@@ -4,6 +4,7 @@ import {
   // computed,
   makeAutoObservable,
   reaction,
+  runInAction,
   // makeObservable,
   // observable,
 } from "mobx";
@@ -27,8 +28,17 @@ class Counter {
     //
     makeAutoObservable(this, {}, { autoBind: true });
   }
+  //   increment() {
+  //     this.counter++;
+  //   }
+  //increment异步写法
   increment() {
-    this.counter++;
+    setTimeout(() => {
+      runInAction(() => {
+        //等价于在action里面改的
+        this.counter++;
+      });
+    }, 1000);
   }
   resset() {
     this.counter = 0;
