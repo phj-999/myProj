@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable } from "mobx";
 
 class Counter {
   counter = 0;
@@ -10,6 +10,7 @@ class Counter {
       increment: action, //修改counter的方法是个action
       resset: action,
       decrement: action.bound,
+      double: computed,
     });
   }
   increment() {
@@ -20,6 +21,9 @@ class Counter {
   }
   decrement() {
     this.counter--;
+  }
+  get double() {
+    return this.counter * 2;
   }
 }
 export default new Counter();
