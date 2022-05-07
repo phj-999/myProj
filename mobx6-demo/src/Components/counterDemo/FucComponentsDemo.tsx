@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 //import counter from "../store/Counter";
-import { useStore } from "../store";
+import { useStore } from "../../store";
 
 const FucComponentsDemo = () => {
   const {counter} = useStore()

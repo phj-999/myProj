@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import FucComponentsDemo from "./Components/FucComponentsDemo";
+import FucComponentsDemo from "./Components/counterDemo/FucComponentsDemo";
 import { useStore } from "./store";
 
 function App() {
