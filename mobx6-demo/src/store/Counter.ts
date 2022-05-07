@@ -1,7 +1,9 @@
 import {
+  autorun,
   // action,
   // computed,
   makeAutoObservable,
+  reaction,
   // makeObservable,
   // observable,
 } from "mobx";
@@ -38,4 +40,17 @@ class Counter {
     return this.counter * 2;
   }
 }
-export default new Counter();
+
+const counter = new Counter();
+
+autorun(() => {
+  //监听每次counter的变化
+  console.log("counter.counter", counter.counter);
+});
+reaction(
+  () => counter.counter,
+  (value, oldvalue) => {
+    console.log("counter变化了", oldvalue);
+  }
+);
+export default counter;
