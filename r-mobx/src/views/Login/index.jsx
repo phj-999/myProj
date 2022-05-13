@@ -2,11 +2,24 @@ import React from 'react';
 import {Layout, Form, Input, Button, Checkbox } from 'antd'
 import './Login.css';
 import { layout, tailLayout } from './config';
+import { useStore } from '@/store';
 
 
 const Login = () => {
   const { Header, Footer, Content } = Layout;
-  
+  const {loginStore} = useStore()
+
+  const onFinish = async(values) => {
+    const {username,password} = values
+    try {
+       await loginStore.userLogin({username,password})
+        //console.log(response);
+        console.log(loginStore.user);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
   
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

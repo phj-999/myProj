@@ -1,7 +1,12 @@
+import React from 'react';
+import LoginStore from "./model/userModel";
+
 const { useContext } = require("react")
 
 class RootStore {
-    constructor() {}
+    constructor() {
+       this.loginStore = new LoginStore();
+    }
 }
 //实例化
 const rootStore = new RootStore()
