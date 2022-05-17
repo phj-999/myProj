@@ -14,3 +14,6 @@ export default Orbit;
 ```
 ### `<ambientLight> ` 环境光
 intensity 光照的强度 color 颜色的rgb数值  `<ambientLight intensity={0.2}/>`
+
+###  `<pointLight />` 光源设置-点光源
+`<pointLight />`

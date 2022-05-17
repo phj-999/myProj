@@ -15,6 +15,7 @@ function App() {
       <div style={{ height: "100vh", width: "100vw" }}>
         <Canvas camera={{ position: [3, 3, 3] }} style={{ background: "red" }}>
           <ambientLight intensity={0.2}/>
+          <pointLight />
           <Orbit />
           <axesHelper args={[5]} />
           <BoxTwo position={[-1, 1, 2]} />
