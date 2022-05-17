@@ -13,13 +13,13 @@ function App() {
     <>
       {/* <BoxOne /> */}
       <div style={{ height: "100vh", width: "100vw" }}>
-        <Canvas shadowMap camera={{ position: [3, 3, 3] }} style={{ background: "red" }}>
+        <Canvas shadowMap camera={{ position: [1,5,1] }} style={{ background: "red" }}>
           <ambientLight intensity={0.2}/>
           <pointLight castShadow />
           <Bulb position={[0,3,0]} />
           <Orbit />
           <axesHelper args={[5]} />
-          <BoxTwo position={[-1, 1, 2]} />
+          <BoxTwo position={[0, 1, 0]} />
           
           <Floor position={[0,-0.5,0]}/>
         </Canvas>

@@ -12,7 +12,6 @@ const BoxTwo = (props) => {
   const ref = useRef();
   useFrame((state) => {
     //   console.log(state);
-    ref.current.rotation.x += 0.01;
     ref.current.rotation.y += 0.01;
   });
   return (
