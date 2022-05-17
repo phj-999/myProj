@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
+
 /**
  *state中是如下api
  *advance, camera, clock, events, get, gl, internal
