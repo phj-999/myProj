@@ -12,3 +12,5 @@ const Orbit = () => {
 export default Orbit;
 // use ->  <Orbit /> 轨道控制 可以鼠标控制3维立体 缩放 放大 转动功能
 ```
+### `<ambientLight> ` 环境光
+intensity 光照的强度 color 颜色的rgb数值  `<ambientLight intensity={0.2}/>`
