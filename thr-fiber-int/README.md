@@ -44,3 +44,13 @@ BoxBufferGeometry、PlaneBufferGeometry、sphereBufferGeometry等几何体类的
  </mesh>
 ```
 
+### <fog /> 雾属性
+材质上面的雾属性决定例如它是否受到雾的影响
+比如  设置雾属性，在前面加上标签
+```js
+ <Canvas shadowMap >
+   <fog attach={'fog'} args={['white', 1, 10]}/>
+  // ...
+```
+但是此时缩放 ，盒子会变雾  为了不让某个材质受影响 比如在3d盒子的材质上设置fog为false 这样缩放起来就不会变雾
+` <meshBasicMaterial color={"blue"} fog={'false'}/>`

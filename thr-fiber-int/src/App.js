@@ -14,6 +14,7 @@ function App() {
       {/* <BoxOne /> */}
       <div style={{ height: "100vh", width: "100vw" }}>
         <Canvas shadowMap camera={{ position: [1,5,1] }} style={{ background: "red" }}>
+          <fog attach={'fog'} args={['white', 1, 10]}/>
           <ambientLight intensity={0.2}/>
           <pointLight castShadow />
           <Bulb position={[0,3,0]} />
