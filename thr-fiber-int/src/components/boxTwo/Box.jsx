@@ -7,7 +7,7 @@ import { useFrame } from "react-three-fiber";
  * raycaster, scene, set, setEvents, setFrameloop
  * viewport, xr,  pointer, setSize
  */
-const Box = () => {
+const BoxTwo = (props) => {
   const ref = useRef();
   useFrame((state) => {
     //   console.log(state);
@@ -15,11 +15,11 @@ const Box = () => {
     ref.current.rotation.y += 0.01;
   });
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} {...props}>
       <boxBufferGeometry />
       <meshBasicMaterial color={"blue"} />
     </mesh>
   );
 };
 
-export default Box;
+export default BoxTwo;
