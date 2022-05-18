@@ -26,10 +26,10 @@ function App() {
           {/* <fog attach={'fog'} args={['white', 1, 10]}/> */}
           <ambientLight intensity={0.2} />
           <pointLight castShadow />
-          <Bulb position={[0, 3, 0]} />
           <Orbit />
           <axesHelper args={[5]} />
           <Dragable>
+            <Bulb position={[0, 3, 0]} />
             <Suspense fallback={null}>
               <BoxTwo position={[-4, 1, 0]} />
             </Suspense>
