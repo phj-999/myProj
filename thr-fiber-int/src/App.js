@@ -11,6 +11,11 @@ import Floor from "./components/boxTwo/Floor";
 import Orbit from "./components/boxTwo/Orbit"; //轨道控制器
 
 function App() {
+  /**
+   *
+   *点击左上角颜色区块，改变所选中盒子的区块颜色
+   * @param {*} e
+   */
   const handleClick = (e) => {
     if (!window.activeMesh) {
       return;
