@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
 /**
@@ -11,31 +11,33 @@ import * as THREE from "three";
  */
 const BoxTwo = (props) => {
   const ref = useRef();
+  const texture = useLoader(THREE.TextureLoader, "/threebox/wood.jpg");
   useFrame((state) => {
     //   console.log(state);
     ref.current.rotation.x += 0.01;
     ref.current.rotation.y += 0.01;
   });
+  
   return (
-    <mesh 
-        ref={ref}
-        {...props} 
-        castShadow 
-        //receiveShadow
-        >
-
-      <boxBufferGeometry />
-
+    <mesh
+      ref={ref}
+      {...props}
+      castShadow
+      //receiveShadow
+    >
+      {/* <boxBufferGeometry /> */}
+      <sphereBufferGeometry args={[1, 100, 100]} />
       <meshBasicMaterial
-        opacity={0.7}
-        transparent
-        color={"white"}
-        //fog={"false"}
-        roughness={0}
-        clearcoat={1}
-        transmission={0.5}
-        reflectivity={1}
-        side={THREE.DoubleSide}
+        // opacity={0.7}
+        // transparent
+        // color={"white"}
+        // fog={"false"}
+        // roughness={0}
+        // clearcoat={1}
+        // transmission={0.5}
+        // reflectivity={1}
+        //side={THREE.DoubleSide}
+        map={texture}
       />
     </mesh>
   );

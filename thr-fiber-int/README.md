@@ -54,3 +54,54 @@ BoxBufferGeometry、PlaneBufferGeometry、sphereBufferGeometry等几何体类的
 ```
 但是此时缩放 ，盒子会变雾  为了不让某个材质受影响 比如在3d盒子的材质上设置fog为false 这样缩放起来就不会变雾
 ` <meshBasicMaterial color={"blue"} fog={'false'}/>`
+### 添加纹理（给盒子上加外部图片）
+```javascript
+//图片在public/threebox里面
+  const texture = useLoader(THREE.TextureLoader, '/threebox/wood.jpg')
+  //然后在需要添加纹理的3维物体材质上添加属性
+    <mesh  ref={ref} {...props}  castShadow  >
+      <boxBufferGeometry />
+      <meshBasicMaterial map={texture}/>
+    </mesh>
+```
+此时是一个方形3维盒子加了外部纹理，把`<boxBufferGeometry />`换成`<sphereBufferGeometry />`就是一个球型3维物体加了纹理
+[图片](./public/mdgif/sphereBufferGeometry-TextureLoader.gif)
+
+![图片](./public/mdgif/sphereBufferGeometry-TextureLoader.gif)
+
+### 给整体添加背景
+#### 一
+```javascript
+const Background = () => {
+    const texture = useLoader(THREE.TextureLoader, '/threebox/sky.jpg')
+  return ( <primitive attach='background' object={texture} />)
+}
+export default Background
+// ...
+//Cavans中
+ <Canvas shadows={true} camera={{ position: [3,3,3] }} style={{ background: "red" }}>
+       <fog attach={'fog'} args={['white', 1, 10]}/>
+         ...
+    <Suspense fallback={null}>
+       <BoxTwo position={[0, 1, 0]} />
+    </Suspense>
+    <Suspense fallback={null}>
+      <Background />
+    </Suspense>
+      <Floor position={[0,-0.5,0]}/>
+</Canvas>
+```
+![给整体添加背景](./public/mdgif/background.gif)
+
+#### 二 
+创建渲染器的目标对象
+把上面代码换成
+```javascript
+const Background = () => {
+    const {gl} = useThree()
+    const texture = useLoader(THREE.TextureLoader, '/threebox/sky.jpg')
+    const formatted = new THREE.WebGLCubeRenderTarget(texture.image.height).fromEquirectangularTexture(gl,texture)
+    return  <primitive attach='background' object={formatted}/>
+}
+export default Background
+```
