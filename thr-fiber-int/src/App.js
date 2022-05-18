@@ -11,24 +11,55 @@ import Floor from "./components/boxTwo/Floor";
 import Orbit from "./components/boxTwo/Orbit"; //轨道控制器
 
 function App() {
+  const handleClick = (e) => {
+    if (!window.activeMesh) {
+      return;
+    } else {
+      window.activeMesh.material.color = new THREE.Color(
+        e.target.style.background
+      );
+    }
+  };
+
   return (
     <>
       {/* <BoxOne /> */}
       <div style={{ height: "100vh", width: "100vw" }}>
-        <Canvas shadows={true} camera={{ position: [7,7,7] }} style={{ background: "black" }}>
+        <div style={{ position: "absolute", zIndex: 1 }}>
+          <div
+            onClick={handleClick}
+            style={{ background: "blue", height: 50, width: 50 }}
+          ></div>
+          <div
+            onClick={handleClick}
+            style={{ background: "yellow", height: 50, width: 50 }}
+          ></div>
+          <div
+            onClick={handleClick}
+            style={{ background: "white", height: 50, width: 50 }}
+          ></div>
+        </div>
+        <Canvas
+          shadows={true}
+          camera={{ position: [7, 7, 7] }}
+          style={{ background: "black" }}
+        >
           {/* <fog attach={'fog'} args={['white', 1, 10]}/> */}
-          <ambientLight intensity={0.2}/>
+          <ambientLight intensity={0.2} />
           <pointLight castShadow />
-          <Bulb position={[0,3,0]} />
+          <Bulb position={[0, 3, 0]} />
           <Orbit />
           <axesHelper args={[5]} />
           <Suspense fallback={null}>
-          <BoxTwo position={[0, 1, 0]} />
+            <BoxTwo position={[-4, 1, 0]} />
           </Suspense>
           <Suspense fallback={null}>
-          <Background />
+            <BoxTwo position={[4, 1, 0]} />
           </Suspense>
-          <Floor position={[0,-0.5,0]}/>
+          <Suspense fallback={null}>
+            <Background />
+          </Suspense>
+          <Floor position={[0, -0.5, 0]} />
         </Canvas>
       </div>
     </>
