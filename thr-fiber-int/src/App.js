@@ -12,6 +12,7 @@ import ColorPicker from "./components/boxTwo/ColorPicker";
 import Dragable from "./components/boxTwo/Dragable";
 import Floor from "./components/boxTwo/Floor";
 import Orbit from "./components/boxTwo/Orbit"; //轨道控制器
+import Model from "./components/boxTwo/Model";
 
 function App() {
   return (
@@ -32,6 +33,18 @@ function App() {
           <Physics>
             <Dragable>
               <Bulb position={[0, 3, 0]} />
+              <Suspense fallback={null}>
+                <Model
+                  path="/tesla_cybertruck/scene.gltf"
+                  scale={new Array(3).fill(0.01)}
+                  position={[4, 0.6, 0]}
+                />
+                <Model
+                  path="/tesla_2018_model_3/scene.gltf"
+                  scale={new Array(3).fill(0.013)}
+                  position={[-4, 0.2, 0]}
+                />
+              </Suspense>
               <Suspense fallback={null}>
                 <BoxTwo position={[-4, 1, 0]} />
               </Suspense>
