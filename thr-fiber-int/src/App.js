@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
-import { Physics } from "use-cannon";
+import { Physics } from "@react-three/cannon";
 
 import "./App.css";
 import Background from "./components/boxTwo/Background";

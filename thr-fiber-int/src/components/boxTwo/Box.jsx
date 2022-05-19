@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
-import { useBox } from "use-cannon";
+import { useBox } from "@react-three/cannon";
 
 /**
  *state中是如下api

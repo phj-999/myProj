@@ -1,7 +1,7 @@
 //地板
 
 import React from 'react'
-import { useBox } from 'use-cannon'
+import { useBox } from '@react-three/cannon'
 
 const Floor = props => {
   const [ref,api] = useBox(()=>({args:[20,1,10], ...props}))
