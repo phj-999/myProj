@@ -15,6 +15,7 @@ import Floor from "./components/boxTwo/Floor";
 import Orbit from "./components/boxTwo/Orbit"; //轨道控制器
 import Car from "./views/car/Car";
 import CameraControls from "./components/boxTwo/CameraControls";
+import CameraButton from "./components/boxTwo/CameraButton";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       {/* <BoxOne /> */}
       <div style={{ height: "100vh", width: "100vw" }}>
         <ColorPicker />
+        <CameraButton />
         <Canvas
           shadows={true}
           camera={{ position: [7, 7, 7] }}
