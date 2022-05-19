@@ -105,3 +105,32 @@ const Background = () => {
 }
 export default Background
 ```
+### 三维向量（Vector3）
+构造函数
+Vector3( x : Float, y : Float, z : Float )
+x - 向量的x值，默认为0。y - 向量的y值，默认为0。 z - 向量的z值，默认为0。
+.set ( x : Float, y : Float, z : Float ) 设置该向量的x、y 和 z 分量。
+#### 随意移动相机，3D对象的地板承载都会弹回原来的位置
+```javascript
+import React from 'react'
+import { useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
+import state from '../../state'
+
+const CameraControls = (props) => {
+    const vec = new THREE.Vector3()
+    useFrame(({camera,scene})=>{
+        //.lerp ( v : Vector3, alpha : Float ) : this
+        //v - 朝着进行插值的Vector3。
+        //alpha - 插值因数，其范围在[0, 1]闭区间。
+        camera.position.lerp(vec.set(...state.cameraPos),0.1)
+        scene.orbitControls.update()
+    })
+
+  return (
+     null
+  )
+}
+
+export default CameraControls
+```
