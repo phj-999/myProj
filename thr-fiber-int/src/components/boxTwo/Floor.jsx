@@ -6,7 +6,7 @@ import { useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 
 const Floor = props => {
-  const [ref,api] = useBox(()=>({args:[20,1,10], ...props}))
+  const [ref,api] = useBox(()=>({args:[40,1,50], ...props}))
   const texture = useLoader(THREE.TextureLoader, '/threebox/wood.jpg')
 
   return (

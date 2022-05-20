@@ -5,7 +5,7 @@ import React from "react";
 const Background = (props) => {
   const texture = useLoader(
     THREE.TextureLoader,
-    process.env.PUBLIC_URL + "/threebox/modern-background-gray.jpeg"
+    process.env.PUBLIC_URL + "/threebox/sky.jpg"
   );
 
   // const { gl } = useThree();
