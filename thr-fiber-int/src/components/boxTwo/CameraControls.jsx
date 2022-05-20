@@ -1,7 +1,7 @@
 import React from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import state from "../../state";
+import state from "../../views/car/config/state";
 
 const CameraControls = ({ }) => {
   //const vec = new THREE.Vector3() config/state里面直接用了，所以这里不用这个

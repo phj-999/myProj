@@ -1,7 +1,7 @@
 /**相机按钮组件，点击切换视角 */
 
 import React from "react";
-import state from "../../state";
+import state from "../../views/car/config/state";
 
 const style = {
   position: "absolute",

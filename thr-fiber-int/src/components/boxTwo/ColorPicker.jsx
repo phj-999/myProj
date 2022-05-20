@@ -4,7 +4,7 @@
  * */
 import React from "react";
 import * as THREE from "three";
-import state from "../../state";
+import state from "../../views/car/config/state";
 
 const sharedStyles = {
   height: 50,

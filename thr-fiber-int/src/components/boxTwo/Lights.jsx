@@ -6,7 +6,7 @@ const Lights = () => {
     <>
       <ambientLight intensity={0.2} />
       <directionalLight
-        position={[6, 3, 0]}
+        position={[6, 4, 0]}
         intensity={2}
         castShadow
         shadow-mapSize-height={2 ** 10}

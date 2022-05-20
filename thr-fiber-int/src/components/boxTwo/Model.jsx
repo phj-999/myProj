@@ -31,7 +31,7 @@ const Model = (props) => {
     }
   });
 
-  return <primitive object={model.scene} scale={props.scale}></primitive>;
+  return <primitive position={props.position} object={model.scene} scale={props.scale}></primitive>;
 };
 
 export default Model;
