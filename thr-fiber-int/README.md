@@ -137,3 +137,5 @@ export default CameraControls
 
 ### 拖动
 <Dragable transformGroup>。。。</Dragable> transformGroup字段不传，拖动的时候肢解对象，比如拖动单个轮胎，车门等，加上就是整个拖动
+
+### `<directionalLight />`定向光

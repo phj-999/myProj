@@ -16,6 +16,7 @@ import Orbit from "./components/boxTwo/Orbit"; //轨道控制器
 import Car from "./views/car/Car";
 import CameraControls from "./components/boxTwo/CameraControls";
 import CameraButton from "./components/boxTwo/CameraButton";
+import state from "./state";
 
 function App() {
   return (
@@ -34,9 +35,17 @@ function App() {
               <Background />
             </Suspense>
           {/* <fog attach={'fog'} args={['white', 1, 10]}/> */}
-          <CameraControls />
+          <CameraControls state={state}/>
           <ambientLight intensity={0.2} />
-          <pointLight castShadow />
+          <directionalLight 
+          position={[6,3,0]} 
+          intensity={2} 
+          castShadow 
+          shadow-mapSize-height={2 ** 10}
+          shadow-mapSize-width={2 ** 10}
+          shadow-radius={10}
+          />
+          {/* <pointLight castShadow /> */}
           <Orbit />
           <axesHelper args={[5]} />
           <Bulb position={[-6, 3, 0]} />
