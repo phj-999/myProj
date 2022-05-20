@@ -18,6 +18,7 @@ import CameraControls from "./components/boxTwo/CameraControls";
 import CameraButton from "./components/boxTwo/CameraButton";
 import Lights from "./components/boxTwo/Lights";
 import state from "./state";
+import Effects from "./components/boxTwo/Effects";
 
 function App() {
   return (
@@ -28,6 +29,12 @@ function App() {
         <ColorPicker />
         <CameraButton />
         <Canvas
+          gl={{
+            powerPreference: "high-performance",
+            antialias: false,
+            stencil: false,
+            depth: false
+          }}
           shadows={true}
           camera={{ position: [7, 7, 7] }}
           style={{ background: "black" }}
@@ -56,6 +63,9 @@ function App() {
            
             <Floor position={[0, -0.5, 0]} />
           </Physics>
+           {/* 景深效果 */}
+         <Effects />
+
         </Canvas>
       </div>
     </>
