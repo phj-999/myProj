@@ -30,13 +30,18 @@ function App() {
           camera={{ position: [7, 7, 7] }}
           style={{ background: "black" }}
         >
+           <Suspense fallback={null}>
+              <Background />
+            </Suspense>
           {/* <fog attach={'fog'} args={['white', 1, 10]}/> */}
           <CameraControls />
           <ambientLight intensity={0.2} />
           <pointLight castShadow />
           <Orbit />
           <axesHelper args={[5]} />
+          <Bulb position={[-6, 3, 0]} />
           <Bulb position={[0, 3, 0]} />
+          <Bulb position={[6, 3, 0]} />
           <Physics>
             <Car />
             {/* 
@@ -49,9 +54,7 @@ function App() {
                 </Suspense>
               </Dragable>  
             */}
-            <Suspense fallback={null}>
-              <Background />
-            </Suspense>
+           
             <Floor position={[0, -0.5, 0]} />
           </Physics>
         </Canvas>

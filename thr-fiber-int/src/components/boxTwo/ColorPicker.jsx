@@ -1,9 +1,17 @@
- /**
-  * 左上角呈现3个不同颜色方块， 
-  * 点击3维盒子后点击不同的颜色的盒子改变3维盒子颜色
-  * */
+/**
+ * 左上角呈现3个不同颜色方块，
+ * 点击3维盒子后点击不同的颜色的盒子改变3维盒子颜色
+ * */
 import React from "react";
 import * as THREE from "three";
+import state from "../../state";
+
+const sharedStyles = {
+  height: 50,
+  width: 50,
+  borderRadius: "50%",
+  cursor: "pointer",
+};
 
 const ColorPicker = (props) => {
   /**
@@ -12,29 +20,70 @@ const ColorPicker = (props) => {
    * @param {*} e
    */
   const handleClick = (e) => {
-    if (!window.activeMesh) {
+    if (!state.activeMesh) {
       return;
     } else {
-      window.activeMesh.material.color = new THREE.Color(
+      state.activeMesh.material.color = new THREE.Color(
         e.target.style.background
       );
     }
   };
 
   return (
-    <div style={{ position: "absolute", zIndex: 1 }}>
+    <div
+      style={{
+        position: "absolute",
+        zIndex: 1,
+        left: 0,
+        right: 0,
+        margin: "auto",
+        width: "fit-content",
+        display: "flex",
+        top: "20px",
+      }}
+    >
       <div
         onClick={handleClick}
-        style={{ background: "blue", height: 50, width: 50 }}
-      ></div>
+        style={{
+          background: "rgb(243, 246, 247)",
+          ...sharedStyles,
+        }}
+      />
       <div
         onClick={handleClick}
-        style={{ background: "yellow", height: 50, width: 50 }}
-      ></div>
+        style={{
+          background: "black",
+          ...sharedStyles,
+        }}
+      />
       <div
         onClick={handleClick}
-        style={{ background: "white", height: 50, width: 50 }}
-      ></div>
+        style={{
+          background: "red",
+          ...sharedStyles,
+        }}
+      />
+      <div
+        onClick={handleClick}
+        style={{
+          background: "rgb(30, 75, 93)",
+          ...sharedStyles,
+        }}
+      />
+      <div
+        onClick={handleClick}
+        style={{
+          background: "#000d89",
+          ...sharedStyles,
+        }}
+      />
+      <div
+        onClick={handleClick}
+        style={{
+          background: "#175421",
+          ...sharedStyles,
+        }}
+      />
     </div>
   );
 };

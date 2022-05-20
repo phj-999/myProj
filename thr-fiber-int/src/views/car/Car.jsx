@@ -6,6 +6,7 @@ import Model from "../../components/boxTwo/Model";
 const Car = () => {
   return (
     <Suspense fallback={null}>
+      {/* 卡车-name： object001_Material009_0  用于点击改变颜色*/}
       <Dragable transformGroup>
         <BoundingBox
           visible
@@ -21,7 +22,8 @@ const Car = () => {
         </BoundingBox>
       </Dragable>
 
-      <Dragable transformGroup>
+{/*model3-name: bonnet_ok_primary_0 用于点击改变颜色*/}
+      <Dragable transformGroup >
         <BoundingBox
           visible
           position={[-4, 4, 0]}
