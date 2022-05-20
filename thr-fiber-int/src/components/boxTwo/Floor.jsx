@@ -8,7 +8,7 @@ const Floor = props => {
   return (
     <mesh {...props} receiveshadow ref={ref} >
         <boxBufferGeometry args={[20,1,10]}/>
-        <meshPhysicalMaterial />
+        <meshPhysicalMaterial  color={'black'} opacity={1} />
     </mesh>
   )
 }

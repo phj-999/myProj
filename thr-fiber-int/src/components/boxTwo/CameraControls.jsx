@@ -8,7 +8,7 @@ const CameraControls = (props) => {
 
   useFrame(({ camera, scene }) => {
     if (state.activeMesh?.name !== state.activeMeshName) {
-      state.activeMesh = scene.getObjectByName(state.activeMeshName || {})
+      state.activeMesh = scene.getObjectByName(state.activeMeshName || {});
     }
     // 如果相机位置 ！= 原来状态
     if (state.shouldUpdate) {
