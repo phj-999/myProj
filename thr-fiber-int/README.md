@@ -1,3 +1,3 @@
 # **<CarShow />**
 
-![carshow组件](public\mdgif\overcar.gif)
+![carshow组件](./public/mdgif/overcar.gif)
