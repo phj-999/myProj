@@ -141,3 +141,6 @@ export default CameraControls
 ### `<directionalLight />`定向光
 ### 3Dobject外面 添加网格
 `<mesh visible设置true或false></mesh>`
+### 远看模糊 近看清晰 背景模糊等景深效果
+`npm i @react-three/postprocessing`
+文档地址 https://docs.pmnd.rs/react-postprocessing/effects/grid
