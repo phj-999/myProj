@@ -35,7 +35,7 @@ function App() {
             stencil: false,
             depth: false
           }}
-          shadows={true}
+          shadows
           camera={{ position: [7, 7, 7] }}
           style={{ background: "black" }}
         >
@@ -46,7 +46,7 @@ function App() {
           <CameraControls state={state}/>
           <Lights />
           <Orbit />
-          <axesHelper args={[5]} />
+          {/* <axesHelper args={[5]} /> */}
           
           <Physics>
             <Car />

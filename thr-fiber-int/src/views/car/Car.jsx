@@ -17,13 +17,13 @@ const Car = () => {
           <Model
             path="/tesla_cybertruck/scene.gltf"
             scale={new Array(3).fill(0.01)}
-            position={[4, 0.6, 0]}
+            // position={[4, 0.6, 0]}
           />
         </BoundingBox>
       </Dragable>
 
-{/*model3-name: bonnet_ok_primary_0 用于点击改变颜色*/}
-      <Dragable transformGroup >
+      {/*model3-name: bonnet_ok_primary_0 用于点击改变颜色*/}
+      <Dragable transformGroup>
         <BoundingBox
           visible
           position={[-4, 4, 0]}
@@ -33,10 +33,14 @@ const Car = () => {
           <Model
             path="/tesla_2018_model_3/scene.gltf"
             scale={new Array(3).fill(0.013)}
-            position={[-4, 0, 0]}
+            //position={[-4, 0, 0]}
           />
         </BoundingBox>
       </Dragable>
+
+      <group rotation={[0, Math.PI, 0]}>
+        <Model path="mech_drone/scene.gltf" scale={new Array(3).fill(0.01)} />
+      </group>
     </Suspense>
   );
 };
