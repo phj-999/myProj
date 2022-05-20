@@ -144,3 +144,5 @@ export default CameraControls
 ### 远看模糊 近看清晰 背景模糊等景深效果
 `npm i @react-three/postprocessing`
 文档地址 https://docs.pmnd.rs/react-postprocessing/effects/grid
+
+////coderbeliver //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
