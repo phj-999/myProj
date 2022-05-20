@@ -9,13 +9,14 @@ import "./App.css";
 import Background from "./components/boxTwo/Background";
 //import BoxOne from "./views/box1demo";
 //import BoxTwo from "./components/boxTwo/Box"; //盒子
-import Bulb from "./components/boxTwo/Bulb";
+// import Bulb from "./components/boxTwo/Bulb";
 import ColorPicker from "./components/boxTwo/ColorPicker";
 import Floor from "./components/boxTwo/Floor";
 import Orbit from "./components/boxTwo/Orbit"; //轨道控制器
 import Car from "./views/car/Car";
 import CameraControls from "./components/boxTwo/CameraControls";
 import CameraButton from "./components/boxTwo/CameraButton";
+import Lights from "./components/boxTwo/Lights";
 import state from "./state";
 
 function App() {
@@ -36,21 +37,10 @@ function App() {
             </Suspense>
           {/* <fog attach={'fog'} args={['white', 1, 10]}/> */}
           <CameraControls state={state}/>
-          <ambientLight intensity={0.2} />
-          <directionalLight 
-          position={[6,3,0]} 
-          intensity={2} 
-          castShadow 
-          shadow-mapSize-height={2 ** 10}
-          shadow-mapSize-width={2 ** 10}
-          shadow-radius={10}
-          />
-          {/* <pointLight castShadow /> */}
+          <Lights />
           <Orbit />
           <axesHelper args={[5]} />
-          <Bulb position={[-6, 3, 0]} />
-          <Bulb position={[0, 3, 0]} />
-          <Bulb position={[6, 3, 0]} />
+          
           <Physics>
             <Car />
             {/* 

@@ -7,7 +7,7 @@ const Floor = props => {
   const [ref,api] = useBox(()=>({args:[20,1,10], ...props}))
   return (
     <mesh {...props} receiveshadow ref={ref} >
-        <boxBufferGeometry args={[20,1,10]}/>
+        <boxBufferGeometry args={[50,0.7,50]}/>
         <meshPhysicalMaterial  color={'black'} opacity={1} />
     </mesh>
   )
