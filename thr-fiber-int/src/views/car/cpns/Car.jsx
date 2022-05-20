@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import BoundingBox from "../../components/boxTwo/BoundingBox";
-import Dragable from "../../components/boxTwo/Dragable";
-import Model from "../../components/boxTwo/Model";
+import BoundingBox from "../../../components/boxTwo/BoundingBox";
+import Dragable from "../../../components/boxTwo/Dragable";
+import Model from "../../../components/boxTwo/Model";
 
 const Car = () => {
   return (
