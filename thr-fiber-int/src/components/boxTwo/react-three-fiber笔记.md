@@ -146,3 +146,5 @@ export default CameraControls
 文档地址 https://docs.pmnd.rs/react-postprocessing/effects/grid
 
 ////coderbeliver //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
+
+# react中使用
