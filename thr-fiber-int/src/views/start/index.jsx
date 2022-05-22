@@ -87,10 +87,13 @@ const Start = () => {
 
   /**灯光 */
   const createLight = () => {
+    // 平行光（太阳光）--直射
     const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
     dirLight.position.set(100, 200, 200);
-    Scene.add(dirLight);
-    Lights.push(dirLight);
+    // 环境光
+    const amLight = new THREE.AmbientLight('##ff9f43', 0.5);
+    Scene.add(dirLight,amLight);
+    Lights.push(dirLight,amLight);
   };
 
   const init = useCallback(() => {
