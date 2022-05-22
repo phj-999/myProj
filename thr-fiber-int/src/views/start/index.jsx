@@ -68,7 +68,7 @@ const Start = () => {
 
     geomatry.setAttribute("color", new THREE.Float32BufferAttribute(color1, 3));
     const mesh = new THREE.Line(geomatry, lineMater);
-    mesh.position.set(4, 0, 0);
+    mesh.position.set(4, 1.5, 0);
     //阴影
     mesh.castShadow = true; //是否被渲染到阴影贴图中
     Scene.add(mesh);
@@ -91,7 +91,7 @@ const Start = () => {
     mesh.receiveShadow = true; //材质是否接受阴影
 
     //var a = new THREE.Vector3(-4, 0, 0);
-    mesh.position.set(-4, 0, 0);
+    mesh.position.set(-4, 2, 0);
     Scene.add(mesh);
     Meshs.push(mesh);
     // console.log(32323);
@@ -102,7 +102,7 @@ const Start = () => {
     const rect = new THREE.SphereGeometry(2, 32, 16); //球形几合体
     const phong = new THREE.MeshPhongMaterial({ color: "#ffcccc" }); //材质
     const mesh = new THREE.Mesh(rect, phong); //网格
-    mesh.position.set(-8, 0, 0);
+    mesh.position.set(-8, 3, 0);
     //阴影
     mesh.castShadow = true; //是否被渲染到阴影贴图中
     mesh.receiveShadow = true; //材质是否接受阴影
