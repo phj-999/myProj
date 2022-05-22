@@ -9,12 +9,15 @@ const Start = () => {
   const Scene = useRef(new THREE.Scene()).current; //场景
   const Camera = useRef(new THREE.PerspectiveCamera()).current; //相机
   const Render = useRef(new THREE.WebGLRenderer({ actialias: true })).current; // 渲染器
-  const Meshs = useRef([]).current; // 物体
+
+  const Meshs = useRef([]).current; // 存储3d Object物体
   const id = useRef(null);
-  const Lights = useRef([]).current;
+  const Lights = useRef([]).current; //存储灯光
   const IsDown = useRef(false); //记录鼠标是否按下，用于控制页面移动
   const PI = useRef(15); //camera的半径
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
+
+  const Floor = useRef(null); //存储地板
   /**
    * 创建网格模型
    */
@@ -158,7 +161,7 @@ const Start = () => {
     Camera.lookAt(0, 0, 0);
   }, []);
 
-  /** 渲染 */
+  /** 渲染+相机参数设计 */
   const init = useCallback(() => {
     //渲染器尺寸
     Render.setSize(Body.current.offsetWidth, Body.current.offsetHeight);
@@ -181,6 +184,20 @@ const Start = () => {
     Camera.updateProjectionMatrix();
     console.log("Render, Camera参数");
   }, [Render, Body]);
+
+  /** 创建地板 floor*/
+  const createFloor = useCallback(() => {
+    // 平面几何
+    const plane = new THREE.PlaneBufferGeometry(40, 30);
+    //材质：一种非光泽表面的材质，没有镜面高光。
+    const lambert = new THREE.MeshLambertMaterial({ color: "white" });
+    const mesh = new THREE.Mesh(plane, lambert);
+    mesh.position.set(-2, -2, 0);
+    //此时是竖在页面， 需要旋转
+    mesh.rotation.x = (-90 / 180) * Math.PI;
+    Scene.add(mesh);
+    Floor.current = mesh;
+  }, [Scene]);
 
   //渲染画面函数
   const renderScene = useCallback(() => {
@@ -208,6 +225,7 @@ const Start = () => {
     createLine(); //创建线条几何体
     createLambert(); //创建第二个盒子
     createPhong(); //球形几何体
+    createFloor(); //平面地板
     renderScene();
     console.log("渲染执行");
     // 销毁 避免热更新一直渲染
@@ -223,6 +241,7 @@ const Start = () => {
         item.dispose();
         console.log("lights 销毁");
       });
+      Floor.current && Scene.remove(Floor.current); //销毁地板
       Render.dispose();
       //Scene.dispose()
     };
