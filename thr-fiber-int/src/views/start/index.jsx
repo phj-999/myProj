@@ -12,6 +12,9 @@ const Start = () => {
   const Meshs = useRef([]).current; // 物体
   const id = useRef(null);
   const Lights = useRef([]).current;
+  const IsDown = useRef(false); //记录鼠标是否按下，用于控制页面移动
+  const PI = useRef(15) //camera的半径
+  const R = useRef(90) //初始的角度，物体在正前方，跟我们视角是90度
   /**
    * 创建网格模型
    */
@@ -117,6 +120,28 @@ const Start = () => {
     );
   };
 
+  /**鼠标事件-按下 */
+  const down = useCallback(() => {
+    IsDown.current = true;
+  }, []);
+  /**鼠标事件-抬起 */
+  const up = useCallback(() => {
+    IsDown.current = false;
+  }, []);
+  /**鼠标事件-移动 */
+  const move = useCallback((e) => {
+    if (IsDown.current === false) return;
+    //console.log(e,'e---move',Camera.position);
+    R.current -= e.movementX * 0.5 //鼠标左右移动对角度自减 
+    const x = PI.current * Math.cos(R.current / 180 * Math.PI)
+    const y = Camera.position.y + e.movementY * 0.1;
+    const z = PI.current * Math.sin(R.current / 180 * Math.PI)
+
+    Camera.position.set(x, y, z);
+    Camera.lookAt(0, 0, 0);
+  }, []);
+
+  /** 渲染 */
   const init = useCallback(() => {
     //渲染器尺寸
     Render.setSize(Body.current.offsetWidth, Body.current.offsetHeight);
@@ -131,7 +156,7 @@ const Start = () => {
     Camera.aspect = Body.current.offsetWidth / Body.current.offsetHeight;
     Camera.near = 1;
     Camera.far = 1000;
-    Camera.position.set(0, 10, 20); //相机位置
+    Camera.position.set(0, 3, PI.current); //相机位置
     Camera.lookAt(0, 0, 0); //设置相机方向
     // 相机参数动态设置完 必须调用此参数才可以更新
     Camera.updateProjectionMatrix();
@@ -191,6 +216,9 @@ const Start = () => {
         width: "100%",
       }}
       ref={Body}
+      onMouseUp={up}
+      onMouseDown={down}
+      onMouseMove={move}
     ></div>
   );
 };
