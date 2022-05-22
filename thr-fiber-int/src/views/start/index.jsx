@@ -88,7 +88,7 @@ const Start = () => {
   /**灯光 */
   const createLight = () => {
     const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
-    dirLight.position.set(100, 100, 100);
+    dirLight.position.set(100, 200, 200);
     Scene.add(dirLight);
     Lights.push(dirLight);
   };
