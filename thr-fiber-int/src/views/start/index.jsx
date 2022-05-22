@@ -13,8 +13,8 @@ const Start = () => {
   const id = useRef(null);
   const Lights = useRef([]).current;
   const IsDown = useRef(false); //记录鼠标是否按下，用于控制页面移动
-  const PI = useRef(15) //camera的半径
-  const R = useRef(90) //初始的角度，物体在正前方，跟我们视角是90度
+  const PI = useRef(15); //camera的半径
+  const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
   /**
    * 创建网格模型
    */
@@ -53,8 +53,6 @@ const Start = () => {
       color.setHSL(Math.random(), Math.random(), Math.random());
       color1.push(color.r, color.g, color.b);
     }
-    //新版
-
     geomatry.setFromPoints(vertices);
 
     geomatry.setAttribute(
@@ -128,16 +126,20 @@ const Start = () => {
   const up = useCallback(() => {
     IsDown.current = false;
   }, []);
-  /**鼠标事件-移动 */
+  /**鼠标事件-移动--相机控制 */
   const move = useCallback((e) => {
     if (IsDown.current === false) return;
     //console.log(e,'e---move',Camera.position);
-    R.current -= e.movementX * 0.5 //鼠标左右移动对角度自减 
-    const x = PI.current * Math.cos(R.current / 180 * Math.PI)
+    R.current -= e.movementX * 0.5; //鼠标左右移动对角度自减
+    // 重新设置相机位置，相机在XOY平面绕着坐标原点旋转运动
+    const x = PI.current * Math.cos((R.current / 180) * Math.PI);
     const y = Camera.position.y + e.movementY * 0.1;
-    const z = PI.current * Math.sin(R.current / 180 * Math.PI)
+    const z = PI.current * Math.sin((R.current / 180) * Math.PI);
 
     Camera.position.set(x, y, z);
+
+    // 相机位置改变后，注意执行.looAt()方法重新计算视图矩阵旋转部分
+    // 如果不执行.looAt()方法，相当于相机镜头方向保持在首次执行`.lookAt()`的时候
     Camera.lookAt(0, 0, 0);
   }, []);
 
@@ -156,6 +158,8 @@ const Start = () => {
     Camera.aspect = Body.current.offsetWidth / Body.current.offsetHeight;
     Camera.near = 1;
     Camera.far = 1000;
+
+    //设置相机位置(眼睛位置或者说相机篇拍照位置
     Camera.position.set(0, 3, PI.current); //相机位置
     Camera.lookAt(0, 0, 0); //设置相机方向
     // 相机参数动态设置完 必须调用此参数才可以更新
