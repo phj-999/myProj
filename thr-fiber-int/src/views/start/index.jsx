@@ -85,15 +85,25 @@ const Start = () => {
     // console.log(32323);
   }, [Scene]);
 
+  /**MeshPhongMaterial材质球形状几何体*/
+  const createPhong = useCallback(() => {
+    const rect = new THREE.SphereGeometry(2, 32, 16); //球形几合体
+    const phong = new THREE.MeshPhongMaterial({ color: "#fff200" }); //材质
+    const mesh = new THREE.Mesh(rect, phong); //网格
+    mesh.position.set(-8, 0, 0);
+    Scene.add(mesh);
+    Meshs.push(mesh);
+  }, [Scene]);
+
   /**灯光 */
   const createLight = () => {
     // 平行光（太阳光）--直射
     const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
     dirLight.position.set(100, 200, 200);
     // 环境光
-    const amLight = new THREE.AmbientLight('##ff9f43', 0.5);
-    Scene.add(dirLight,amLight);
-    Lights.push(dirLight,amLight);
+    const amLight = new THREE.AmbientLight("#ff9f43", 0.5);
+    Scene.add(dirLight, amLight);
+    Lights.push(dirLight, amLight);
   };
 
   const init = useCallback(() => {
@@ -140,8 +150,9 @@ const Start = () => {
     init();
     createLight(); //灯光
     creatReact();
-    createLine(); //创建线条
+    createLine(); //创建线条几何体
     createLambert(); //创建第二个盒子
+    createPhong(); //球形几何体
     renderScene();
     console.log("渲染执行");
     // 销毁 避免热更新一直渲染
