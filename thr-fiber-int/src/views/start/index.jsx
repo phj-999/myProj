@@ -88,7 +88,7 @@ const Start = () => {
   /**MeshPhongMaterial材质球形状几何体*/
   const createPhong = useCallback(() => {
     const rect = new THREE.SphereGeometry(2, 32, 16); //球形几合体
-    const phong = new THREE.MeshPhongMaterial({ color: "#fff200" }); //材质
+    const phong = new THREE.MeshPhongMaterial({ color: "#ffcccc" }); //材质
     const mesh = new THREE.Mesh(rect, phong); //网格
     mesh.position.set(-8, 0, 0);
     Scene.add(mesh);
@@ -98,12 +98,23 @@ const Start = () => {
   /**灯光 */
   const createLight = () => {
     // 平行光（太阳光）--直射
-    const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
-    dirLight.position.set(100, 200, 200);
+    // const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
+    // dirLight.position.set(100, 200, 200);
     // 环境光
     const amLight = new THREE.AmbientLight("#ff9f43", 0.5);
-    Scene.add(dirLight, amLight);
-    Lights.push(dirLight, amLight);
+    // 点光源
+    const point = new THREE.PointLight("#cd84f1", 4, 6);
+    point.position.set(0, 5, 0);
+    Scene.add(
+      //dirLight,
+      point,
+      amLight
+    );
+    Lights.push(
+      //dirLight,
+      point,
+      amLight
+    );
   };
 
   const init = useCallback(() => {
