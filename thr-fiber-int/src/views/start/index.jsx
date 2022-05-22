@@ -4,13 +4,13 @@ import * as THREE from "three";
 import "./index.css";
 
 const Start = () => {
-  const Body = useRef();
+  const Body = useRef(); 
   //const Scene =  new THREE.Scene() 这样每次都会实例化一次 重复渲染浪费性能
   const Scene = useRef(new THREE.Scene()).current; //场景
   const Camera = useRef(new THREE.PerspectiveCamera()).current; //相机
   const Render = useRef(new THREE.WebGL1Renderer({ actialias: true })).current; // 渲染器
   const Meshs = useRef([]).current; // 物体
-
+  const id = useRef(null)
   /**
    * 创建网格模型
    */
@@ -58,7 +58,7 @@ const Start = () => {
       item.rotation.y += (0.5 / 180) * Math.PI;
     });
     // 要重复的把相机拍到的东西通过渲染器输出到页面，所以要用到requestAnimationFrame
-    window.requestAnimationFrame(() => {
+    id.current = window.requestAnimationFrame(() => {
       renderScene();
     });
     console.log("Camera, Render, Scene");
@@ -71,6 +71,15 @@ const Start = () => {
     creatReact();
     renderScene();
     console.log("渲染执行");
+    // 销毁 避免热更新一直渲染 
+    return ()=>{
+      cancelAnimationFrame(id.current) //保证不会重复回调
+      Meshs.forEach(item=>{
+        Scene.remove(item)
+        item.geometry.dispose() //废弃几何体 
+        item.material.dispose()//废弃材质
+      })
+    }
   }, []);
 
   return (
