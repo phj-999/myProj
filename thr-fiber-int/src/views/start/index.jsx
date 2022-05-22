@@ -143,6 +143,21 @@ const Start = () => {
     Camera.lookAt(0, 0, 0);
   }, []);
 
+  /**鼠标滚轮事件---相机控制功能--缩放功能 */
+  const wheel = useCallback((e) => {
+    // console.log(e,'滚动滑轮');
+    //判断滚轮方向 >0 滑轮向上 半径要自增 否则就是向下 半径自减
+    if (e.deltaY > 0) PI.current += 1;
+    else PI.current -= 1;
+    // 半径变化 角度如果旋转果 要重新获取xy轴
+    const x = PI.current * Math.cos((R.current / 180) * Math.PI);
+    const y = Camera.position.y; //滑轮滚动默认y轴不变
+    const z = PI.current * Math.sin((R.current / 180) * Math.PI);
+
+    Camera.position.set(x, y, z);
+    Camera.lookAt(0, 0, 0);
+  }, []);
+
   /** 渲染 */
   const init = useCallback(() => {
     //渲染器尺寸
@@ -223,6 +238,7 @@ const Start = () => {
       onMouseUp={up}
       onMouseDown={down}
       onMouseMove={move}
+      onWheel={wheel}
     ></div>
   );
 };
