@@ -17,22 +17,6 @@ const Start = () => {
   const PI = useRef(15); //camera的半径
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
 
-  /**
-   * 创建普通的几何体
-   */
-  const creatReact = useCallback(() => {
-    // //创建一个球体几何对象
-    const react = new THREE.BoxBufferGeometry(2, 2, 2);
-    // 材质
-    const mashBasicMaster = new THREE.MeshBasicMaterial({ color: "red" });
-    // 网格
-    const mesh = new THREE.Mesh(react, mashBasicMaster);
-    mesh.position.set(0, 0, 0);
-    //阴影
-    mesh.castShadow = true; //是否被渲染到阴影贴图中
-    Scene.add(mesh); ////网格模型添加到场景中
-    Meshs.push(mesh); // 方便调用
-  }, [Scene]);
 
   /**创建线条几何体 */
   const createLine = useCallback(() => {
@@ -180,6 +164,16 @@ const Start = () => {
     Camera.lookAt(0, 0, 0);
   }, []);
 
+  /**
+   * 点击事件
+   * 点击随机生成方块
+   */
+  const handleClick = useCallback(() => {
+    const array = Array.of(createLine, createLambert, createPhong);
+    const index = Math.floor(Math.random() * 3);
+    array[index]();
+  }, []);
+
   /** 渲染器部分配置+相机参数设计 */
   const init = useCallback(() => {
     //渲染器尺寸
@@ -258,6 +252,7 @@ const Start = () => {
       onMouseDown={down}
       onMouseMove={move}
       onWheel={wheel}
+      onClick={handleClick}
     ></div>
   );
 };
