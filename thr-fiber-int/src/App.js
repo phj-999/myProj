@@ -4,16 +4,19 @@ import { ErrorFallback } from "./components/ErrorFallback";
 
 import "./App.css";
 
-//const CarsShow = React.lazy(()=>import("./views/car/CarsShow"))
 const Spinner = React.lazy(() => import("./components/boxTwo/Spinner"));
-const Start = React.lazy(() => import("./views/start"));
+//const CarsShow = React.lazy(()=>import("./views/car/CarsShow"))
+//const Start = React.lazy(() => import("./views/start"));
+const IronUniverse = React.lazy(() => import("./views/Iron-Universe"));
+
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={<Spinner />}>
         {/* <CarsShow /> */}
-        <Start />
+        {/* <Start /> */}
+        <IronUniverse />
       </Suspense>
     </ErrorBoundary>
   );
