@@ -19,7 +19,7 @@ const Start = () => {
 
   const Floor = useRef(null); //存储地板
   /**
-   * 创建网格模型
+   * 创建普通的几何体
    */
   const creatReact = useCallback(() => {
     // //创建一个球体几何对象
@@ -29,6 +29,8 @@ const Start = () => {
     // 网格
     const mesh = new THREE.Mesh(react, mashBasicMaster);
     mesh.position.set(0, 0, 0);
+    //阴影
+    mesh.castShadow = true; //是否被渲染到阴影贴图中
     Scene.add(mesh); ////网格模型添加到场景中
     Meshs.push(mesh); // 方便调用
   }, [Scene]);
@@ -67,6 +69,8 @@ const Start = () => {
     geomatry.setAttribute("color", new THREE.Float32BufferAttribute(color1, 3));
     const mesh = new THREE.Line(geomatry, lineMater);
     mesh.position.set(4, 0, 0);
+    //阴影
+    mesh.castShadow = true; //是否被渲染到阴影贴图中
     Scene.add(mesh);
     Meshs.push(mesh);
   }, []);
@@ -82,6 +86,10 @@ const Start = () => {
     });
     //网格
     const mesh = new THREE.Mesh(react, lambert);
+    //阴影
+    mesh.castShadow = true; //是否被渲染到阴影贴图中
+    mesh.receiveShadow = true; //材质是否接受阴影
+
     //var a = new THREE.Vector3(-4, 0, 0);
     mesh.position.set(-4, 0, 0);
     Scene.add(mesh);
@@ -95,6 +103,9 @@ const Start = () => {
     const phong = new THREE.MeshPhongMaterial({ color: "#ffcccc" }); //材质
     const mesh = new THREE.Mesh(rect, phong); //网格
     mesh.position.set(-8, 0, 0);
+    //阴影
+    mesh.castShadow = true; //是否被渲染到阴影贴图中
+    mesh.receiveShadow = true; //材质是否接受阴影
     Scene.add(mesh);
     Meshs.push(mesh);
   }, [Scene]);
@@ -102,21 +113,30 @@ const Start = () => {
   /**灯光 */
   const createLight = () => {
     // 平行光（太阳光）--直射
-    // const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
-    // dirLight.position.set(100, 200, 200);
+    const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
+    dirLight.position.set(0, 20, 0);
+    dirLight.castShadow = true; //平行光配置阴影就行了 环境光不需要
+    // 投影显示范围
+    dirLight.shadow.camera.top = -10;
+    dirLight.shadow.camera.bottom = 10;
+    dirLight.shadow.camera.right = -10;
+    dirLight.shadow.camera.left = 10;
+    // 把阴影变清晰(比较费性能)
+    dirLight.shadow.mapSize.width = 2000;
+    dirLight.shadow.mapSize.height = 2000;
     // 环境光
-    const amLight = new THREE.AmbientLight("#ff9f43", 0.5);
+    const amLight = new THREE.AmbientLight("#ff9f43", 0.3);
     // 点光源
-    const point = new THREE.PointLight("#cd84f1", 4, 6);
-    point.position.set(0, 5, 0);
+    // const point = new THREE.PointLight("#cd84f1", 4, 6);
+    // point.position.set(0, 5, 0);
     Scene.add(
-      //dirLight,
-      point,
+      dirLight,
+      //point,
       amLight
     );
     Lights.push(
-      //dirLight,
-      point,
+      dirLight,
+      //point,
       amLight
     );
   };
@@ -161,10 +181,11 @@ const Start = () => {
     Camera.lookAt(0, 0, 0);
   }, []);
 
-  /** 渲染+相机参数设计 */
+  /** 渲染器部分配置+相机参数设计 */
   const init = useCallback(() => {
     //渲染器尺寸
     Render.setSize(Body.current.offsetWidth, Body.current.offsetHeight);
+    Render.shadowMap.enabled = true; //开启阴影
     // 设计相机参数
     /**PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
        fov — 摄像机视锥体垂直视野角度
@@ -192,6 +213,9 @@ const Start = () => {
     //材质：一种非光泽表面的材质，没有镜面高光。
     const lambert = new THREE.MeshLambertMaterial({ color: "white" });
     const mesh = new THREE.Mesh(plane, lambert);
+    //阴影
+    mesh.castShadow = true; //是否被渲染到阴影贴图中
+    mesh.receiveShadow = true; //材质是否接受阴影
     mesh.position.set(-2, -2, 0);
     //此时是竖在页面， 需要旋转
     mesh.rotation.x = (-90 / 180) * Math.PI;
