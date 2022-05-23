@@ -19,7 +19,7 @@ const UniverseStarTwo = () => {
   const Lights = useRef([]).current; //存储灯光
   const IsDown = useRef(false); //记录鼠标是否按下，用于控制页面移动
   const PI = useRef(100); //camera的半径 控制相机的距离
-  const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
+  const R = useRef(20); //初始的角度，物体在正前方，跟我们视角是90度
   const Floor = useRef(null); //存储地板
   const Clock = useRef(new THREE.Clock()); // 用于动画
   const Mixer = useRef(); //用于更新混合器
@@ -45,6 +45,32 @@ const UniverseStarTwo = () => {
       animated.play();
       //Meshs.push(object)
       Scene.add(object);
+    });
+  }, []);
+
+  // 用GLTFLoader的loader加载动画
+  const loaderGLTF = useCallback(() => {
+    //加载器追踪管理器
+    const manager = new THREE.LoadingManager();
+    manager.onLoad = () => setLoaded(100); //加载结束
+    manager.onStart = (_, loaded, total) => setLoaded(loaded / total); //开始加载
+    manager.onProgress = (_, loaded, total) => setLoaded(loaded / total); //加载途中
+    //加载器
+    const loader = new GLTFLoader(manager);
+    loader.setPath("/Iron_man/");
+    loader.load("i10.gltf", (object) => {
+      //console.log(obj,'loaderFbx');
+      //   object.position.set(0, 0, 0);
+      //   object.scale.set(0.1, 0.1, 0.1);
+
+      //3D 动画
+      Mixer.current = new THREE.AnimationMixer(object.scene);
+      const animated = Mixer.current.clipAction(object.animations[0]);
+      animated.setLoop(true);
+      animated.play();
+      //Meshs.push(object)
+      console.log(object, "loaderGLTF"); //animations,assets,cameras,parser,scenes,userData
+      Scene.add(object.scene);
     });
   }, []);
 
@@ -252,7 +278,8 @@ const UniverseStarTwo = () => {
     init();
     createLight(); //灯光
     createFloor(); //平面地板
-    loaderFbx();
+    //loaderFbx();
+    loaderGLTF();
     renderScene();
     document.addEventListener("resize", setView);
     console.log("渲染执行");
