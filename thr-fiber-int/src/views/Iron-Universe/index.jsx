@@ -14,7 +14,7 @@ const Start = () => {
   const id = useRef(null);
   const Lights = useRef([]).current; //存储灯光
   const IsDown = useRef(false); //记录鼠标是否按下，用于控制页面移动
-  const PI = useRef(15); //camera的半径
+  const PI = useRef(30); //camera的半径
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
 
   /**创建线条几何体 */
