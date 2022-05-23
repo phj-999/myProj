@@ -22,7 +22,7 @@ const UniverseStarTwo = () => {
   const R = useRef(20); //初始的角度，物体在正前方，跟我们视角是90度
   const Floor = useRef(null); //存储地板
   const Clock = useRef(new THREE.Clock()); // 用于动画
-  const Mixer = useRef(); //用于更新混合器
+  const Mixer = useRef([]).current; //用于更新混合器
 
   const loaderFbx = useCallback(() => {
     //加载器追踪管理器
@@ -35,12 +35,21 @@ const UniverseStarTwo = () => {
     loader.setPath("/Iron_man/");
     loader.load("gtx2.fbx", (object) => {
       //console.log(obj,'loaderFbx');
-      object.position.set(0, 0, 0);
-      object.scale.set(0.1, 0.1, 0.1);
+      object.position.set(-6, 0, -1);
+      object.scale.set(0.05, 0.05, 0.05);
 
       //3D 动画
-      Mixer.current = new THREE.AnimationMixer(object);
-      const animated = Mixer.current.clipAction(object.animations[0]);
+      //Mixer.current = new THREE.AnimationMixer(object);
+      const Mixer1 = new THREE.AnimationMixer(object);
+      Mixer.push(Mixer1);
+      //const animated = Mixer.current.clipAction(object.animations[0]);
+
+      //   console.log('====================================');
+      //   console.log(Mixer1);
+      //   console.log('====================================');
+      //   console.log(Mixer[0]);
+
+      const animated = Mixer[0].clipAction(object.animations[0]);
       animated.setLoop(true);
       animated.play();
       //Meshs.push(object)
@@ -60,12 +69,16 @@ const UniverseStarTwo = () => {
     loader.setPath("/Iron_man/");
     loader.load("i10.gltf", (object) => {
       //console.log(obj,'loaderFbx');
-      //   object.position.set(0, 0, 0);
-      //   object.scale.set(0.1, 0.1, 0.1);
+      //object.scene.position.set(0, 0, 0);
+      object.scene.scale.set(2, 2, 2);
 
       //3D 动画
-      Mixer.current = new THREE.AnimationMixer(object.scene);
-      const animated = Mixer.current.clipAction(object.animations[0]);
+      //Mixer.current = new THREE.AnimationMixer(object.scene);
+      const Mixer2 = new THREE.AnimationMixer(object.scene);
+      Mixer.push(Mixer2);
+
+      //const animated = Mixer.current.clipAction(object.animations[0]);
+      const animated = Mixer[2].clipAction(object.animations[0]);
       animated.setLoop(true);
       animated.play();
       //Meshs.push(object)
@@ -254,9 +267,13 @@ const UniverseStarTwo = () => {
     //   item.rotation.y += (0.5 / 180) * Math.PI;
     // });
     const time = Clock.current.getDelta(); //获取当前秒数
-    if (Mixer.current) {
+    if (Mixer.length) {
       //是否创建了混合器 是的话就更新混合器
-      Mixer.current.update(time);
+      Mixer.forEach((item) => {
+        item.update(time);
+      });
+      //console.log(Mixer,'mixer');
+      //Mixer.current.update(time);
     }
     // 要重复的把相机拍到的东西通过渲染器输出到页面，所以要用到requestAnimationFrame
     id.current = window.requestAnimationFrame(() => {
@@ -278,7 +295,7 @@ const UniverseStarTwo = () => {
     init();
     createLight(); //灯光
     createFloor(); //平面地板
-    //loaderFbx();
+    loaderFbx();
     loaderGLTF();
     renderScene();
     document.addEventListener("resize", setView);
@@ -298,6 +315,10 @@ const UniverseStarTwo = () => {
         console.log("lights 销毁");
       });
       Floor.current && Scene.remove(Floor.current); //销毁地板
+      Mixer.forEach((item) => {
+        Scene.remove(item);
+        item.uncacheClip();
+      });
       Render.dispose();
       //Scene.dispose()
     };
