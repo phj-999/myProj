@@ -7,7 +7,8 @@ import "./App.css";
 const Spinner = React.lazy(() => import("./components/boxTwo/Spinner"));
 //const CarsShow = React.lazy(()=>import("./views/car/CarsShow"))
 //const Start = React.lazy(() => import("./views/start"));
-const IronUniverse = React.lazy(() => import("./views/Iron-Universe"));
+//const UniverseStar = React.lazy(() => import("./views/Iron-Universe/UniverseStar"));
+const UniverseStarTwo = React.lazy(() => import("./views/Iron-Universe/UniverseStarTwo"));
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
       <Suspense fallback={<Spinner />}>
         {/* <CarsShow /> */}
         {/* <Start /> */}
-        <IronUniverse />
+        {/* <UniverseStar /> */}
+        <UniverseStarTwo />
       </Suspense>
     </ErrorBoundary>
   );
