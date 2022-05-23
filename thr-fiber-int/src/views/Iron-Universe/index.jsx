@@ -30,7 +30,8 @@ const Start = () => {
     let vertices = [];
     //let color1 = [];
     const width = Math.random() * 5;
-    for (let i = 0; i < linenum; i++) {
+    //linenum线条数
+    for (let i = 0; i < 1000 + linenum; i++) {
       const x = Math.random() * width - width * 0.5;
       const y = Math.random() * width - width * 0.5;
       const z = Math.random() * width - width * 0.5;
@@ -184,7 +185,7 @@ const Start = () => {
     const y = 10 - Math.random() * 20;
     const z = 20 - Math.random() * 40;
     const color = new THREE.Color(Math.random(), Math.random(), Math.random());
-    const linenum = index === 0 ? Math.ceil(Math.random() * 1000) : 0;
+    const linenum = index === 0 ? Math.ceil(Math.random() * 10000) : 0;
     array[index](x, y, z, color, linenum);
   }, []);
 
