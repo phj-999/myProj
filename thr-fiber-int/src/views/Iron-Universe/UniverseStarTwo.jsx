@@ -2,6 +2,7 @@ import { Progress } from "antd";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import "./index.css";
 
@@ -20,6 +21,8 @@ const UniverseStarTwo = () => {
   const PI = useRef(100); //camera的半径 控制相机的距离
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
   const Floor = useRef(null); //存储地板
+  const Clock = useRef(new THREE.Clock()); // 用于动画
+  const Mixer = useRef(); //用于更新混合器
 
   const loaderFbx = useCallback(() => {
     //加载器追踪管理器
@@ -30,10 +33,16 @@ const UniverseStarTwo = () => {
     //加载器
     const loader = new FBXLoader(manager);
     loader.setPath("/Iron_man/");
-    loader.load("gtx2.fbx", function (object) {
+    loader.load("gtx2.fbx", (object) => {
       //console.log(obj,'loaderFbx');
       object.position.set(0, 0, 0);
       object.scale.set(0.1, 0.1, 0.1);
+
+      //3D 动画
+      Mixer.current = new THREE.AnimationMixer(object);
+      const animated = Mixer.current.clipAction(object.animations[0]);
+      animated.setLoop(true);
+      animated.play();
       //Meshs.push(object)
       Scene.add(object);
     });
@@ -218,6 +227,11 @@ const UniverseStarTwo = () => {
     //   // y轴
     //   item.rotation.y += (0.5 / 180) * Math.PI;
     // });
+    const time = Clock.current.getDelta(); //获取当前秒数
+    if (Mixer.current) {
+      //是否创建了混合器 是的话就更新混合器
+      Mixer.current.update(time);
+    }
     // 要重复的把相机拍到的东西通过渲染器输出到页面，所以要用到requestAnimationFrame
     id.current = window.requestAnimationFrame(() => {
       renderScene();
