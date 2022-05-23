@@ -180,6 +180,8 @@ const UniverseStarTwo = () => {
     //渲染器尺寸
     Render.setSize(Body.current.offsetWidth, Body.current.offsetHeight);
     Render.shadowMap.enabled = true; //开启阴影
+    //导入的3d模型太模糊：原因是因为高分屏显示像素是不像我们的普通屏幕，要设置成我们电脑的像素配置才不模糊
+    Render.setPixelRatio(window.devicePixelRatio)
     // 设计相机参数
     /**PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
        fov — 摄像机视锥体垂直视野角度
