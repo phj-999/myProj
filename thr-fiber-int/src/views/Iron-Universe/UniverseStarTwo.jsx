@@ -30,7 +30,7 @@ const UniverseStarTwo = () => {
     //加载器
     const loader = new FBXLoader(manager);
     loader.setPath("/Iron_man/");
-    loader.load("gtx.fbx", function (object) {
+    loader.load("gtx2.fbx", function (object) {
       //console.log(obj,'loaderFbx');
       object.position.set(0, 0, 0);
       object.scale.set(0.1, 0.1, 0.1);
