@@ -1,11 +1,12 @@
 import { Progress } from "antd";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 import "./index.css";
 
 const UniverseStarTwo = () => {
+  const [loaded, setLoaded] = useState(0); //加载器管理器
   const Body = useRef();
   //const Scene =  new THREE.Scene() 这样每次都会实例化一次 重复渲染浪费性能
   const Scene = useRef(new THREE.Scene()).current; //场景
@@ -21,7 +22,13 @@ const UniverseStarTwo = () => {
   const Floor = useRef(null); //存储地板
 
   const loaderFbx = useCallback(() => {
-    const loader = new FBXLoader();
+    //加载器追踪管理器
+    const manager = new THREE.LoadingManager();
+    manager.onLoad = () => setLoaded(100); //加载结束
+    manager.onStart = (_, loaded, total) => setLoaded(loaded / total); //开始加载
+    manager.onProgress = (_, loaded, total) => setLoaded(loaded / total); //加载途中
+    //加载器
+    const loader = new FBXLoader(manager);
     loader.setPath("/Iron_man/");
     loader.load("gtx.fbx", function (object) {
       //console.log(obj,'loaderFbx');
@@ -134,7 +141,7 @@ const UniverseStarTwo = () => {
     R.current -= e.movementX * 0.5; //鼠标左右移动对角度自减
     // 重新设置相机位置，相机在XOY平面绕着坐标原点旋转运动
     const x = PI.current * Math.cos((R.current / 180) * Math.PI);
-    const y = Camera.position.y + e.movementY * 0.1;
+    let y = Camera.position.y + e.movementY * 0.1;
     const z = PI.current * Math.sin((R.current / 180) * Math.PI);
     //if (y < 3) y = 3;
     Camera.position.set(x, y, z);
@@ -257,9 +264,11 @@ const UniverseStarTwo = () => {
 
   return (
     <div className="box">
-      <div className="mask">
-        <Progress percent={50} />
-      </div>
+      {loaded < 100 && (
+        <div className="mask">
+          <Progress percent={loaded} />
+        </div>
+      )}
       <div
         style={{
           height: "100%",
