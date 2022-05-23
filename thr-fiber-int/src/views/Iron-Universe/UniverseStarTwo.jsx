@@ -1,6 +1,7 @@
+import { Progress } from "antd";
 import React, { useCallback, useEffect, useRef } from "react";
 import * as THREE from "three";
-import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader'
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 import "./index.css";
 
@@ -19,21 +20,17 @@ const UniverseStarTwo = () => {
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
   const Floor = useRef(null); //存储地板
 
-  const loaderFbx = useCallback(
-    () => {
-      const loader = new FBXLoader()
-      loader.setPath('/Iron_man/')
-      loader.load('gtx.fbx',function(object){
-          //console.log(obj,'loaderFbx');
-          object.position.set(0,0,0)
-          object.scale.set(0.1,0.1,0.1)
-          //Meshs.push(object)
-          Scene.add(object)
-      })
-    },
-    [],
-  )
-  
+  const loaderFbx = useCallback(() => {
+    const loader = new FBXLoader();
+    loader.setPath("/Iron_man/");
+    loader.load("gtx.fbx", function (object) {
+      //console.log(obj,'loaderFbx');
+      object.position.set(0, 0, 0);
+      object.scale.set(0.1, 0.1, 0.1);
+      //Meshs.push(object)
+      Scene.add(object);
+    });
+  }, []);
 
   /**灯光 */
   const createLight = () => {
@@ -67,47 +64,50 @@ const UniverseStarTwo = () => {
   };
 
   /**创建星球和星云几何体*/
-//   const createStar = useCallback((x, y, z, color) => {
-//     const width = Math.random() * 2;
-//     //球体
-//     const BallGeometry = new THREE.SphereBufferGeometry(width, 64, 64);
-//     //圆环
-//     const RingGeometry = new THREE.RingGeometry(
-//       width + 0.3,
-//       width + 0.3 + width * 0.5,
-//       64
-//     );
+  //   const createStar = useCallback((x, y, z, color) => {
+  //     const width = Math.random() * 2;
+  //     //球体
+  //     const BallGeometry = new THREE.SphereBufferGeometry(width, 64, 64);
+  //     //圆环
+  //     const RingGeometry = new THREE.RingGeometry(
+  //       width + 0.3,
+  //       width + 0.3 + width * 0.5,
+  //       64
+  //     );
 
-//     //材质
-//     const phong = new THREE.MeshPhongMaterial({ color }); //phong材质 用于球体
-//     const lambert = new THREE.MeshLambertMaterial({
-//       color: "#fff",
-//       side: THREE.DoubleSide,
-//     }); //lamber材质 用于圆环
-//     const Ballmesh = new THREE.Mesh(BallGeometry, phong); //星球
-//     const Ringmesh = new THREE.Mesh(RingGeometry, lambert); //星球
+  //     //材质
+  //     const phong = new THREE.MeshPhongMaterial({ color }); //phong材质 用于球体
+  //     const lambert = new THREE.MeshLambertMaterial({
+  //       color: "#fff",
+  //       side: THREE.DoubleSide,
+  //     }); //lamber材质 用于圆环
+  //     const Ballmesh = new THREE.Mesh(BallGeometry, phong); //星球
+  //     const Ringmesh = new THREE.Mesh(RingGeometry, lambert); //星球
 
-//     //位置
-//     Ballmesh.position.set(x, y, z); //星球
-//     Ringmesh.position.set(x, y, z); //星云
+  //     //位置
+  //     Ballmesh.position.set(x, y, z); //星球
+  //     Ringmesh.position.set(x, y, z); //星云
 
-//     //旋转星云
-//     Ringmesh.rotation.x = (-90 * 180) / Math.PI;
-//     // add
-//     // Scene.add(Ballmesh, Ringmesh);
-//     // Meshs.push(Ballmesh, Ringmesh)
-//     //有两个mesh，上面太麻烦 所以用组group添加
-//     const group = new THREE.Group();
-//     group.add(Ballmesh, Ringmesh);
-//     Scene.add(group);
-//   }, []);
+  //     //旋转星云
+  //     Ringmesh.rotation.x = (-90 * 180) / Math.PI;
+  //     // add
+  //     // Scene.add(Ballmesh, Ringmesh);
+  //     // Meshs.push(Ballmesh, Ringmesh)
+  //     //有两个mesh，上面太麻烦 所以用组group添加
+  //     const group = new THREE.Group();
+  //     group.add(Ballmesh, Ringmesh);
+  //     Scene.add(group);
+  //   }, []);
 
   /** 创建地板 floor*/
   const createFloor = useCallback(() => {
     // 平面几何
     const plane = new THREE.PlaneBufferGeometry(40, 30);
     //材质：一种非光泽表面的材质，没有镜面高光。
-    const lambert = new THREE.MeshLambertMaterial({ color: "white",side:THREE.DoubleSide });
+    const lambert = new THREE.MeshLambertMaterial({
+      color: "white",
+      side: THREE.DoubleSide,
+    });
     const mesh = new THREE.Mesh(plane, lambert);
     //阴影
     mesh.castShadow = true; //是否被渲染到阴影贴图中
@@ -136,9 +136,8 @@ const UniverseStarTwo = () => {
     const x = PI.current * Math.cos((R.current / 180) * Math.PI);
     const y = Camera.position.y + e.movementY * 0.1;
     const z = PI.current * Math.sin((R.current / 180) * Math.PI);
-    if(y<3) y=3
+    //if (y < 3) y = 3;
     Camera.position.set(x, y, z);
-     
     // 相机位置改变后，注意执行.looAt()方法重新计算视图矩阵旋转部分
     // 如果不执行.looAt()方法，相当于相机镜头方向保持在首次执行`.lookAt()`的时候
     Camera.lookAt(0, 0, 0);
@@ -181,7 +180,7 @@ const UniverseStarTwo = () => {
     Render.setSize(Body.current.offsetWidth, Body.current.offsetHeight);
     Render.shadowMap.enabled = true; //开启阴影
     //导入的3d模型太模糊：原因是因为高分屏显示像素是不像我们的普通屏幕，要设置成我们电脑的像素配置才不模糊
-    Render.setPixelRatio(window.devicePixelRatio)
+    Render.setPixelRatio(window.devicePixelRatio);
     // 设计相机参数
     /**PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
        fov — 摄像机视锥体垂直视野角度
@@ -257,18 +256,23 @@ const UniverseStarTwo = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-      }}
-      ref={Body}
-      onMouseUp={up}
-      onMouseDown={down}
-      onMouseMove={move}
-      onWheel={wheel}
-      onClick={handleClick}
-    ></div>
+    <div className="box">
+      <div className="mask">
+        <Progress percent={50} />
+      </div>
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+        }}
+        ref={Body}
+        onMouseUp={up}
+        onMouseDown={down}
+        onMouseMove={move}
+        onWheel={wheel}
+        onClick={handleClick}
+      ></div>
+    </div>
   );
 };
 
