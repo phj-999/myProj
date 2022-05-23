@@ -136,7 +136,7 @@ const UniverseStarTwo = () => {
     const x = PI.current * Math.cos((R.current / 180) * Math.PI);
     const y = Camera.position.y + e.movementY * 0.1;
     const z = PI.current * Math.sin((R.current / 180) * Math.PI);
-
+    if(y<3) y=3
     Camera.position.set(x, y, z);
 
     // 相机位置改变后，注意执行.looAt()方法重新计算视图矩阵旋转部分

@@ -16,7 +16,7 @@ const Spinner = () => {
     return (
         <mesh ref={ref} position={[0, 3, 0]}>
             <dodecahedronBufferGeometry args={[1, 1]} />
-            <meshPhysicalMaterial color={'rgb(93, 89, 30)'} opacity={.5} side={THREE.DoubleSide}/>
+            <meshPhysicalMaterial color={'rgb(188, 7, 31)'} opacity={.5} side={THREE.DoubleSide}/>
         </mesh>
     )
 };
