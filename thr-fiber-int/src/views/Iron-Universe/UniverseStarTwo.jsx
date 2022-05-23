@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import * as THREE from "three";
+import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader'
 
 import "./index.css";
 
@@ -14,9 +15,25 @@ const UniverseStarTwo = () => {
   const id = useRef(null);
   const Lights = useRef([]).current; //存储灯光
   const IsDown = useRef(false); //记录鼠标是否按下，用于控制页面移动
-  const PI = useRef(30); //camera的半径
+  const PI = useRef(100); //camera的半径 控制相机的距离
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
   const Floor = useRef(null); //存储地板
+
+  const loaderFbx = useCallback(
+    () => {
+      const loader = new FBXLoader()
+      loader.setPath('/Iron_man/')
+      loader.load('gtx.fbx',function(object){
+          //console.log(obj,'loaderFbx');
+          object.position.set(0,0,0)
+          object.scale.set(0.1,0.1,0.1)
+          //Meshs.push(object)
+          Scene.add(object)
+      })
+    },
+    [],
+  )
+  
 
   /**灯光 */
   const createLight = () => {
@@ -95,7 +112,7 @@ const UniverseStarTwo = () => {
     //阴影
     mesh.castShadow = true; //是否被渲染到阴影贴图中
     mesh.receiveShadow = true; //材质是否接受阴影
-    mesh.position.set(-2, -2, 0);
+    mesh.position.set(0, 0, 0);
     //此时是竖在页面， 需要旋转
     mesh.rotation.x = (-90 / 180) * Math.PI;
     Scene.add(mesh);
@@ -187,12 +204,12 @@ const UniverseStarTwo = () => {
   const renderScene = useCallback(() => {
     //执行渲染操作   指定场景、相机作为参数
     Render.render(Scene, Camera);
-    Meshs.forEach((item) => {
-      // 旋转and速度  x轴
-      item.rotation.x += (0.5 / 180) * Math.PI; //角度/180 * Math.PI
-      // y轴
-      item.rotation.y += (0.5 / 180) * Math.PI;
-    });
+    // Meshs.forEach((item) => {
+    //   // 旋转and速度  x轴
+    //   item.rotation.x += (0.5 / 180) * Math.PI; //角度/180 * Math.PI
+    //   // y轴
+    //   item.rotation.y += (0.5 / 180) * Math.PI;
+    // });
     // 要重复的把相机拍到的东西通过渲染器输出到页面，所以要用到requestAnimationFrame
     id.current = window.requestAnimationFrame(() => {
       renderScene();
@@ -213,6 +230,7 @@ const UniverseStarTwo = () => {
     init();
     createLight(); //灯光
     createFloor(); //平面地板
+    loaderFbx();
     renderScene();
     document.addEventListener("resize", setView);
     console.log("渲染执行");
