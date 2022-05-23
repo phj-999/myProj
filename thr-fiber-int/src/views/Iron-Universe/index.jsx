@@ -103,11 +103,47 @@ const Start = () => {
     [Scene]
   );
 
+  /**创建星球和星云几何体*/
+  const createStar = useCallback((x, y, z, color) => {
+    const width = Math.random() * 2;
+    //球体
+    const BallGeometry = new THREE.SphereBufferGeometry(width, 64, 64);
+    //圆环
+    const RingGeometry = new THREE.RingGeometry(
+      width + 0.3,
+      width + 0.3 + width * 0.5,
+      64
+    );
+
+    //材质
+    const phong = new THREE.MeshPhongMaterial({ color }); //phong材质 用于球体
+    const lambert = new THREE.MeshLambertMaterial({
+      color: "#fff",
+      side: THREE.DoubleSide,
+    }); //lamber材质 用于圆环
+    const Ballmesh = new THREE.Mesh(BallGeometry, phong); //星球
+    const Ringmesh = new THREE.Mesh(RingGeometry, lambert); //星球
+
+    //位置
+    Ballmesh.position.set(x, y, z); //星球
+    Ringmesh.position.set(x, y, z); //星云
+
+    //旋转星云
+    Ringmesh.rotation.x = (-90 * 180) / Math.PI;
+    // add
+    // Scene.add(Ballmesh, Ringmesh);
+    // Meshs.push(Ballmesh, Ringmesh)
+    //有两个mesh，上面太麻烦 所以用组group添加
+    const group = new THREE.Group();
+    group.add(Ballmesh, Ringmesh);
+    Scene.add(group);
+  }, []);
+
   /**灯光 */
   const createLight = () => {
     // 平行光（太阳光）--直射
-    const dirLight = new THREE.DirectionalLight("#ffc773 ", 1);
-    dirLight.position.set(30, 30, 2000);
+    const dirLight = new THREE.DirectionalLight("#ffc773 ", 1.3);
+    dirLight.position.set(0, 0, 2000);
     dirLight.castShadow = true; //平行光配置阴影就行了 环境光不需要
     // 投影显示范围
     dirLight.shadow.camera.top = -10;
@@ -118,7 +154,7 @@ const Start = () => {
     dirLight.shadow.mapSize.width = 2000;
     dirLight.shadow.mapSize.height = 2000;
     // 环境光
-    const amLight = new THREE.AmbientLight("#ff9f43", 0.3);
+    const amLight = new THREE.AmbientLight("#ff9f43", 0.6);
     // 点光源
     // const point = new THREE.PointLight("#cd84f1", 4, 6);
     // point.position.set(0, 5, 0);
@@ -179,15 +215,16 @@ const Start = () => {
    * 点击随机生成方块
    */
   const handleClick = useCallback(() => {
-    const array = Array.of(createLine, createLambert, createPhong);
+    //const array = Array.of(createLine, createLambert, createPhong);
     const index = Math.floor(Math.random() * 3);
-    const x = 20 - Math.random() * 40;
-    const y = 10 - Math.random() * 20;
-    const z = 20 - Math.random() * 40;
+    const x = 30 - Math.random() * 60;
+    const y = 5 - Math.random() * 10;
+    const z = 30 - Math.random() * 60;
     const color = new THREE.Color(Math.random(), Math.random(), Math.random());
-    const linenum = index === 0 ? Math.ceil(Math.random() * 10000) : 0;
-    array[index](x, y, z, color, linenum);
-  }, []);
+    //const linenum = index === 0 ? Math.ceil(Math.random() * 10000) : 0;
+    //array[index](x, y, z, color, linenum);
+    createStar(x, y, z, color);
+  }, [createStar]);
 
   /** 渲染器部分配置+相机参数设计 */
   const init = useCallback(() => {
