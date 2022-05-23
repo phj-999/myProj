@@ -106,8 +106,8 @@ const Start = () => {
   /**灯光 */
   const createLight = () => {
     // 平行光（太阳光）--直射
-    const dirLight = new THREE.DirectionalLight("#48dbfb", 1);
-    dirLight.position.set(0, 20, 0);
+    const dirLight = new THREE.DirectionalLight("#ffc773 ", 1);
+    dirLight.position.set(30, 30, 2000);
     dirLight.castShadow = true; //平行光配置阴影就行了 环境光不需要
     // 投影显示范围
     dirLight.shadow.camera.top = -10;
