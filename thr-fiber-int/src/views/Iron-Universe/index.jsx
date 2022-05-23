@@ -17,31 +17,30 @@ const Start = () => {
   const PI = useRef(15); //camera的半径
   const R = useRef(90); //初始的角度，物体在正前方，跟我们视角是90度
 
-
   /**创建线条几何体 */
-  const createLine = useCallback(() => {
+  const createLine = useCallback((x, y, z, color, linenum) => {
     // 线条材质
     const lineMater = new THREE.LineBasicMaterial({
-      vertexColors: true,
+      color,
     });
     // 几何体
     const geomatry = new THREE.BufferGeometry();
-    const color = new THREE.Color();
+    //const color = new THREE.Color();
 
     let vertices = [];
-    let color1 = [];
-
-    for (let i = 0; i < 8000; i++) {
-      const x = Math.random() * 2 - 1;
-      const y = Math.random() * 2 - 1;
-      const z = Math.random() * 2 - 1;
+    //let color1 = [];
+    const width = Math.random() * 5;
+    for (let i = 0; i < linenum; i++) {
+      const x = Math.random() * width - width * 0.5;
+      const y = Math.random() * width - width * 0.5;
+      const z = Math.random() * width - width * 0.5;
       //geomatry.vertics.push(new THREE.Vector3(x, y, z));
       vertices.push(x, y, z);
       //geomatry.colors.push(Math.random(), Math.random(), Math.random());
-      color.setHSL(Math.random(), Math.random(), Math.random());
-      color1.push(color.r, color.g, color.b);
+      //color.setHSL(Math.random(), Math.random(), Math.random());
+      //color1.push(color.r, color.g, color.b);
     }
-    geomatry.setFromPoints(vertices);
+    //geomatry.setFromPoints(vertices);
 
     geomatry.setAttribute(
       "position",
@@ -49,9 +48,10 @@ const Start = () => {
       new THREE.Float32BufferAttribute(vertices, 3)
     );
 
-    geomatry.setAttribute("color", new THREE.Float32BufferAttribute(color1, 3));
+    //geomatry.setAttribute("color", new THREE.Float32BufferAttribute(color1, 3));
     const mesh = new THREE.Line(geomatry, lineMater);
-    mesh.position.set(4, 1.5, 0);
+    //mesh.position.set(4, 1.5, 0);
+    mesh.position.set(x, y, z);
     //阴影
     mesh.castShadow = true; //是否被渲染到阴影贴图中
     Scene.add(mesh);
@@ -59,39 +59,48 @@ const Start = () => {
   }, []);
 
   /**创建lambert材质立方体 */
-  const createLambert = useCallback(() => {
-    //几何体
-    const react = new THREE.BoxBufferGeometry(2, 2, 2);
-    //材质
-    const lambert = new THREE.MeshLambertMaterial({
-      color: "white",
-      side: THREE.DoubleSide, //两面可见
-    });
-    //网格
-    const mesh = new THREE.Mesh(react, lambert);
-    //阴影
-    mesh.castShadow = true; //是否被渲染到阴影贴图中
-    mesh.receiveShadow = true; //材质是否接受阴影
+  const createLambert = useCallback(
+    (x, y, z, color) => {
+      const width = Math.random() * 5;
+      //几何体
+      const react = new THREE.BoxBufferGeometry(width, width, width);
+      //材质
+      const lambert = new THREE.MeshLambertMaterial({
+        color,
+        side: THREE.DoubleSide, //两面可见
+      });
+      //网格
+      const mesh = new THREE.Mesh(react, lambert);
+      //阴影
+      mesh.castShadow = true; //是否被渲染到阴影贴图中
+      mesh.receiveShadow = true; //材质是否接受阴影
 
-    //var a = new THREE.Vector3(-4, 0, 0);
-    mesh.position.set(-4, 2, 0);
-    Scene.add(mesh);
-    Meshs.push(mesh);
-    // console.log(32323);
-  }, [Scene]);
+      //var a = new THREE.Vector3(-4, 0, 0);
+      //mesh.position.set(-4, 2, 0);
+      mesh.position.set(x, y, z);
+      Scene.add(mesh);
+      Meshs.push(mesh);
+      // console.log(32323);
+    },
+    [Scene]
+  );
 
   /**MeshPhongMaterial材质球形状几何体*/
-  const createPhong = useCallback(() => {
-    const rect = new THREE.SphereGeometry(2, 32, 16); //球形几合体
-    const phong = new THREE.MeshPhongMaterial({ color: "#ffcccc" }); //材质
-    const mesh = new THREE.Mesh(rect, phong); //网格
-    mesh.position.set(-8, 3, 0);
-    //阴影
-    mesh.castShadow = true; //是否被渲染到阴影贴图中
-    mesh.receiveShadow = true; //材质是否接受阴影
-    Scene.add(mesh);
-    Meshs.push(mesh);
-  }, [Scene]);
+  const createPhong = useCallback(
+    (x, y, z, color) => {
+      const rect = new THREE.SphereGeometry(2, 32, 16); //球形几合体
+      const phong = new THREE.MeshPhongMaterial({ color }); //材质
+      const mesh = new THREE.Mesh(rect, phong); //网格
+      //mesh.position.set(-8, 3, 0);
+      mesh.position.set(x, y, z);
+      //阴影
+      mesh.castShadow = true; //是否被渲染到阴影贴图中
+      mesh.receiveShadow = true; //材质是否接受阴影
+      Scene.add(mesh);
+      Meshs.push(mesh);
+    },
+    [Scene]
+  );
 
   /**灯光 */
   const createLight = () => {
@@ -171,7 +180,12 @@ const Start = () => {
   const handleClick = useCallback(() => {
     const array = Array.of(createLine, createLambert, createPhong);
     const index = Math.floor(Math.random() * 3);
-    array[index]();
+    const x = 20 - Math.random() * 40;
+    const y = 10 - Math.random() * 20;
+    const z = 20 - Math.random() * 40;
+    const color = new THREE.Color(Math.random(), Math.random(), Math.random());
+    const linenum = index === 0 ? Math.ceil(Math.random() * 1000) : 0;
+    array[index](x, y, z, color, linenum);
   }, []);
 
   /** 渲染器部分配置+相机参数设计 */
