@@ -2,12 +2,12 @@ const {
   override,
   fixBabelImports,
   addWebpackAlias,
-  //addLessLoader,
+  addPostcssPlugins,
 } = require("customize-cra");
 
 const path = require("path");
 
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");//生产环境打包-去除console.log、debugger；
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); //生产环境打包-去除console.log、debugger；
 
 const myPlugin = [
   new UglifyJsPlugin({
@@ -16,10 +16,10 @@ const myPlugin = [
     // 开启多线程打包
     parallel: true,
     uglifyOptions: {
-      warnings: false,// 删除警告
+      warnings: false, // 删除警告
       compress: {
         drop_debugger: true, // 移除debugger
-        drop_console: true,  // 移除console
+        drop_console: true, // 移除console
       },
     },
   }),
@@ -49,17 +49,7 @@ module.exports = override(
     "@": path.resolve(__dirname, "src"),
   }),
 
-  //  addLessLoader({
-
-  //  javascriptEnabled: true,
-
-  //  modifyVars: {
-
-  //  '@primary-color': '#1DA57A'
-
-  //  }
-
-  //  }),
+  addPostcssPlugins([require("tailwindcss"), require("autoprefixer")]),
 
   (config) => {
     //暴露webpack的配置 config ,evn

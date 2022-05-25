@@ -14,7 +14,7 @@ const CarShuttle = React.lazy(() => import("@/views/Car-Shuttle"));
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={null}>
         {/* <CarsShow /> */}
         {/* <Start /> */}
         {/* <UniverseStar /> */}
