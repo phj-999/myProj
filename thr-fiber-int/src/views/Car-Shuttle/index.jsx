@@ -16,7 +16,16 @@ const CarShuttle = () => {
   return (
     <>
       <div className={"box-content w-screen h-screen bg-gray-200"}>
-        <header className="w-screen h-2 header text-red-400">gegegeg</header>
+        <Canvas>
+          {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
+          <OrbitControls targrt={[0, 0, 0]} />
+          {/* 相机默认事件 */}
+          <PerspectiveCamera position={[3, 2, 5]} fov={50} makeDefault />
+          <mesh position={[0, 0, 0]}>
+            <boxBufferGeometry args={[1, 1, 1]} />
+            <meshBasicMaterial color={"#111827"}/>
+          </mesh>
+        </Canvas>
       </div>
     </>
   );
