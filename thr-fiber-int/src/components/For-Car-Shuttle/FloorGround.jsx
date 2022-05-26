@@ -28,14 +28,13 @@ const FloorGround = () => {
         //纹理偏移效果
         item.offset.set(0, 0);
       });
-      Textur[normal]=LinearEncoding
-  }, [Textur, normal]);
+    Textur[1].encoding=LinearEncoding;
+  }, [Textur]);
 
     useFrame((state, delta) => {
       let t = -state.clock.getElapsedTime() * 0.128;
-      Textur.forEach((item)=>{
-        item.offset?.set(0, t % 1);
-      })
+      Textur[roughness]?.offset.set(0, t % 1);
+      Textur[normal]?.offset.set(0, t % 1);
     });
 
   return (
