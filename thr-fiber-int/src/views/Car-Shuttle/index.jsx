@@ -25,7 +25,7 @@ import {
   FloorGround,
   FloorGrid,
 } from "@/components/For-Car-Shuttle";
-import { Rings } from "../../components/For-Car-Shuttle";
+import { Boxes, Rings } from "../../components/For-Car-Shuttle";
 
 // import './header.css'
 
@@ -58,6 +58,7 @@ const CarShuttle = () => {
           </CubeCamera>
 
           <FloorGround />
+          <Boxes />
           <FloorGrid />
           <Rings />
           {/* <mesh position={[0, 0, 0]}>
