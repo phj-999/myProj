@@ -1,13 +1,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
-  EffectComposer,
-  DepthOfField,
-  Bloom,
-  Noise,
-  ChromaticAberration,
-} from "@react-three/postprocessing";
-import {
   AdaptiveDpr,
   AdaptiveEvents,
   CubeCamera,
@@ -21,7 +14,8 @@ import {
   FloorGround,
   FloorGrid,
   Boxes, 
-  Rings
+  Rings,
+  Effect
 } from "@/components/For-Car-Shuttle";
 
 // import './header.css'
@@ -54,6 +48,8 @@ const CarShuttle = () => {
           <Boxes />
           <FloorGrid />
           <Rings />
+          {/* 效果组件 */}
+          <Effect />
           {/* <mesh position={[0, 0, 0]}>
             <boxBufferGeometry args={[1, 1, 1]} />
             <meshBasicMaterial color={"#111827"}/>
