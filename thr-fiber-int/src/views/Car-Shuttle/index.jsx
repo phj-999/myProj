@@ -26,7 +26,7 @@ import { Car, Lights, FloorGround } from "@/components/For-Car-Shuttle";
 const CarShuttle = () => {
   return (
     <>
-      <div className={"box-content w-screen h-screen bg-gray-200"}>
+      <div className={"box-content w-screen h-screen"}>
         <Canvas frameloop="demand">
           <AdaptiveDpr pixelated={true} />
 

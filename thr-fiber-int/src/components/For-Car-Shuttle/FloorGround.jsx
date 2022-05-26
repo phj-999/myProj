@@ -43,9 +43,9 @@ const FloorGround = () => {
       <planeGeometry args={[30, 30]} />
       <MeshReflectorMaterial
         envMapIntensity={0}
-        normalMap={normal}
+        normalMap={Textur[normal]}
         normalScale={[0.15, 0.15]}
-        roughnessMap={roughness}
+        roughnessMap={Textur[roughness]}
         dithering={true}
         color={[0.015, 0.015, 0.015]}
         roughness={0.7}
