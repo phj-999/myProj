@@ -32,8 +32,8 @@ import { Boxes, Rings } from "../../components/For-Car-Shuttle";
 const CarShuttle = () => {
   return (
       <div className={"box-content w-screen h-screen"}>
-        <Canvas shadows={true} frameloop="demand">
-          <AdaptiveDpr pixelated={true} />
+        <Canvas shadows={true} >
+          <AdaptiveDpr pixelated />
 
           {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
           <OrbitControls
@@ -43,7 +43,7 @@ const CarShuttle = () => {
           />
           {/* 相机默认事件 */}
           <PerspectiveCamera position={[3, 2, 5]} fov={50} makeDefault />
-          {/* <color args={[0, 0, 0]} attach="background" /> */}
+          <color args={[0, 0, 0]} attach="background" />
           {/* <axesHelper args={[5]} /> */}
           <Lights />
           {/* <AdaptiveEvents /> */}

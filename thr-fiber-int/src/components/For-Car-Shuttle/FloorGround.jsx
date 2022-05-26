@@ -29,7 +29,7 @@ const FloorGround = () => {
         item.offset.set(0, 0);
       });
     Textur[1].encoding=LinearEncoding;
-  }, [Textur]);
+  }, []);
 
     useFrame((state, delta) => {
       let t = -state.clock.getElapsedTime() * 0.128;
