@@ -29,7 +29,7 @@ const FloorGround = () => {
         item.offset.set(0, 0);
       });
     Textur[1].encoding=LinearEncoding;
-  }, []);
+  }, [Textur]);
 
     useFrame((state, delta) => {
       let t = -state.clock.getElapsedTime() * 0.128;
@@ -38,7 +38,8 @@ const FloorGround = () => {
     });
 
   return (
-  <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
+    <group dispose={null}>
+      <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
       <planeGeometry args={[30, 30]} />
       <MeshReflectorMaterial
         envMapIntensity={0}
@@ -61,7 +62,8 @@ const FloorGround = () => {
         debug={0}
         reflectorOffset={0.2} //  对投射反射的虚拟相机进行偏移。当反射面离物体的原点有一定的距离时很有用（默认=0）。
       />
-  </mesh>
+    </mesh>
+  </group>
   )
 };
 

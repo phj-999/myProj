@@ -43,6 +43,7 @@ const Car = () => {
   })
 
   return <primitive  
+   dispose={null}
   // position={[0,0,0]} 
   // scale={[0.002,0.002,0.002]}
    object={cartexture.scene}/>

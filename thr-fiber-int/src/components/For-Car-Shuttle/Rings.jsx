@@ -33,7 +33,8 @@ const Rings = () => {
   });
   return (
     <>
-      {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((v, i) => (
+    <group dispose={null}>
+      {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((v, i) => (    
         <mesh
           castShadow
           receiveShadow
@@ -43,8 +44,9 @@ const Rings = () => {
         >
           <torusGeometry args={[3.35, 0.05, 16, 100]} />
           <meshStandardMaterial emissive={[4, 0.1, 0.4]} color={[0, 0, 0]} />
-        </mesh>
+        </mesh>       
       ))}
+       </group>
     </>
   );
 };

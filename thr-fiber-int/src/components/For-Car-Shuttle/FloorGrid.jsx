@@ -11,6 +11,10 @@ const FloorGrid = () => {
         diffuse.anisotropy = 4;
         diffuse.repeat.set(30, 30);
         diffuse.offset.set(0, 0);
+
+        return () => {
+          diffuse.scene.remove()
+        }
       }, [diffuse]);
 
       useFrame((state, delta) => {
@@ -19,6 +23,7 @@ const FloorGrid = () => {
       });
     return (
     <>
+    <group dispose={null}>
       <mesh rotation-x={-Math.PI * 0.5} position={[0, 0.425, 0]}>
       <planeGeometry args={[35, 35]} />
       <meshBasicMaterial
@@ -29,6 +34,7 @@ const FloorGrid = () => {
         transparent={true}
       />
     </mesh>
+    </group>
   </>
   )
 }
