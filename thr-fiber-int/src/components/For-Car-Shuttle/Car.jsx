@@ -12,8 +12,8 @@ const Car = () => {
 
   useEffect(() => {
     //console.log(cartexture)
-    // cartexture.scene.scale.set(0.002,0.002,0.002)
-    // cartexture.scene.position.set(0,-0.2,0)
+    cartexture.scene.scale.set(0.005, 0.005, 0.005);
+    cartexture.scene.position.set(0, -0.035, 0);
     cartexture.scene.traverse((object) => {
       if (object instanceof Mesh) {
         object.castShadow = true;
@@ -42,7 +42,12 @@ const Car = () => {
 
   })
 
-  return <primitive  dispose={null} position={[0,0,0]} scale={[0.002,0.002,0.002]} object={cartexture.scene}>Car</primitive>;
+  return <primitive  
+  // position={[0,0,0]} 
+  // scale={[0.002,0.002,0.002]}
+   object={cartexture.scene}/>
+     
+  
 };
 
 export default Car;
