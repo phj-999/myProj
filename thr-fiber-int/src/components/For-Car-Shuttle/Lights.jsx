@@ -6,17 +6,19 @@ const Lights = () => {
   return (
     <>
       <SpotLight
-        penumbra={0.5}
+        color={'red'}
+        intensity={1.5}
         depthBuffer={depthBuffer}
-        position={[3, 2, 0]}
-        intensity={0.5}
-        angle={0.5}
-        color={"blue"}
+        position={[5, 5, 0]}
+        angle={0.6}
+        penumbra={0.5}
         castShadow
+        shadow-bias={-0.0001}
       />
       <spotLight
         color={[0.14, 0.5, 1]}
         intensity={2}
+        depthBuffer={depthBuffer}
         angle={0.6}
         penumbra={0.5}
         position={[-5, 5, 0]}
