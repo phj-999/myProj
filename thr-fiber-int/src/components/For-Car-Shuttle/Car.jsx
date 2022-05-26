@@ -11,9 +11,9 @@ const Car = () => {
   );
 
   useEffect(() => {
-    console.log(cartexture)
-    cartexture.scene.scale.set(0.002,0.002,0.002)
-    cartexture.scene.position.set(0,-0.2,0)
+    //console.log(cartexture)
+    // cartexture.scene.scale.set(0.002,0.002,0.002)
+    // cartexture.scene.position.set(0,-0.2,0)
     cartexture.scene.traverse((object) => {
       if (object instanceof Mesh) {
         object.castShadow = true;
@@ -31,8 +31,10 @@ const Car = () => {
     // console.log(delta,'delta');
     // 获取自时钟启动后的秒数，同时将 .oldTime 设置为当前时间。
     let t = state.clock.getElapsedTime()
+    //拿到汽车部件
     let object3d = cartexture.scene.children[0].children[0].children[0];
-    console.log(object3d);
+    //console.log(object3d);
+    //让四个轮胎转动
     object3d.children[0].rotation.x = t * 2;
     object3d.children[2].rotation.x = t * 2;
     object3d.children[4].rotation.x = t * 2;

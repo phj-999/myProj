@@ -10,19 +10,26 @@ import {
 import { Physics } from "@react-three/cannon";
 
 import Spinner from "../../components/boxTwo/Spinner";
-import { AdaptiveDpr, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import {
+  AdaptiveDpr,
+  OrbitControls,
+  PerspectiveCamera,
+} from "@react-three/drei";
 
 import Car from "@/components/For-Car-Shuttle/Car";
 import Floor from "@/components/boxTwo/Floor";
+import Lights from "@/components/For-Car-Shuttle/Lights";
 
 // import './header.css'
 
 const CarShuttle = () => {
+  // const depthBuffer = useDepthBuffer({ size:256,frames:Infinity });
   return (
     <>
       <div className={"box-content w-screen h-screen bg-gray-200"}>
         <Canvas frameloop="demand">
           <AdaptiveDpr pixelated={true} />
+          <Lights />
           {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
           <OrbitControls targrt={[0, 0, 0]} />
           {/* 相机默认事件 */}
