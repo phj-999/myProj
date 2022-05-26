@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import {
   EffectComposer,
   DepthOfField,
@@ -6,21 +7,22 @@ import {
   Noise,
   ChromaticAberration,
 } from "@react-three/postprocessing";
+import { Physics } from "@react-three/cannon";
 
 import Spinner from "../../components/boxTwo/Spinner";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { AdaptiveDpr, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+
 import Car from "@/components/For-Car-Shuttle/Car";
-import { AxesHelper } from "three";
 import Floor from "@/components/boxTwo/Floor";
-import { Physics } from "@react-three/cannon";
+
 // import './header.css'
 
 const CarShuttle = () => {
   return (
     <>
       <div className={"box-content w-screen h-screen bg-gray-200"}>
-        <Canvas>
+        <Canvas frameloop="demand">
+          <AdaptiveDpr pixelated={true} />
           {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
           <OrbitControls targrt={[0, 0, 0]} />
           {/* 相机默认事件 */}
