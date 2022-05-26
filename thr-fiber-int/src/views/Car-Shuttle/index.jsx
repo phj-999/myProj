@@ -16,34 +16,35 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 
-import Car from "@/components/For-Car-Shuttle/Car";
 import Floor from "@/components/boxTwo/Floor";
-import Lights from "@/components/For-Car-Shuttle/Lights";
+import { Car, Lights, FloorGround } from "@/components/For-Car-Shuttle";
 
 // import './header.css'
 
 const CarShuttle = () => {
-  // const depthBuffer = useDepthBuffer({ size:256,frames:Infinity });
   return (
     <>
       <div className={"box-content w-screen h-screen bg-gray-200"}>
         <Canvas frameloop="demand">
           <AdaptiveDpr pixelated={true} />
-          <Lights />
+          
           {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
-          <OrbitControls targrt={[0, 0, 0]} />
+          <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
           {/* 相机默认事件 */}
           <PerspectiveCamera position={[3, 2, 5]} fov={50} makeDefault />
           {/* <color args={[0, 0, 0]} attach="background" /> */}
           <axesHelper args={[5]} />
+          <Lights />
           <Car />
+          <FloorGround />
+          
           {/* <mesh position={[0, 0, 0]}>
             <boxBufferGeometry args={[1, 1, 1]} />
             <meshBasicMaterial color={"#111827"}/>
           </mesh> */}
-          <Physics>
+          {/* <Physics>
             <Floor position={[0, -0.5, 0]} />
-          </Physics>
+          </Physics> */}
         </Canvas>
       </div>
     </>

@@ -7,7 +7,7 @@ const Car = () => {
   // 此汽车的loader
   const cartexture = useLoader(
     GLTFLoader,
-    process.env.PUBLIC_URL + "car/scene.gltf"
+    process.env.PUBLIC_URL + "models_for_carshuttle/car/scene.gltf"
   );
 
   useEffect(() => {
