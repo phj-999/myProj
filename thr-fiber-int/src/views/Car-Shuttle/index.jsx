@@ -25,12 +25,12 @@ import {
   FloorGround,
   FloorGrid,
 } from "@/components/For-Car-Shuttle";
+import { Rings } from "../../components/For-Car-Shuttle";
 
 // import './header.css'
 
 const CarShuttle = () => {
   return (
-    <>
       <div className={"box-content w-screen h-screen"}>
         <Canvas shadows={true} frameloop="demand">
           <AdaptiveDpr pixelated={true} />
@@ -59,7 +59,7 @@ const CarShuttle = () => {
 
           <FloorGround />
           <FloorGrid />
-
+          <Rings />
           {/* <mesh position={[0, 0, 0]}>
             <boxBufferGeometry args={[1, 1, 1]} />
             <meshBasicMaterial color={"#111827"}/>
@@ -69,7 +69,6 @@ const CarShuttle = () => {
           </Physics> */}
         </Canvas>
       </div>
-    </>
   );
 };
 
