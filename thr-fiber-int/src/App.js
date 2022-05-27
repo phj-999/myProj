@@ -3,6 +3,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./components/ErrorFallback";
 
 import "./App.css";
+import { Loader } from "./components/d";
 
 const Spinner = React.lazy(() => import("./components/boxTwo/Spinner"));
 //const CarsShow = React.lazy(()=>import("./views/car/CarsShow"))
@@ -14,7 +15,7 @@ const CarShuttle = React.lazy(() => import("@/views/Car-Shuttle"));
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader/>}>
         {/* <CarsShow /> */}
         {/* <Start /> */}
         {/* <UniverseStar /> */}

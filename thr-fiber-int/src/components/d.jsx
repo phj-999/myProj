@@ -1,10 +1,13 @@
-<Canvas>
-        {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
-        <OrbitControls targrt={[0, 0, 0]} />
-        {/* 相机默认事件 */}
-        <PerspectiveCamera position={[3, 2, 5]} fov={50} makeDefault />
-        <mesh position={[0,0,0]}>
-          <boxBufferGeometry args={[1, 1, 1]}/>
-          <meshBasicMaterial />
-        </mesh>
-      </Canvas>
+import { Html, useProgress } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+
+export function Loader () {
+  const {  progress } = useProgress()
+  return (
+    <Canvas>
+      <Html center>
+      {progress} % loaded
+      </Html>
+    </Canvas>
+  );
+}
