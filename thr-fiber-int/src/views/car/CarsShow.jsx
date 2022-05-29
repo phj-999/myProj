@@ -24,19 +24,21 @@ const CarsShow = () => {
     width: window.innerWidth,
     height: window.innerHeight,
   });
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, [windowDimensions]);
+
   const handleResize = () => {
     setWindowDimensions({
       width: window.innerWidth,
       height: window.innerHeight,
     });
   };
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-  }, [windowDimensions]);
   return (
     <>
       {/* <BoxOne /> */}
-      <div style={{ height: "100vh", width: "100vw" }}>
+      <div className={"box-content w-screen h-screen"}>
         <ColorPicker />
         <CameraButton />
         <Canvas
@@ -44,7 +46,7 @@ const CarsShow = () => {
             powerPreference: "high-performance",
             antialias: false,
             stencil: false,
-            depth: false,
+            depth: false
           }}
           shadows
           camera={{ position: [7, 7, 7] }}
@@ -54,7 +56,7 @@ const CarsShow = () => {
             <Background windowDimensions={windowDimensions} />
           </Suspense>
           {/* <fog attach={'fog'} args={['white', 1, 10]}/> */}
-          <CameraControls state={state} />
+          <CameraControls />
           <Lights />
           <Orbit />
           {/* <axesHelper args={[5]} /> */}

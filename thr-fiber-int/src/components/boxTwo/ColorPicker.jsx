@@ -20,28 +20,14 @@ const ColorPicker = (props) => {
    * @param {*} e
    */
   const handleClick = (e) => {
-    if (!state.activeMesh) {
-      return;
-    } else {
-      state.activeMesh.material.color = new THREE.Color(
-        e.target.style.background
-      );
-    }
+    if (!state.activeMesh) return;
+    state.activeMesh.material.color = new THREE.Color(
+      e.target.style.background
+    );
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: 1,
-        left: 0,
-        right: 0,
-        margin: "auto",
-        width: "fit-content",
-        display: "flex",
-        top: "20px",
-      }}
-    >
+    <div className={"absolute,flex, top-5 left-0, right-0, m-auto, w-fit,z-1"}>
       <div
         onClick={handleClick}
         style={{

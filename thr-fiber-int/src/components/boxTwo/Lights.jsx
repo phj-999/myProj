@@ -6,12 +6,12 @@ const Lights = () => {
     <>
       <ambientLight intensity={0.2} />
       <directionalLight
-        position={[6, 4, 0]}
-        intensity={2}
-        castShadow
-        shadow-mapSize-height={2 ** 10}
-        shadow-mapSize-width={2 ** 10}
-        shadow-radius={10}
+        intensity={0.5}
+        position={[6, 3, 0]}
+        // castShadow
+        // shadow-mapSize-height={2 ** 10}
+        // shadow-mapSize-width={2 ** 10}
+        // shadow-radius={10}
       />
       {/* <pointLight castShadow /> */}
       <Bulb position={[-6, 3, 0]} />
