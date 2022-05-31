@@ -19,14 +19,15 @@ import {
   Rings,
   Effect,
   Table,
-  BackgroundScene
+  BackgroundScene,
+  HaloRings
 } from "@/components/For-Car-Shuttle";
 
 // import './header.css'
 
 const CarShuttle = () => {
   return (
-      <div className={"box-content w-screen h-screen"}>
+      <div className={"box-content w-screen h-screen bg-black"}>
         <Canvas shadows={true} >
           <AdaptiveDpr pixelated />
 
@@ -34,7 +35,7 @@ const CarShuttle = () => {
           <OrbitControls target={[0, 0.35, 0]} regress/>
           {/* 相机默认事件 */}
           <PerspectiveCamera position={[3, 2, 5]} fov={50} makeDefault />
-          <color args={[0, 0, 0]} attach="background" />
+          {/* <color args={[0, 0, 0]} attach="background" /> */}
           {/* <axesHelper args={[5]} /> */}
           <Lights />
           <AdaptiveEvents /> 
@@ -53,7 +54,8 @@ const CarShuttle = () => {
           <FloorGround />
           <Boxes />
           <FloorGrid />
-          <Rings />
+          {/* <Rings /> */}
+          <HaloRings />
           <Environment>
             <Table /> 
           </Environment>

@@ -9,12 +9,12 @@ import { BlendFunction } from "postprocessing";
 
 const Effect = () => {
   return (
-    <EffectComposer>
+    <EffectComposer autoClear>
         {/* 景深效果 */}
       <DepthOfField
         focusDistance={0.0035}
         focalLength={0.01}
-        bokehScale={3}
+        bokehScale={2}
         height={480}
       />
       {/* 光晕效果组件 */}

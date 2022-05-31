@@ -11,9 +11,8 @@ const Car = () => {
     GLTFLoader,
     process.env.PUBLIC_URL + "models_for_carshuttle/car/scene.gltf"
   );
-console.log('====================================');
-console.log(cartexture);
-console.log('====================================');
+
+// console.log(cartexture);
 
   useEffect(() => {
     //console.log(cartexture)
@@ -46,6 +45,7 @@ console.log('====================================');
     object3d.children[4].rotation.x = t * 2;
     object3d.children[6].rotation.x = t * 2;
     carRef.current.rotation.z = t
+    cartexture.scenes[0].children[0].updateMatrix()
   })
 
   return <primitive  ref={carRef}
