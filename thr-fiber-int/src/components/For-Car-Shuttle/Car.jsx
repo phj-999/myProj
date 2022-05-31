@@ -22,6 +22,7 @@ const Car = () => {
     });
     return () => {
       cartexture.scene.remove()
+      cartexture.scene.dispose()
       console.log('111');
     }
   }, [cartexture])

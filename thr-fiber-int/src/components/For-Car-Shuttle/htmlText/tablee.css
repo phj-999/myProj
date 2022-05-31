@@ -1,0 +1,10 @@
+
+.tablee{
+    box-sizing: content-box;
+    min-width: 35vw;
+    min-height: 15vw;
+    background-color:white;
+    border-radius: 40px;
+    opacity: 0.6;
+    -moz-opacity: 0.6; 
+}

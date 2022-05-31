@@ -15,7 +15,8 @@ import {
   FloorGrid,
   Boxes, 
   Rings,
-  Effect
+  Effect,
+  Table
 } from "@/components/For-Car-Shuttle";
 
 // import './header.css'
@@ -40,6 +41,7 @@ const CarShuttle = () => {
               <>
                 <Environment map={texture} />
                 <Car />
+               {/* <Table /> */}
               </>
             )}
           </CubeCamera>
@@ -48,6 +50,9 @@ const CarShuttle = () => {
           <Boxes />
           <FloorGrid />
           <Rings />
+          <Environment>
+            <Table /> 
+          </Environment>
           {/* 效果组件 */}
           <Effect />
           {/* <mesh position={[0, 0, 0]}>
