@@ -6,4 +6,6 @@ import Rings from "./Rings";
 import { Boxes } from "./Boxes";
 import Effect from "./Effect";
 import Table from './htmlText/table'
-export { Boxes, Car, Lights, FloorGround, FloorGrid, Rings, Effect, Table };
+import BackgroundScene from './Background'
+
+export { Boxes, Car, Lights, FloorGround, FloorGrid, Rings, Effect, Table, BackgroundScene };

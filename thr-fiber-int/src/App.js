@@ -4,14 +4,15 @@ import { ErrorFallback } from "./components/ErrorFallback";
 
 import "./App.css";
 //import { Loader } from "./components/d";
-import { Loader } from "@react-three/drei"
-
+import { Html, Loader } from "@react-three/drei"
+//import TestCar from '@/components/For-Car-Shuttle/TestCar'
 const Spinner = React.lazy(() => import("./components/boxTwo/Spinner"));
 //const CarsShow = React.lazy(()=>import("./views/car/CarsShow"))
 //const Start = React.lazy(() => import("./views/start"));
 //const UniverseStar = React.lazy(() => import("./views/Iron-Universe/UniverseStar"));
 //const UniverseStarTwo = React.lazy(() => import("./views/Iron-Universe/UniverseStarTwo"));
 const CarShuttle = React.lazy(() => import("@/views/Car-Shuttle"));
+
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         {/* <UniverseStar /> */}
         {/* <UniverseStarTwo /> */}
          <CarShuttle /> 
+      {/* <TestCar /> */}
       </Suspense>
       {/* <Loader /> */}
     </ErrorBoundary>

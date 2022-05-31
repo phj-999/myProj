@@ -7,6 +7,8 @@ import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  Stats,
+  useGLTF,
 } from "@react-three/drei";
 import {
   Car,
@@ -16,7 +18,8 @@ import {
   Boxes, 
   Rings,
   Effect,
-  Table
+  Table,
+  BackgroundScene
 } from "@/components/For-Car-Shuttle";
 
 // import './header.css'
@@ -45,7 +48,8 @@ const CarShuttle = () => {
               </>
             )}
           </CubeCamera>
-
+          
+          <BackgroundScene />
           <FloorGround />
           <Boxes />
           <FloorGrid />
@@ -53,6 +57,7 @@ const CarShuttle = () => {
           <Environment>
             <Table /> 
           </Environment>
+          <Stats />
           {/* 效果组件 */}
           <Effect />
           {/* <mesh position={[0, 0, 0]}>
@@ -68,3 +73,10 @@ const CarShuttle = () => {
 };
 
 export default CarShuttle;
+
+useGLTF.preload([
+  process.env.PUBLIC_URL +
+    "models_for_carshuttle/textures/terrain-roughness.jpg",
+  process.env.PUBLIC_URL +
+    "models_for_carshuttle/textures/terrain-normal.jpg",
+])

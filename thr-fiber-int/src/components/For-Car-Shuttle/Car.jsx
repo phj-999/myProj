@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Mesh } from "three";
+import { useGLTF } from "@react-three/drei";
 
 const Car = () => {
+  const carRef = useRef()
   // 此汽车的loader
   const cartexture = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL + "models_for_carshuttle/car/scene.gltf"
   );
+console.log('====================================');
+console.log(cartexture);
+console.log('====================================');
 
   useEffect(() => {
     //console.log(cartexture)
     cartexture.scene.scale.set(0.005, 0.005, 0.005);
-    cartexture.scene.position.set(0, -0.035, 0);
+    cartexture.scene.position.set(0, 0.035, 0);
     cartexture.scene.traverse((object) => {
       if (object instanceof Mesh) {
         object.castShadow = true;
@@ -40,10 +45,10 @@ const Car = () => {
     object3d.children[2].rotation.x = t * 2;
     object3d.children[4].rotation.x = t * 2;
     object3d.children[6].rotation.x = t * 2;
-
+    carRef.current.rotation.z = t
   })
 
-  return <primitive  
+  return <primitive  ref={carRef}
    dispose={null}
   // position={[0,0,0]} 
   // scale={[0.002,0.002,0.002]}
@@ -53,3 +58,5 @@ const Car = () => {
 };
 
 export default Car;
+
+useGLTF.preload( process.env.PUBLIC_URL + "models_for_carshuttle/car/scene.gltf") //预加载
