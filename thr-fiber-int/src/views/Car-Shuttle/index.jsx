@@ -50,8 +50,8 @@ const CarShuttle = () => {
             )}
           </CubeCamera>
           
-          <BackgroundScene />
-          <FloorGround />
+          {/* <BackgroundScene /> */}
+          {/* <FloorGround /> */}
           <Boxes />
           <FloorGrid />
           {/* <Rings /> */}
@@ -76,9 +76,3 @@ const CarShuttle = () => {
 
 export default CarShuttle;
 
-useGLTF.preload([
-  process.env.PUBLIC_URL +
-    "models_for_carshuttle/textures/terrain-roughness.jpg",
-  process.env.PUBLIC_URL +
-    "models_for_carshuttle/textures/terrain-normal.jpg",
-])

@@ -15,7 +15,7 @@ const Lights = () => {
         castShadow
         shadow-bias={-0.0001}
       />
-      <spotLight
+      <SpotLight
         color={[0.14, 0.5, 1]}
         intensity={2}
         //depthBuffer={depthBuffer}
@@ -25,6 +25,7 @@ const Lights = () => {
         castShadow
         shadow-bias={-0.0001}
       />
+      <ambientLight intensity={2}/>
     </>
   );
 };
