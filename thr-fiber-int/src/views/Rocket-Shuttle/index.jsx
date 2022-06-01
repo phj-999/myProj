@@ -22,8 +22,8 @@ import {
   Table,
   BackgroundScene,
   HaloRings,
-} from "@/components/For-Car-Shuttle";
-import Rocket from "../../components/For-Car-Shuttle/rocket";
+} from "@/components/For-Rocket-Shuttle";
+import Rocket from "../../components/For-Rocket-Shuttle/rocket";
 
 // import './header.css'
 
@@ -83,5 +83,5 @@ export default CarShuttle;
 useLoader.preload(
   GLTFLoader,
   process.env.PUBLIC_URL +
-    "models_for_carshuttle/falcon_9_spacex_rocket/scene.gltf"
+    "models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
 );

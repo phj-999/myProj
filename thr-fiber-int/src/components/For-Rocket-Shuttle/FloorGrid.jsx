@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { RepeatWrapping, TextureLoader } from "three";
 
 const FloorGrid = () => {
-    const diffuse = useLoader(TextureLoader, process.env.PUBLIC_URL + "models_for_carshuttle/textures/grid-texture.png");
+    const diffuse = useLoader(TextureLoader, process.env.PUBLIC_URL + "models_for_rocketshuttle/textures/grid-texture.png");
   
     useEffect(() => {
         diffuse.wrapS = RepeatWrapping;

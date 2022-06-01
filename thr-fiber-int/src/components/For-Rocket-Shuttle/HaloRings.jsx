@@ -3,7 +3,7 @@ import React from "react";
 
 const HaloRings = () => {
   const { nodes, materials } = useGLTF(
-    process.env.PUBLIC_URL + "models_for_carshuttle/halo_ring/scene.gltf"
+    process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
   );
   // console.log("nodes", nodes);
   // console.log("====================================");
@@ -47,5 +47,5 @@ const HaloRings = () => {
 export default HaloRings;
 
 useGLTF.preload(
-  process.env.PUBLIC_URL + "models_for_carshuttle/halo_ring/scene.gltf"
+  process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
 );

@@ -7,7 +7,7 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 const TestCar = () => {
   // 此汽车的loader
   const t = useLoader( GLTFLoader ,
-    process.env.PUBLIC_URL + "models_for_carshuttle/car/scene.gltf"
+    process.env.PUBLIC_URL + "models_for_rocketshuttle/car/scene.gltf"
   );
 
 // console.log('nodes',nodes);

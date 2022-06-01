@@ -9,9 +9,9 @@ const FloorGround = () => {
 
   const [roughness, normal] = useLoader(TextureLoader, [
     process.env.PUBLIC_URL +
-      "models_for_carshuttle/textures/terrain-roughness.jpg",
+      "models_for_rocketshuttle/textures/terrain-roughness.jpg",
     process.env.PUBLIC_URL +
-      "models_for_carshuttle/textures/terrain-normal.jpg",
+      "models_for_rocketshuttle/textures/terrain-normal.jpg",
   ]);
 
    Textur.push(roughness, normal)
