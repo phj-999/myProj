@@ -5,9 +5,9 @@ const HaloRings = () => {
   const { nodes, materials } = useGLTF(
     process.env.PUBLIC_URL + "models_for_carshuttle/halo_ring/scene.gltf"
   );
-  console.log("nodes", nodes);
-  console.log("====================================");
-  console.log("materials", materials);
+  // console.log("nodes", nodes);
+  // console.log("====================================");
+  // console.log("materials", materials);
   return (
     <group
       scale={[0.003, 0.003, 0.003]}
