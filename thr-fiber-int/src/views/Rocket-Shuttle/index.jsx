@@ -17,7 +17,7 @@ import {
   FloorGround,
   FloorGrid,
   Boxes,
-  Rings,
+  HaloRingsCollection,
   Effect,
   Table,
   BackgroundScene,
@@ -37,13 +37,13 @@ const CarShuttle = () => {
         {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
         <OrbitControls target={[0, 0.35, 0]} regress />
         {/* 相机默认事件 */}
-        <PerspectiveCamera position={[3, 2, 5]} fov={50} makeDefault />
+        <PerspectiveCamera position={[10, 10, 10]} fov={60} makeDefault />
         {/* <color args={[0, 0, 0]} attach="background" /> */}
         <axesHelper args={[5]} />
         <Lights />
         <AdaptiveEvents />
-        {/* 将Car纹理作为渲染道具返回。它使子级在渲染到内部缓冲区时不可见，以便它们不包括在反射中。 */}
-        <CubeCamera resolution={256} frames={Infinity}>
+        {/* 将纹理作为渲染道具返回。它使子级在渲染到内部缓冲区时不可见，以便它们不包括在反射中。 */}
+        <CubeCamera enablePan={true} resolution={256} frames={Infinity}>
           {(texture) => (
             <>
               <Environment map={texture} />
@@ -59,7 +59,7 @@ const CarShuttle = () => {
         <Boxes />
         <FloorGrid />
         {/* <Rings /> */}
-        <HaloRings />
+        <HaloRingsCollection />
         <Environment>
           <Table />
         </Environment>

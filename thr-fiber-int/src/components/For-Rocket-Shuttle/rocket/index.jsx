@@ -20,10 +20,7 @@ const Rocket = () => {
       if (rocket) {
         rocketRef.push(rocket);
       }
-      console.log("====================================");
-      console.log(rocket);
-      console.log("====================================");
-      console.log(rocketRef);
+      // console.log(rocketRef);
       rocketRef[0].scene.scale.set(0.005, 0.005, 0.005);
     
       rocketRef[0].scene.rotation.set(1.5,0,0);//变成横的

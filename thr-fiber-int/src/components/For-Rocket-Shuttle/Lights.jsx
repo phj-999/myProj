@@ -25,7 +25,7 @@ const Lights = () => {
         castShadow
         shadow-bias={-0.0001}
       />
-       <ambientLight intensity={1.5} position={[0,0,-4]}/> 
+       <ambientLight intensity={1.5} position={[0,0,-6]}/> 
     </>
   );
 };
