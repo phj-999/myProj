@@ -1,14 +1,15 @@
 import { useGLTF } from "@react-three/drei";
-import React from "react";
+import { useFrame } from "@react-three/fiber";
+import React, { useRef } from "react";
 
 const HaloRings = (props) => {
+  const lightsRef = useRef().current
   const { nodes, materials } = useGLTF(
     process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
   );
    console.log("nodes", nodes);
    console.log("====================================");
    console.log("materials", materials);
-
 
 
   return (
@@ -20,7 +21,7 @@ const HaloRings = (props) => {
       dispose={null}
     >
       {/* 灯光 */}
-      <mesh
+      <mesh ref={lightsRef}
         geometry={nodes["LIGHTKRAFTFBXASC032GRAVITONFBXASC032"].geometry}
         material={materials.LIGHTKRAFTFBXASC032GRAVITONFBXASC032}
       />

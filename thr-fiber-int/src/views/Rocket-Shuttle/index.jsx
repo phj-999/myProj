@@ -28,10 +28,15 @@ import Rocket from "../../components/For-Rocket-Shuttle/rocket";
 // import './header.css'
 
 const CarShuttle = () => {
-
   return (
     <div className={"box-content w-screen h-screen bg-black"}>
-      <Canvas shadows={true}>
+      <Canvas
+        dpr={window.devicePixelRatio}
+        onCreated={({ camera, gl, scene }) => {
+          gl.shadowMap.enabled = true;
+        }}
+        shadows={true}
+      >
         <AdaptiveDpr pixelated />
 
         {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
