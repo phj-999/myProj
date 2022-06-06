@@ -13,6 +13,7 @@ import {
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {
   Car,
+  Rocket,
   Lights,
   FloorGround,
   FloorGrid,
@@ -22,14 +23,15 @@ import {
   Table,
   BackgroundScene,
   HaloRings,
+  ControlMenu
 } from "@/components/For-Rocket-Shuttle";
-import Rocket from "../../components/For-Rocket-Shuttle/rocket";
-
 // import './header.css'
 
-const CarShuttle = () => {
+const RocketShuttle = () => {
+
   return (
     <div className={"box-content w-screen h-screen bg-black"}>
+      <ControlMenu />
       <Canvas
         dpr={window.devicePixelRatio}
         onCreated={({ camera, gl, scene }) => {
@@ -83,7 +85,7 @@ const CarShuttle = () => {
   );
 };
 
-export default CarShuttle;
+export default RocketShuttle;
 
 useLoader.preload(
   GLTFLoader,

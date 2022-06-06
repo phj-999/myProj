@@ -1,7 +1,8 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 import * as THREE from "three";
+import { useRingLampsStore } from "@/store/store";
 
 const HaloRings = (props) => {
   const earthRef = useRef();
@@ -9,11 +10,11 @@ const HaloRings = (props) => {
   const { nodes, materials } = useGLTF(
     process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
   );
+  const { visiablevalue } = useRingLampsStore((state) => state.ringLampsState);
   //  const [earthRing] = useMemo(() => { const earthRing = nodes["MaterialFBXASC032FBXASC0352142146801"]
   //   return [earthRing]
   // }, [nodes])
 
-  console.log("nodes", nodes);
   useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
     earthRef.current.rotation.z = t;
@@ -40,7 +41,8 @@ const HaloRings = (props) => {
       dispose={null}
     >
       {/* 灯光 */}
-      <mesh //关灯visible={false}
+      <mesh
+        visible={visiablevalue}
         geometry={nodes["LIGHTKRAFTFBXASC032GRAVITONFBXASC032"].geometry}
         material={materials.LIGHTKRAFTFBXASC032GRAVITONFBXASC032}
       />

@@ -10,6 +10,7 @@ import BackgroundScene from "./Background";
 import HaloRings from './HaloRings/HaloRings'
 import HaloRingsCollection from "./HaloRings/HaloRingsCollection";
 import Rocket from "./rocket";
+import ControlMenu from './htmlText/ControlMenu'
 
 export {
   Boxes,
@@ -24,4 +25,5 @@ export {
   HaloRings,
   HaloRingsCollection,
   Rocket,
+  ControlMenu
 };
