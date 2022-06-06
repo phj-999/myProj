@@ -64,7 +64,7 @@ const CarShuttle = () => {
         <Boxes />
         <FloorGrid />
         {/* <Rings /> */}
-        <HaloRingsCollection />
+        <HaloRings />
         <Environment>
           <Table />
         </Environment>

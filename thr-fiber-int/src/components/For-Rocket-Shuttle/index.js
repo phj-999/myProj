@@ -7,6 +7,7 @@ import { Boxes } from "./Boxes";
 import Effect from "./Effect";
 import Table from "./htmlText/table";
 import BackgroundScene from "./Background";
+import HaloRings from './HaloRings/HaloRings'
 import HaloRingsCollection from "./HaloRings/HaloRingsCollection";
 import Rocket from "./rocket";
 
@@ -20,6 +21,7 @@ export {
   Effect,
   Table,
   BackgroundScene,
+  HaloRings,
   HaloRingsCollection,
   Rocket,
 };

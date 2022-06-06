@@ -1,42 +1,52 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
+import * as THREE from "three";
 
 const HaloRings = (props) => {
-  const earthRef = useRef().current
+  const earthRef = useRef();
+  const SmalllightsRef = useRef();
   const { nodes, materials } = useGLTF(
     process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
   );
- const [earthRing] = useMemo(() => { const earthRing = nodes["MaterialFBXASC032FBXASC0352142146801"]
-  return [earthRing]
-}, [nodes])
-  
-   //console.log("nodes", nodes);
-  // console.log("====================================");
-   //console.log("materials", materials);
-  // console.log("earthRef", nodes["MaterialFBXASC032FBXASC0352142146801"]);
-   
-  console.log(earthRing,'earthRing');
-   useFrame((state,delta)=>{
-    let t = state.clock.getElapsedTime()
-    earthRing.rotation.x = t*3
-   })
+  //  const [earthRing] = useMemo(() => { const earthRing = nodes["MaterialFBXASC032FBXASC0352142146801"]
+  //   return [earthRing]
+  // }, [nodes])
+
+  console.log("nodes", nodes);
+  useFrame((state, delta) => {
+    const t = state.clock.getElapsedTime();
+    earthRef.current.rotation.z = t;
+    SmalllightsRef.current.rotation.z = -t * 3;
+    earthRef.current.rotation.x = THREE.MathUtils.lerp(
+      earthRef.current.rotation.x,
+      Math.cos(t / 2) / 10 + 0.25,
+      0.1
+    );
+    earthRef.current.rotation.y = THREE.MathUtils.lerp(
+      earthRef.current.rotation.y,
+      Math.sin(t / 4) / 10,
+      0.1
+    );
+  });
 
   return (
     <group
-      // scale={[0.003, 0.003, 0.003]}
-      {...props}
+      rotation-x={-0.5}
+      position={[0, 0, 0]}
+      scale={[0.007, 0.007, 0.007]}
       castShadow
       receiveShadow
       dispose={null}
     >
       {/* 灯光 */}
-      <mesh 
+      <mesh //关灯visible={false}
         geometry={nodes["LIGHTKRAFTFBXASC032GRAVITONFBXASC032"].geometry}
         material={materials.LIGHTKRAFTFBXASC032GRAVITONFBXASC032}
       />
       {/* 内环表面地图 */}
-      <mesh  ref={earthRef}
+      <mesh
+        ref={earthRef}
         geometry={nodes["MaterialFBXASC032FBXASC0352142146801"].geometry}
         material={materials.MaterialFBXASC032FBXASC0352142146801}
       />
@@ -52,6 +62,7 @@ const HaloRings = (props) => {
       />
 
       <mesh
+        ref={SmalllightsRef}
         geometry={nodes["MaterialFBXASC032FBXASC0352142150746_1"].geometry}
         material={materials.MaterialFBXASC032FBXASC0352142150746}
       />
@@ -61,7 +72,7 @@ const HaloRings = (props) => {
       />
     </group>
   );
-}
+};
 
 export default HaloRings;
 
