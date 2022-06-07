@@ -4,12 +4,11 @@ import { PoweroffOutlined, BulbOutlined } from "@ant-design/icons";
 import { useRingLampsStore } from "@/store/store";
 
 const ControlMenu = (props) => {
-  const { isVisable, visiablevalue } = useRingLampsStore(
+  const { isVisable } = useRingLampsStore(
     (state) => state.ringLampsState
   );
   const closeLamps = useRingLampsStore((state) => state.closeLamps);
   const openLamps = useRingLampsStore((state) => state.openLamps);
-  console.log(isVisable, visiablevalue, "a");
   const CloseRingBule = () => {
     closeLamps();
   }; //光环灯光关闭
@@ -22,11 +21,11 @@ const ControlMenu = (props) => {
        flex 
        md:flex-row md:justify-between md:content-center
        sm:flex-col
-       w-1/5 h-auto
+       w-auto h-auto
        absolute 
-       top-0 right-0
-       opacity-25
-       bg-blue-300 
+       top-20 right-10
+       opacity-60
+       bg-optblue 
        pointer-events-auto
        ring ring-indigo-300 
        z-20 "

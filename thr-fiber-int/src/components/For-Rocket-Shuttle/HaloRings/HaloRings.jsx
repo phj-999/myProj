@@ -47,7 +47,7 @@ const HaloRings = (props) => {
         material={materials.LIGHTKRAFTFBXASC032GRAVITONFBXASC032}
       />
       {/* 内环表面地图 */}
-      <mesh
+      <mesh 
         ref={earthRef}
         geometry={nodes["MaterialFBXASC032FBXASC0352142146801"].geometry}
         material={materials.MaterialFBXASC032FBXASC0352142146801}

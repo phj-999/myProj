@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",'./public/index.html'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        'optblue': '#4C7CE3'
+      }
+    },
   },
   plugins: [],
 }
