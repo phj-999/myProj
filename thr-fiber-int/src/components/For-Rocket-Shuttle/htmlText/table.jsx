@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import {
   //   useGLTF,
   //   PresentationControls,
@@ -12,38 +12,28 @@ import Gauge from "./Gauge";
 
 import "./tablee.css";
 
-
 const Table = () => {
   const ref = useRef();
   const { width, height } = useWindowSize();
-  const a = useRef(
-    new THREE.Vector3(Math.round(-0.004855 * width), -0.001 * height, 0)
-  ).current;
+
+  const a = useMemo(
+    () => new THREE.Vector3(Math.round(0.0052 * width), -0.0028 * height, 0),
+    [height, width]
+  );
   //scene.orbitControls.enabled = false;
   return (
     <group ref={ref} dispose={null}>
-      {/* <mesh
-        // geometry={nodes.Object005_glass_0.geometry}
-        // material={materials.glass}
-      > */}
       <Html
         distanceFactor={10}
         //scale={2}
         className="tablee"
-        rotation={[Math.PI / 0,1,0]}
+        rotation={[Math.PI / 0, 1, 0]}
         position={a}
         transform={false}
         //occlude
       >
-          <Gauge />
+        <Gauge />
       </Html>
-      {/* </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        // geometry={nodes.Object006_watch_0.geometry}
-        // material={materials.watch}
-      /> */}
     </group>
   );
 };

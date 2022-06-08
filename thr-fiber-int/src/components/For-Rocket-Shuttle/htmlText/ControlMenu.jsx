@@ -4,9 +4,7 @@ import { PoweroffOutlined, BulbOutlined } from "@ant-design/icons";
 import { useRingLampsStore } from "@/store/store";
 
 const ControlMenu = (props) => {
-  const { isVisable } = useRingLampsStore(
-    (state) => state.ringLampsState
-  );
+  const { isVisable } = useRingLampsStore((state) => state.ringLampsState);
   const closeLamps = useRingLampsStore((state) => state.closeLamps);
   const openLamps = useRingLampsStore((state) => state.openLamps);
   const CloseRingBule = () => {
@@ -31,12 +29,20 @@ const ControlMenu = (props) => {
        z-20 "
     >
       {isVisable ? (
-        <Button style={{ pointerEvents: "auto" }} onClick={CloseRingBule} ghost>
+        <Button
+          style={{ pointerEvents: "auto", color: "orange" }}
+          onClick={CloseRingBule}
+          ghost
+        >
           <PoweroffOutlined />
           关闭光环灯光
         </Button>
       ) : (
-        <Button style={{ pointerEvents: "auto" }} onClick={OpenRingBule} ghost>
+        <Button
+          style={{ pointerEvents: "auto", color: "orange" }}
+          onClick={OpenRingBule}
+          ghost
+        >
           <BulbOutlined />
           打开光环灯光
         </Button>

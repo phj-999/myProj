@@ -10,7 +10,6 @@ import {
   Stats,
   useGLTF,
 } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {
   Car,
   Rocket,
@@ -86,8 +85,3 @@ const RocketShuttle = () => {
 
 export default RocketShuttle;
 
-useLoader.preload(
-  GLTFLoader,
-  process.env.PUBLIC_URL +
-    "models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
-);
