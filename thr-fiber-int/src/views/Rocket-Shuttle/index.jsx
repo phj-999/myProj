@@ -18,7 +18,6 @@ import {
   FloorGround,
   FloorGrid,
   Boxes,
-  HaloRingsCollection,
   Effect,
   Table,
   BackgroundScene,
