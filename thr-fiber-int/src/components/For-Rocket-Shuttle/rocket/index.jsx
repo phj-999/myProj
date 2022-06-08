@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useLoader } from "@react-three/fiber";
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useSpring, animated, config } from "@react-spring/three";
@@ -7,6 +7,7 @@ import { useSpring, animated, config } from "@react-spring/three";
 const Rocket = () => {
   const rocketRef = useRef([]).current;
   const rotateyRef = useRef(new THREE.Vector3(0, 1, 0)).current;
+  const rocketRef2 = useRef()  //控制火箭抖动的ref
   const rocket = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL +
@@ -18,7 +19,7 @@ const Rocket = () => {
   const { nodes, materials } = rocket;
   const [active, setActive] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
       if (rocket) {
         rocketRef.push(rocket);
@@ -46,8 +47,16 @@ const Rocket = () => {
     config: config.molasses, //{ mass: 1, tension: 280, friction: 120 }
   });
 
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime()
+     rocketRef2.current.rotation.y = Math.sin(t / 4) / 8
+    rocketRef2.current.rotation.z = (1 + Math.sin(t / 1.5)) / 20
+    rocketRef2.current.position.y = (1 + Math.sin(t / 1.5)) / 10
+  })
+
   return (
     <animated.group
+      ref={rocketRef2}
       dispose={null}
       position={props.position}
       onClick={(event) => {
