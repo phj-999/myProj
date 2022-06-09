@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useSpring, animated, config } from "@react-spring/three";
 import { useGLTF } from "@react-three/drei";
+import { useRocket } from "../../../store/store";
 
 const Rocket = () => {
   const rocketRef = useRef([]).current;
@@ -18,7 +19,7 @@ const Rocket = () => {
     // }
   );
   const { nodes, materials } = rocket;
-  const [active, setActive] = useState(true);
+  const { active } = useRocket((state) => state.rocketState);
 
   useEffect(() => {
     try {
@@ -50,20 +51,13 @@ const Rocket = () => {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    rocketRef2.current.rotation.y = Math.sin(t / 4) / 8;
-    rocketRef2.current.rotation.z = (1 + Math.sin(t / 1.5)) / 20;
+    rocketRef2.current.rotation.y = Math.sin(2*t / 4) / 5;
+    rocketRef2.current.rotation.z = (1 + Math.sin(2*t / 1.5)) / 20;
     rocketRef2.current.position.y = (1 + Math.sin(t / 1.5)) / 10;
   });
 
   return (
-    <animated.group
-      ref={rocketRef2}
-      dispose={null}
-      position={props.position}
-      onClick={(event) => {
-        setActive(!active);
-      }}
-    >
+    <animated.group ref={rocketRef2} dispose={null} position={props.position}>
       <primitive object={rocket.scene} />
     </animated.group>
   );

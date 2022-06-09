@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Button } from "antd";
 import { PoweroffOutlined, BulbOutlined } from "@ant-design/icons";
-import { useRingLampsStore } from "@/store/store";
+import { useRingLampsStore, useRocket } from "@/store/store";
 
 const ControlMenu = (props) => {
+  //光环灯操作
   const { isVisable } = useRingLampsStore((state) => state.ringLampsState);
-  const closeLamps = useRingLampsStore((state) => state.closeLamps);
-  const openLamps = useRingLampsStore((state) => state.openLamps);
-  const CloseRingBule = () => {
-    closeLamps();
+  const closeLamps = useRingLampsStore((state) => state.closeLamps); //关闭
+  const openLamps = useRingLampsStore((state) => state.openLamps); //打开
+  const CloseRingBule = async () => {
+    await closeLamps();
   }; //光环灯光关闭
-  const OpenRingBule = () => {
-    openLamps();
+  const OpenRingBule = async () => {
+    await openLamps();
   }; // 光环灯光打开
+
+  //火箭操作
+  const { isactive } = useRocket((state) => state.rocketState);
+  const move = useRocket((state) => state.move);
+  const back = useRocket((state) => state.back);
+  const MoveRocket = async () => {
+    await move();
+  };
+  const BackRocket = async () => {
+    await back();
+  };
+
   return (
     <div
       className="
@@ -45,6 +58,26 @@ const ControlMenu = (props) => {
         >
           <BulbOutlined />
           打开光环灯光
+        </Button>
+      )}
+
+      {isactive ? (
+        <Button
+          style={{ pointerEvents: "auto", color: "orange" }}
+          onClick={BackRocket}
+          ghost
+        >
+          <PoweroffOutlined />
+          火箭前进
+        </Button>
+      ) : (
+        <Button
+          style={{ pointerEvents: "auto", color: "orange" }}
+          onClick={MoveRocket}
+          ghost
+        >
+          <BulbOutlined />
+          火箭运动返回
         </Button>
       )}
     </div>
