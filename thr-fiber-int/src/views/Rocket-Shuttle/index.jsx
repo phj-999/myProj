@@ -65,9 +65,6 @@ const RocketShuttle = () => {
         <FloorGrid />
         {/* <Rings /> */}
         <HaloRings />
-        <Environment>
-          <Table />
-        </Environment>
         <Stats />
         {/* 效果组件 */}
         <Effect />

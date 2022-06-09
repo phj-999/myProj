@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "antd";
 import { PoweroffOutlined, BulbOutlined } from "@ant-design/icons";
 import { useRingLampsStore, useRocket } from "@/store/store";
+import Table from "./table";
 
 const ControlMenu = (props) => {
   //光环灯操作
@@ -27,6 +28,7 @@ const ControlMenu = (props) => {
   };
 
   return (
+    <>
     <div
       className="
        flex 
@@ -81,6 +83,8 @@ const ControlMenu = (props) => {
         </Button>
       )}
     </div>
+    <Table />
+    </>
   );
 };
 
