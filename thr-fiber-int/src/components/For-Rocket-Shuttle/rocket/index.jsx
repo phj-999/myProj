@@ -18,9 +18,11 @@ const Rocket = () => {
     //   console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
     // }
   );
-  const { nodes, materials } = rocket;
   const { active } = useRocket((state) => state.rocketState);
-
+  console.log(rocketRef2,'rocketRef2')
+  const handlePointerMove = (event) => {
+    console.log(event.object);
+  };
   useEffect(() => {
     try {
       if (rocket) {
@@ -51,13 +53,20 @@ const Rocket = () => {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    rocketRef2.current.rotation.y = Math.sin(2*t / 4) / 5;
-    rocketRef2.current.rotation.z = (1 + Math.sin(2*t / 1.5)) / 20;
+    rocketRef2.current.rotation.y = Math.sin((2 * t) / 4) / 5;
+    rocketRef2.current.rotation.z = (1 + Math.sin((2 * t) / 1.5)) / 20;
     rocketRef2.current.position.y = (1 + Math.sin(t / 1.5)) / 10;
   });
 
   return (
-    <animated.group ref={rocketRef2} dispose={null} position={props.position}>
+    <animated.group
+      ref={rocketRef2}
+      dispose={null}
+      position={props.position}
+      onPointerMove={handlePointerMove}
+      // onPointerDown={(e) => {e.stopPropagation(); state.current = e.object.material.name }}
+      // onPointerMissed={(e) =>{state.current = null} }
+    >
       <primitive object={rocket.scene} />
     </animated.group>
   );
