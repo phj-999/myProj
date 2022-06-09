@@ -6,6 +6,9 @@ module.exports = {
     extend: {
       colors:{
         'optblue': '#4C7CE3'
+      },
+      letterSpacing:{
+        wide:'.0625rem'
       }
     },
   },

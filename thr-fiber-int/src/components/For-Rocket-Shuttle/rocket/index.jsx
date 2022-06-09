@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useSpring, animated, config } from "@react-spring/three";
-import { useGLTF } from "@react-three/drei";
-import { useRocket } from "../../../store/store";
+import { Html, useGLTF } from "@react-three/drei";
+import { useRocket } from "@/store/store";
 
 const Rocket = () => {
   const rocketRef = useRef([]).current;
   const rotateyRef = useRef(new THREE.Vector3(0, 1, 0)).current;
   const rocketRef2 = useRef(); //控制火箭抖动的ref
+  const rocketSelfRef = useRef(); //控制火箭抖动的
   const rocket = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL +
@@ -19,7 +20,7 @@ const Rocket = () => {
     // }
   );
   const { active } = useRocket((state) => state.rocketState);
-  console.log(rocketRef2,'rocketRef2')
+  console.log(rocketRef2, "rocketRef2");
   const handlePointerMove = (event) => {
     console.log(event.object);
   };
@@ -67,7 +68,23 @@ const Rocket = () => {
       // onPointerDown={(e) => {e.stopPropagation(); state.current = e.object.material.name }}
       // onPointerMissed={(e) =>{state.current = null} }
     >
-      <primitive object={rocket.scene} />
+      <primitive ref={rocketSelfRef} object={rocket.scene} />
+
+      <Html
+        distanceFactor={12}
+        position={[0, 4, 6.5]}
+        transform
+        occlude={[rocketSelfRef]}
+      >
+        <div className="cursor-pointer 
+        rounded-2xl outline-none border-none 
+        text-base font-bold text-pink-900
+        bg-indigo-400 py-0.5 px-2.5 tracking-wide 
+        flex justify-center items-center 
+        gap-5px">
+          s p a c e X
+        </div>
+      </Html>
     </animated.group>
   );
 };

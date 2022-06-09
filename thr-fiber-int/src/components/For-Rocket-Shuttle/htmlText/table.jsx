@@ -17,7 +17,7 @@ const Table = () => {
   const { width, height } = useWindowSize();
 
   const a = useMemo(
-    () => new THREE.Vector3(Math.round(0.0052 * width), -0.0028 * height, 0),
+    () => new THREE.Vector3(0.0052 * width, -0.0028 * height, 0),
     [height, width]
   );
   //scene.orbitControls.enabled = false;
@@ -29,7 +29,7 @@ const Table = () => {
         className="tablee"
         rotation={[Math.PI / 0, 1, 0]}
         position={a}
-        transform={false}
+        transform
         //occlude
       >
         <Gauge />
