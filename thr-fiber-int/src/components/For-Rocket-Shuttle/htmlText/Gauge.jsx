@@ -161,7 +161,7 @@ const Gauge = () => {
         endAngle: -30,
         splitNumber: 8,
         radius: "50%",
-        center: ["50%", "50%"],
+        center: ["30%", "50%"],
         axisLine: {
           show: true,
           lineStyle: {
@@ -246,6 +246,7 @@ const Gauge = () => {
         z: 10,
         splitNumber: 8,
         radius: "50%",
+        center:['30%','50%'],
         axisLine: {
           lineStyle: {
             width: 14,
@@ -269,7 +270,7 @@ const Gauge = () => {
           show: false,
         },
         detail: {
-          offsetCenter: ["25%", "70%"],
+          offsetCenter: ["5%", "70%"],
           formatter: "{a|{value}}{b|km/h}",
           rich: {
             a: {
@@ -308,7 +309,7 @@ const Gauge = () => {
         endAngle: -150,
         splitNumber: 8,
         radius: "50%",
-        center: ["79%", "55%"],
+        center: ["69%", "55%"],
         axisLine: {
           lineStyle: {
             color: [[1, "#AE96A6"]],
@@ -379,7 +380,7 @@ const Gauge = () => {
         endAngle: 55,
         splitNumber: 2,
         radius: "49%",
-        center: ["79%", "55.3%"],
+        center: ["69%", "55.3%"],
         axisLine: {
           lineStyle: {
             width: 9,
@@ -433,7 +434,7 @@ const Gauge = () => {
         },
         title: {},
         detail: {
-          offsetCenter: ["10%", "-56%"],
+          offsetCenter: ["0%", "-56%"],
           formatter: "{a|831}{b| km}",
           rich: {
             a: {
@@ -467,7 +468,7 @@ const Gauge = () => {
         clockwise: false,
         splitNumber: 2,
         radius: "50%",
-        center: ["79%", "55%"],
+        center: ["69%", "55%"],
         axisLine: {
           lineStyle: {
             color: [

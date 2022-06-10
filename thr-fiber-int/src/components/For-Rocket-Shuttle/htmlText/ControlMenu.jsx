@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "antd";
 import { PoweroffOutlined, BulbOutlined } from "@ant-design/icons";
 import { useRingLampsStore, useRocket } from "@/store/store";
-import Table from "./table";
+import Gauge from "./Gauge";
 
 const ControlMenu = (props) => {
   //光环灯操作
@@ -29,8 +29,8 @@ const ControlMenu = (props) => {
 
   return (
     <>
-    <div
-      className="
+      <div
+        className="
        flex 
        md:flex-row md:justify-between md:content-center
        sm:flex-col
@@ -42,48 +42,50 @@ const ControlMenu = (props) => {
        pointer-events-auto
        ring ring-indigo-300 
        z-20 "
-    >
-      {isVisable ? (
-        <Button
-          style={{ pointerEvents: "auto", color: "orange" }}
-          onClick={CloseRingBule}
-          ghost
-        >
-          <PoweroffOutlined />
-          关闭光环灯光
-        </Button>
-      ) : (
-        <Button
-          style={{ pointerEvents: "auto", color: "orange" }}
-          onClick={OpenRingBule}
-          ghost
-        >
-          <BulbOutlined />
-          打开光环灯光
-        </Button>
-      )}
+      >
+        {isVisable ? (
+          <Button
+            style={{ pointerEvents: "auto", color: "orange" }}
+            onClick={CloseRingBule}
+            ghost
+          >
+            <PoweroffOutlined />
+            关闭光环灯光
+          </Button>
+        ) : (
+          <Button
+            style={{ pointerEvents: "auto", color: "orange" }}
+            onClick={OpenRingBule}
+            ghost
+          >
+            <BulbOutlined />
+            打开光环灯光
+          </Button>
+        )}
 
-      {isactive ? (
-        <Button
-          style={{ pointerEvents: "auto", color: "orange" }}
-          onClick={BackRocket}
-          ghost
-        >
-          <PoweroffOutlined />
-          火箭前进
-        </Button>
-      ) : (
-        <Button
-          style={{ pointerEvents: "auto", color: "orange" }}
-          onClick={MoveRocket}
-          ghost
-        >
-          <BulbOutlined />
-          火箭运动返回
-        </Button>
-      )}
-    </div>
-    <Table />
+        {isactive ? (
+          <Button
+            style={{ pointerEvents: "auto", color: "orange" }}
+            onClick={BackRocket}
+            ghost
+          >
+            <PoweroffOutlined />
+            火箭前进
+          </Button>
+        ) : (
+          <Button
+            style={{ pointerEvents: "auto", color: "orange" }}
+            onClick={MoveRocket}
+            ghost
+          >
+            <BulbOutlined />
+            火箭运动返回
+          </Button>
+        )}
+      </div>
+      <div className=" absolute bottom-0 right-6 w-[20vw] h-auto bg-optblue opacity-60 rounded-lg">
+        <Gauge />
+      </div>
     </>
   );
 };
