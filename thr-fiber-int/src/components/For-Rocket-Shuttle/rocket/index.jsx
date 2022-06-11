@@ -1,16 +1,19 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useSpring, animated, config } from "@react-spring/three";
-import { Html, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { useRocket } from "@/store/store";
+import HtmlModel from "../htmlText/HtmlModel";
 
 const Rocket = () => {
   const rocketRef = useRef([]).current;
   const rotateyRef = useRef(new THREE.Vector3(0, 1, 0)).current;
   const rocketRef2 = useRef(); //控制火箭抖动的ref
   const rocketSelfRef = useRef(); //控制火箭抖动的
+  const { active } = useRocket((state) => state.rocketState); //用于控制rocket位置
+  const [hovered, setHovered] = useState(false); //鼠标经过状态
   const rocket = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL +
@@ -19,11 +22,26 @@ const Rocket = () => {
     //   console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
     // }
   );
-  const { active } = useRocket((state) => state.rocketState);
-  console.log(rocketRef2, "rocketRef2");
-  const handlePointerMove = (event) => {
-    console.log(event.object);
-  };
+  
+  /**
+   * 鼠标划过
+   */
+  const hover = useCallback(async (event) => {
+    setHovered(true);
+    await event.stopPropagation();
+    console.log(event.object, "e.object");
+    await event.object.material.color.set("#FFD700");
+  }, []);
+
+  /**
+   * 鼠标划出
+   */
+  const unhover = useCallback(async (event) => {
+    setHovered(false);
+    await event.stopPropagation();
+    await event.object.material.color.set("#FFFFFF");
+  }, []);
+
   useEffect(() => {
     try {
       if (rocket) {
@@ -64,27 +82,18 @@ const Rocket = () => {
       ref={rocketRef2}
       dispose={null}
       position={props.position}
-      onPointerMove={handlePointerMove}
-      // onPointerDown={(e) => {e.stopPropagation(); state.current = e.object.material.name }}
-      // onPointerMissed={(e) =>{state.current = null} }
+      onPointerOver={hover}
+      onPointerOut={unhover}
     >
       <primitive ref={rocketSelfRef} object={rocket.scene} />
-
-      <Html
+      <HtmlModel
         distanceFactor={12}
         position={[0, 4, 6.5]}
         transform
         occlude={[rocketSelfRef]}
       >
-        <div className="cursor-pointer 
-        rounded-2xl outline-none border-none 
-        text-base font-bold text-pink-900
-        bg-indigo-400 py-0.5 px-2.5 tracking-wide 
-        flex justify-center items-center 
-        gap-5px">
-          s p a c e X
-        </div>
-      </Html>
+        s p a c e X
+      </HtmlModel>
     </animated.group>
   );
 };
