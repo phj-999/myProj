@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import React, { useRef } from "react";
 import * as THREE from "three";
 import { useRingLampsStore } from "@/store/store";
+import HtmlModel from "../htmlText/HtmlModel";
 
 const HaloRings = (props) => {
   const earthRef = useRef();
@@ -32,47 +33,60 @@ const HaloRings = (props) => {
   });
 
   return (
-    <group
-      rotation-x={-0.5}
-      position={[0, 0, 0]}
-      scale={[0.007, 0.007, 0.007]}
-      castShadow
-      receiveShadow
-      dispose={null}
-    >
-      {/* 灯光 */}
-      <mesh
-        visible={visiablevalue}
-        geometry={nodes["LIGHTKRAFTFBXASC032GRAVITONFBXASC032"].geometry}
-        material={materials.LIGHTKRAFTFBXASC032GRAVITONFBXASC032}
-      />
-      {/* 内环表面地图 */}
-      <mesh 
-        ref={earthRef}
-        geometry={nodes["MaterialFBXASC032FBXASC0352142146801"].geometry}
-        material={materials.MaterialFBXASC032FBXASC0352142146801}
-      />
-      {/*外环圈  */}
-      <mesh
-        geometry={nodes["MaterialFBXASC032FBXASC0352142147988"].geometry}
-        material={materials.MaterialFBXASC032FBXASC0352142147988}
-      />
-      {/* 灯轴 */}
-      <mesh
-        geometry={nodes["MaterialFBXASC032FBXASC0352142150746"].geometry}
-        material={materials.MaterialFBXASC032FBXASC0352142150746}
-      />
+    <>
+      <HtmlModel
+        scale={1.2}
+        rotation-y={Math.PI / 4}
+        position={[-4, 7, -3]}
+        distanceFactor={12}
+        transform
+        occlude //={[earthRef]}
+      >
+        Halo-Ring星门
+      </HtmlModel>
 
-      <mesh
-        ref={SmalllightsRef}
-        geometry={nodes["MaterialFBXASC032FBXASC0352142150746_1"].geometry}
-        material={materials.MaterialFBXASC032FBXASC0352142150746}
-      />
-      <mesh
-        geometry={nodes["MaterialFBXASC032FBXASC0352142150746_2"].geometry}
-        material={materials.MaterialFBXASC032FBXASC0352142150746}
-      />
-    </group>
+      <group
+        rotation-x={-0.5}
+        position={[0, 0, 0]}
+        scale={[0.007, 0.007, 0.007]}
+        castShadow
+        receiveShadow
+        dispose={null}
+      >
+        {/* 灯光 */}
+        <mesh
+          visible={visiablevalue}
+          geometry={nodes["LIGHTKRAFTFBXASC032GRAVITONFBXASC032"].geometry}
+          material={materials.LIGHTKRAFTFBXASC032GRAVITONFBXASC032}
+        />
+        {/* 内环表面地图 */}
+        <mesh
+          ref={earthRef}
+          geometry={nodes["MaterialFBXASC032FBXASC0352142146801"].geometry}
+          material={materials.MaterialFBXASC032FBXASC0352142146801}
+        />
+        {/*外环圈  */}
+        <mesh
+          geometry={nodes["MaterialFBXASC032FBXASC0352142147988"].geometry}
+          material={materials.MaterialFBXASC032FBXASC0352142147988}
+        />
+        {/* 灯轴 */}
+        <mesh
+          geometry={nodes["MaterialFBXASC032FBXASC0352142150746"].geometry}
+          material={materials.MaterialFBXASC032FBXASC0352142150746}
+        />
+
+        <mesh
+          ref={SmalllightsRef}
+          geometry={nodes["MaterialFBXASC032FBXASC0352142150746_1"].geometry}
+          material={materials.MaterialFBXASC032FBXASC0352142150746}
+        />
+        <mesh
+          geometry={nodes["MaterialFBXASC032FBXASC0352142150746_2"].geometry}
+          material={materials.MaterialFBXASC032FBXASC0352142150746}
+        />
+      </group>
+    </>
   );
 };
 

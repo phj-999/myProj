@@ -18,7 +18,6 @@ import {
   FloorGrid,
   Boxes,
   Effect,
-  Table,
   BackgroundScene,
   HaloRings,
   ControlMenu
@@ -54,7 +53,6 @@ const RocketShuttle = () => {
               <Environment map={texture} />
               <Rocket />
               {/* <Car /> */}
-              {/* <Table /> */}
             </>
           )}
         </CubeCamera>
