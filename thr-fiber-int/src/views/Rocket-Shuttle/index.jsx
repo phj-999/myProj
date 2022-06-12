@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   AdaptiveDpr,
@@ -20,15 +20,25 @@ import {
   Effect,
   BackgroundScene,
   HaloRings,
-  ControlMenu
+  ControlMenu,
 } from "@/components/For-Rocket-Shuttle";
 // import './header.css'
+import * as THREE from 'three'
 
 const RocketShuttle = () => {
-
+  const Pposition = useMemo(() => new THREE.Vector3(10,10,10), [])
+  const [persPposition,setPersPposition] = useState(Pposition)
+  const changeposition = useCallback(
+    (pos,camera) => {
+      setPersPposition(pos)
+      camera.updateProjectionMatrix ()
+    },
+    [],
+  )
+  
   return (
     <div className={"box-content w-screen h-screen bg-black"}>
-      <ControlMenu />
+      {/* <ControlMenu /> */}
       <Canvas
         dpr={window.devicePixelRatio}
         onCreated={({ camera, gl, scene }) => {
@@ -41,7 +51,7 @@ const RocketShuttle = () => {
         {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
         <OrbitControls target={[0, 0.35, 0]} regress />
         {/* 相机默认事件 */}
-        <PerspectiveCamera position={[10, 10, 10]} fov={60} makeDefault />
+        <PerspectiveCamera position={persPposition} fov={60} makeDefault />
         {/* <color args={[0, 0, 0]} attach="background" /> */}
         <axesHelper args={[5]} />
         <Lights />
@@ -63,6 +73,9 @@ const RocketShuttle = () => {
         <FloorGrid />
         {/* <Rings /> */}
         <HaloRings />
+        <Environment>
+          <ControlMenu Pposition changeposition={changeposition}/>
+        </Environment>
         <Stats />
         {/* 效果组件 */}
         <Effect />
@@ -79,4 +92,3 @@ const RocketShuttle = () => {
 };
 
 export default RocketShuttle;
-

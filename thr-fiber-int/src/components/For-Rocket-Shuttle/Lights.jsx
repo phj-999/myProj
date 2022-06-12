@@ -1,5 +1,5 @@
 import React from "react";
-import { SpotLight, useDepthBuffer } from "@react-three/drei";
+import { SpotLight } from "@react-three/drei";
 
 const Lights = () => {
   //const depthBuffer = useDepthBuffer({ size: 256, frames: 1 });
