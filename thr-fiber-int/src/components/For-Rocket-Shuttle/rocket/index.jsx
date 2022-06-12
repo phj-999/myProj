@@ -25,7 +25,6 @@ const Rocket = () => {
    */
   const hover = useCallback(async (event) => {
     await event.stopPropagation();
-    console.log(event.object, "e.object");
     await event.object.material.color.set("#FFD700");
     if (event.object.name === "Cylinder001_fairing_0") setHoveredhead(true);
     if (event.object.name === "Cylinder_body_0") sethoveredBody(true);

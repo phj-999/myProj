@@ -36,7 +36,7 @@ const ControlMenu = (props) => {
        sm:flex-col
        w-auto h-auto
        absolute 
-       top-20 right-10
+       top-10 right-10
        opacity-60
        bg-optblue 
        pointer-events-auto
@@ -82,6 +82,22 @@ const ControlMenu = (props) => {
             火箭运动返回
           </Button>
         )}
+      </div>
+      <div
+        className="
+       opacity-60 bg-optblue
+    text-orange-500 absolute  top-28 right-10 w-60 h-auto 
+    antialiased font-serif text-lg font-semibold tracking-wider break-all
+    md:block
+    sm:hidden
+    "
+      >
+        <div className="text-center">Rocket功能</div>
+        <div>
+          鼠标滑过Rocketb部件,部件颜色改变成金黄色,同时显示对应的html内容介绍
+          <br />
+          鼠标划出,HTML介绍内容消失,Rocket部件颜色取消
+        </div>
       </div>
       <div className=" absolute bottom-0 right-6 w-[20vw] h-auto bg-optblue opacity-60 rounded-lg">
         <Gauge />
