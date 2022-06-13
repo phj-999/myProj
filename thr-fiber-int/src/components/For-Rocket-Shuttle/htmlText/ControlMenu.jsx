@@ -28,6 +28,7 @@ const ControlMenu = (props) => {
   // 视角操作
   const { changeposition, Pposition } = props;
   const newaposition = useMemo(() => new THREE.Vector3(-10, -8, 8), []);
+  const oldposition = useMemo(() => new THREE.Vector3(10, 10, 10), []);
   const [angle, setAngle] = useState(true);
   const {camera} = useThree()
 
@@ -56,8 +57,8 @@ const ControlMenu = (props) => {
 
   const changeAngleorg = useCallback(async () => {
     setAngle(true);
-    await changeposition(Pposition,camera);
-  }, [Pposition, camera, changeposition]);
+    await changeposition(oldposition,camera);
+  }, [camera, changeposition, oldposition]);
 
   return (
     <Html prepend scale={1} position={aposition}>
