@@ -26,7 +26,7 @@ const ControlMenu = (props) => {
     [height, width]
   );
   // 视角操作
-  const { changeposition, Pposition } = props;
+  const { changeposition } = props;
   const newaposition = useMemo(() => new THREE.Vector3(-10, -8, 8), []);
   const oldposition = useMemo(() => new THREE.Vector3(10, 10, 10), []);
   const [angle, setAngle] = useState(true);

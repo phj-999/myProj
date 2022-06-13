@@ -8,13 +8,10 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Stats,
-  useGLTF,
 } from "@react-three/drei";
 import {
-  Car,
   Rocket,
   Lights,
-  FloorGround,
   FloorGrid,
   Boxes,
   Effect,
@@ -22,7 +19,6 @@ import {
   HaloRings,
   ControlMenu,
 } from "@/components/For-Rocket-Shuttle";
-// import './header.css'
 import * as THREE from 'three'
 
 const RocketShuttle = () => {
@@ -38,7 +34,6 @@ const RocketShuttle = () => {
   
   return (
     <div className={"box-content w-screen h-screen bg-black"}>
-      {/* <ControlMenu /> */}
       <Canvas
         dpr={window.devicePixelRatio}
         onCreated={({ camera, gl, scene }) => {
@@ -52,7 +47,6 @@ const RocketShuttle = () => {
         <OrbitControls target={[0, 0.35, 0]} regress />
         {/* 相机默认事件 */}
         <PerspectiveCamera position={persPposition} fov={60} makeDefault />
-        {/* <color args={[0, 0, 0]} attach="background" /> */}
         <axesHelper args={[5]} />
         <Lights />
         <AdaptiveEvents />
@@ -62,16 +56,13 @@ const RocketShuttle = () => {
             <>
               <Environment map={texture} />
               <Rocket />
-              {/* <Car /> */}
             </>
           )}
         </CubeCamera>
-        {/* <Rocket /> */}
-        {/* <BackgroundScene /> */}
+         <BackgroundScene />
         {/* <FloorGround /> */}
         <Boxes />
         <FloorGrid />
-        {/* <Rings /> */}
         <HaloRings />
         <Environment>
           <ControlMenu Pposition changeposition={changeposition}/>
@@ -79,13 +70,6 @@ const RocketShuttle = () => {
         <Stats />
         {/* 效果组件 */}
         <Effect />
-        {/* <mesh position={[0, 0, 0]}>
-            <boxBufferGeometry args={[1, 1, 1]} />
-            <meshBasicMaterial color={"#111827"}/>
-          </mesh> */}
-        {/* <Physics>
-            <Floor position={[0, -0.5, 0]} />
-          </Physics> */}
       </Canvas>
     </div>
   );
