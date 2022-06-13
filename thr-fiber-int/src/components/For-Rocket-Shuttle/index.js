@@ -9,6 +9,7 @@ import BackgroundScene from "./Background";
 import HaloRings from './HaloRings/HaloRings'
 import Rocket from "./rocket";
 import ControlMenu from './htmlText/ControlMenu'
+import Dragable from './Dragable'
 
 export {
   Boxes,
@@ -21,5 +22,6 @@ export {
   BackgroundScene,
   HaloRings,
   Rocket,
-  ControlMenu
+  ControlMenu,
+  Dragable
 };

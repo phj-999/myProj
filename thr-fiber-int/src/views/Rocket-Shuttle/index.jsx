@@ -18,12 +18,15 @@ import {
   BackgroundScene,
   HaloRings,
   ControlMenu,
+  Dragable
 } from "@/components/For-Rocket-Shuttle";
 import * as THREE from 'three'
+import { useOrbit } from "@/store/store";
 
 const RocketShuttle = () => {
   const Pposition = useMemo(() => new THREE.Vector3(10,10,10), [])
   const [persPposition,setPersPposition] = useState(Pposition)
+  const {enabled} = useOrbit((state)=>state.enabled)
   const changeposition = useCallback(
     (pos,camera) => {
       setPersPposition(pos)
@@ -44,7 +47,7 @@ const RocketShuttle = () => {
         <AdaptiveDpr pixelated />
 
         {/* 轨道控制 控制器的焦点暂时设为【0，0，0】 */}
-        <OrbitControls target={[0, 0.35, 0]} regress />
+        <OrbitControls enabled={enabled} target={[0, 0.35, 0]} regress />
         {/* 相机默认事件 */}
         <PerspectiveCamera position={persPposition} fov={60} makeDefault />
         <axesHelper args={[5]} />
@@ -55,7 +58,9 @@ const RocketShuttle = () => {
           {(texture) => (
             <>
               <Environment map={texture} />
+              <Dragable>
               <Rocket />
+              </Dragable>
             </>
           )}
         </CubeCamera>
@@ -63,7 +68,9 @@ const RocketShuttle = () => {
         {/* <FloorGround /> */}
         <Boxes />
         <FloorGrid />
+        <Dragable>
         <HaloRings />
+        </Dragable>
         <Environment>
           <ControlMenu Pposition changeposition={changeposition}/>
         </Environment>

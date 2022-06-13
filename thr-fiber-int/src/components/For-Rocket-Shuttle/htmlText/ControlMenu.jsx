@@ -149,7 +149,8 @@ const ControlMenu = (props) => {
         <div>
           鼠标滑过Rocketb部件,部件颜色改变成金黄色,同时显示对应的html内容介绍
           <br />
-          鼠标划出,HTML介绍内容消失,Rocket部件颜色取消
+          鼠标划出,HTML介绍内容消失,Rocket部件颜色取消<br/>
+          可以移动rocket和halorings,并进行分解
         </div>
       </div>
       <div className=" absolute bottom-0 right-6 w-[20vw] h-auto bg-optblue opacity-60 rounded-lg">
