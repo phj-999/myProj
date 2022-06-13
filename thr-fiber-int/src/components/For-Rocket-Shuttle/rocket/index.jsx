@@ -3,7 +3,6 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useSpring, animated, config } from "@react-spring/three";
-import { useGLTF } from "@react-three/drei";
 import { useRocket } from "@/store/store";
 import HtmlModel from "../htmlText/HtmlModel";
 
@@ -119,7 +118,7 @@ const Rocket = () => {
 
 export default Rocket;
 
-useGLTF.preload(
+useLoader.preload(
   process.env.PUBLIC_URL +
     "models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
 );

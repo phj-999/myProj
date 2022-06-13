@@ -1,14 +1,15 @@
-import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import React, { useRef } from "react";
 import * as THREE from "three";
 import { useRingLampsStore } from "@/store/store";
 import HtmlModel from "../htmlText/HtmlModel";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const HaloRings = (props) => {
   const earthRef = useRef();
   const SmalllightsRef = useRef();
-  const { nodes, materials } = useGLTF(
+  const { nodes, materials } = useLoader(
+    GLTFLoader,
     process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
   );
   const { visiablevalue } = useRingLampsStore((state) => state.ringLampsState);
@@ -92,6 +93,6 @@ const HaloRings = (props) => {
 
 export default HaloRings;
 
-useGLTF.preload(
+useLoader.preload(
   process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
 );
