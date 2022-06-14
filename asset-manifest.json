@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "./static/css/main.ed19f6d8.css",
-    "main.js": "./static/js/main.737012fe.js",
-    "static/js/326.aa8d6fe8.chunk.js": "./static/js/326.aa8d6fe8.chunk.js",
-    "static/js/450.ad1f18c1.chunk.js": "./static/js/450.ad1f18c1.chunk.js",
-    "static/js/988.f40817e1.chunk.js": "./static/js/988.f40817e1.chunk.js",
-    "static/js/879.9cd51b19.chunk.js": "./static/js/879.9cd51b19.chunk.js",
-    "index.html": "./index.html",
-    "static/media/default.less": "./static/media/default.003f90b383291c3b90da.less",
-    "static/media/index.less": "./static/media/index.512735b3dccd7d4b3088.less"
+    "main.css": "/myprofromgitlab/static/css/main.ed19f6d8.css",
+    "main.js": "/myprofromgitlab/static/js/main.ebc16366.js",
+    "static/js/326.c125f41d.chunk.js": "/myprofromgitlab/static/js/326.c125f41d.chunk.js",
+    "static/js/450.ad1f18c1.chunk.js": "/myprofromgitlab/static/js/450.ad1f18c1.chunk.js",
+    "static/js/988.f40817e1.chunk.js": "/myprofromgitlab/static/js/988.f40817e1.chunk.js",
+    "static/js/879.9cd51b19.chunk.js": "/myprofromgitlab/static/js/879.9cd51b19.chunk.js",
+    "index.html": "/myprofromgitlab/index.html",
+    "static/media/default.less": "/myprofromgitlab/static/media/default.003f90b383291c3b90da.less",
+    "static/media/index.less": "/myprofromgitlab/static/media/index.512735b3dccd7d4b3088.less"
   },
   "entrypoints": [
     "static/css/main.ed19f6d8.css",
-    "static/js/main.737012fe.js"
+    "static/js/main.ebc16366.js"
   ]
 }
