@@ -3,9 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import { HashRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCpcP8bc8vIHME5RTBX7bTD38U2NQtp5Tw",
+  authDomain: "spacerockethalorings.firebaseapp.com",
+  projectId: "spacerockethalorings",
+  storageBucket: "spacerockethalorings.appspot.com",
+  messagingSenderId: "748657504627",
+  appId: "1:748657504627:web:797547792bcf0fa704d506",
+  measurementId: "G-RGCKPLRCEN"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 root.render(
   <React.StrictMode>
     <HashRouter>
