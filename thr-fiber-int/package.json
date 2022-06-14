@@ -2,7 +2,7 @@
   "name": "thr-fiber-int",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://phj-999.github.io/thr-fiber-int",
   "dependencies": {
     "@react-spring/three": "^9.4.5",
     "@react-spring/web": "^9.4.5",
@@ -17,6 +17,7 @@
     "antd": "^4.20.3",
     "echarts": "^5.3.2",
     "echarts-for-react": "^3.0.2",
+    "gh-pages": "^4.0.0",
     "lodash": "^4.17.21",
     "postprocessing": "^6.26.4",
     "react": "^18.1.0",
@@ -29,7 +30,9 @@
     "zustand": "^4.0.0-rc.1"
   },
   "scripts": {
-    "start": "dotenv -e .local.single.env -e .env.dev react-app-rewired start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
