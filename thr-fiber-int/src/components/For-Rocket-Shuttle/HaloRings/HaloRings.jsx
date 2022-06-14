@@ -94,5 +94,6 @@ const HaloRings = (props) => {
 export default HaloRings;
 
 useLoader.preload(
+  GLTFLoader,
   process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
 );

@@ -119,6 +119,7 @@ const Rocket = () => {
 export default Rocket;
 
 useLoader.preload(
+  GLTFLoader,
   process.env.PUBLIC_URL +
     "models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
 );
