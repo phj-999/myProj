@@ -2,7 +2,7 @@
   "name": "myprofromgitlab",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://phj-999.github.io/myprofromgitlab",
   "dependencies": {
     "@react-spring/three": "^9.4.5",
     "@react-spring/web": "^9.4.5",
