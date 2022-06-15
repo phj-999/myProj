@@ -9,7 +9,7 @@ const Car = () => {
   // 此汽车的loader
   const cartexture = useLoader(
     GLTFLoader,
-    process.env.PUBLIC_URL + "models_for_rocketshuttle/car/scene.gltf"
+    process.env.PUBLIC_URL + "/models_for_rocketshuttle/car/scene.gltf"
   );
 
 // console.log(cartexture);
@@ -59,4 +59,4 @@ const Car = () => {
 
 export default Car;
 
-useGLTF.preload( process.env.PUBLIC_URL + "models_for_rocketshuttle/car/scene.gltf") //预加载
+useGLTF.preload( process.env.PUBLIC_URL + "/models_for_rocketshuttle/car/scene.gltf") //预加载

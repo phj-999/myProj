@@ -10,7 +10,7 @@ const HaloRings = (props) => {
   const SmalllightsRef = useRef();
   const { nodes, materials } = useLoader(
     GLTFLoader,
-    process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
+    process.env.PUBLIC_URL + "/models_for_rocketshuttle/halo_ring/scene.gltf"
   );
   const { visiablevalue } = useRingLampsStore((state) => state.ringLampsState);
   //  const [earthRing] = useMemo(() => { const earthRing = nodes["MaterialFBXASC032FBXASC0352142146801"]
@@ -95,5 +95,5 @@ export default HaloRings;
 
 useLoader.preload(
   GLTFLoader,
-  process.env.PUBLIC_URL + "models_for_rocketshuttle/halo_ring/scene.gltf"
+  process.env.PUBLIC_URL + "/models_for_rocketshuttle/halo_ring/scene.gltf"
 );

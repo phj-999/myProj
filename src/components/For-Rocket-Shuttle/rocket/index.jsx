@@ -17,7 +17,7 @@ const Rocket = () => {
   const rocket = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL +
-      "models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
+      "/models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
   );
   /**
    * 鼠标划过
@@ -121,5 +121,5 @@ export default Rocket;
 useLoader.preload(
   GLTFLoader,
   process.env.PUBLIC_URL +
-    "models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
+    "/models_for_rocketshuttle/falcon_9_spacex_rocket/scene.gltf"
 );
