@@ -1,4 +1,8 @@
-# 主要使用的库：
+# 部署gitpage后的预览地址
+
+[gitpage预览地址](https://phj-999.github.io/myprofromgitlab/#/rocket)：https://phj-999.github.io/myprofromgitlab/#/rocket
+
+# 主要使用的库
 
 - [three.js (0.140.2)](https://threejs.org/docs/index.html#manual/zh/introduction/Creating-a-scene)
 - [react-three-fiber (8.0.17)](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)
