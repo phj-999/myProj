@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/myprofromgitlab/static/css/main.ed19f6d8.css",
-    "main.js": "/myprofromgitlab/static/js/main.ebc16366.js",
-    "static/js/326.c125f41d.chunk.js": "/myprofromgitlab/static/js/326.c125f41d.chunk.js",
+    "main.js": "/myprofromgitlab/static/js/main.a160ced4.js",
+    "static/js/326.8c9290f4.chunk.js": "/myprofromgitlab/static/js/326.8c9290f4.chunk.js",
     "static/js/450.ad1f18c1.chunk.js": "/myprofromgitlab/static/js/450.ad1f18c1.chunk.js",
     "static/js/988.f40817e1.chunk.js": "/myprofromgitlab/static/js/988.f40817e1.chunk.js",
     "static/js/879.9cd51b19.chunk.js": "/myprofromgitlab/static/js/879.9cd51b19.chunk.js",
@@ -12,6 +12,6 @@
   },
   "entrypoints": [
     "static/css/main.ed19f6d8.css",
-    "static/js/main.ebc16366.js"
+    "static/js/main.a160ced4.js"
   ]
 }
