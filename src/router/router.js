@@ -1,17 +1,17 @@
 import React from 'react'
 import { Navigate } from "react-router-dom";
-const RocketShuttle = React.lazy(()=>import('@/views/Rocket-Shuttle/index'))
+// const RocketShuttle = React.lazy(()=>import('@/views/Rocket-Shuttle/index'))
 const Notfound = React.lazy(()=>import('@/views/notfound/Notfound'))
 
 const routes = [
     {
         path:'/',
-       element: <Navigate  to='/rocket' />
+       element: <Navigate  to='/warehouse' />
     },
-    {
-        path: '/rocket',
-        element: <RocketShuttle />
-    },
+    // {
+    //     path: '/rocket',
+    //     element: <RocketShuttle />
+    // },
     {
         path: '*',
         element: <Notfound />
