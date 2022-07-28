@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head includeDefault="true">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <title>3D仓库图显示</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+  </style> 
+  <!-- threejs -->
+  <script type="text/javascript" src="js/libs/three.js"></script>
+  <!-- stats.js -->
+  <script type="text/javascript" src="js/libs/stats.js"></script>
+</head>
+
+<body>
+  <div id="Stats-output"></div>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000)
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    var stats = statsInit()
+
+    // 场景初始化
+    function sceneInit() {
+      const scene = new THREE.Scene()
+    }
+    // 相机初始化
+    function cameraInit() {
+      camera.position.set(0, 800, 1500)
+      camera.lookAt(new THREE.Vector3(0, 0, 0))
+    }
+    // 初始化灯光
+    function lightsInit() {
+      // 平行光
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3)//模拟远处类似太阳的光源
+      directionalLight.color.setHSL(0.1, 1, 0.95)
+      directionalLight.position.set(0, 200, 0).normalize()
+      // 环境光
+      const ambient = new THREE.AmbientLight(0xffffff, 1) //AmbientLight,影响整个场景的光源
+      ambient.position.set(0, 0, 0)
+      scene.add(directionalLight, ambient)
+    }
+    // stats监测插件
+    function statsInit() {
+      const stats = new Stats()
+      stats.domElement.style.position = 'absolute'
+      stats.domElement.style.left = '0px'
+      stats.domElement.style.top = '0px'
+      stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+      document.getElementById("Stats-output").appendChild(stats.dom)
+      return stats
+    }
+
+    // 渲染器初始化
+    function rendererInit() {
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setClearColor(0x4682B4, 1.0)
+      document.getElementById("canvas").appendChild(renderer.domElement)
+    }
+
+    // 初始化
+    const Init = async () => {
+      await sceneInit()
+      await cameraInit()
+      await lightsInit()
+      await statsInit()
+      await rendererInit()
+    }
+    // animate
+    const renderScene = async () => {
+      //通知stats画面已被重新渲染了
+      stats.update()
+      //通过requestAnimationFrame方法在特定时间间隔重新渲染场景
+      await requestAnimationFrame(renderScene)
+      await renderer.render(scene, camera)
+    }
+
+
+    window.onload = function () {
+      Init()
+      renderScene()
+    }
+  </script>
+</body>
+
+</html>
