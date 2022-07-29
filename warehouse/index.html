@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html>
 
-<head includeDefault="true">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <title>3D仓库图显示</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-
-  </style> 
-  <!-- threejs -->
-  <script type="text/javascript" src="js/libs/three.js"></script>
-  <!-- stats.js -->
-  <script type="text/javascript" src="js/libs/stats.js"></script>
+<link includeDefault="true">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="icon" href="publlic/icon/building-fill.png" sizes="16*16" type="image/png">
+</link>
+<title>3D仓库图显示</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
+<!-- threejs-->
+<script type="text/javascript" src="js/libs/three.js"></script>
+<!-- stats.js -->
+<script type="text/javascript" src="js/libs/stats.js"></script>
+<!-- OrbitControls -->
+<script type="text/javascript" src="js/libs/controls/OrbitControls.js"></script>
 </head>
 
 <body>
   <div id="Stats-output"></div>
-  <canvas id="canvas"></canvas>
+  <div id="canvas"></div>
 
   <script>
+
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000)
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     var stats = statsInit()
+    //创建控件对象
+    const controls = new THREE.OrbitControls(camera, renderer.domElement)
 
     // 场景初始化
     function sceneInit() {
@@ -55,8 +63,20 @@
       stats.domElement.style.left = '0px'
       stats.domElement.style.top = '0px'
       stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
-      document.getElementById("Stats-output").appendChild(stats.dom)
+      document.getElementById("Stats-output").appendChild(stats.domElement)
       return stats
+    }
+
+    // 控制器
+    const ControlsInit = () => {
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.5;
+      // 视角最小距离
+      controls.minDistance = 100;
+      // 视角最远距离
+      controls.maxDistance = 5000;
+      // 最大角度
+      controls.maxPolarAngle = Math.PI / 2.2;
     }
 
     // 渲染器初始化
@@ -66,6 +86,44 @@
       document.getElementById("canvas").appendChild(renderer.domElement)
     }
 
+    // 地板
+    const createFloor = () => {
+      const textureloader = new THREE.TextureLoader() //加载器
+      textureloader.load('publlic/images/floor.jpg', function (texture) {
+        // 设置阵列模式  
+        // 默认ClampToEdgeWrapping  RepeatWrapping：阵列  
+        // 镜像阵列：MirroredRepeatWrapping
+        texture.wrapS = THREE.RepeatWrapping
+        texture.wrapT = THREE.RepeatWrapping
+        // uv两个方向纹理重复数量
+        texture.repeat.set(10, 10)
+        // 几何体
+        const floorgeometry = new THREE.BoxBufferGeometry(2600, 1400, 1)
+        // 材质
+        const floormaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
+        // 网格模型
+        const mesh = new THREE.Mesh(floorgeometry, floormaterial)
+        // 位置
+        mesh.position.y = -0.5
+        mesh.rotation.x = Math.PI / 2;
+        scene.add(mesh)
+      })
+    }
+
+    //创建墙壁
+    const createWall = (angle,name) => {
+      const wallGeometry = new THREE.BoxBufferGeometry(10, 200, 1400)
+      const wallMaterial = new THREE.MeshPhongMaterial({color: 0xafc0ca})
+      const wallcube = new THREE.Mesh(wallGeometry, wallMaterial)
+
+      wallcube.position.x = -1295;
+      wallcube.position.y = 100;
+      wallcube.position.z = 0;
+      wallcube.rotation.y += angle * Math.PI;  //-逆时针旋转,+顺时针
+      wallcube.name = name;
+      scene.add(wallcube);
+    }
+
     // 初始化
     const Init = async () => {
       await sceneInit()
@@ -73,11 +131,15 @@
       await lightsInit()
       await statsInit()
       await rendererInit()
+      await ControlsInit()
+      await createFloor()
+      await createWall(0,'墙面')
     }
     // animate
     const renderScene = async () => {
       //通知stats画面已被重新渲染了
-      stats.update()
+      await stats.update()
+      await controls.update()
       //通过requestAnimationFrame方法在特定时间间隔重新渲染场景
       await requestAnimationFrame(renderScene)
       await renderer.render(scene, camera)
