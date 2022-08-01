@@ -21,6 +21,9 @@
 <script type="text/javascript" src="js/libs/stats.js"></script>
 <!-- OrbitControls -->
 <script type="text/javascript" src="js/libs/controls/OrbitControls.js"></script>
+<!-- ThreeBsp -->
+<script type="text/javascript" src="js/libs/ThreeBSP.js"></script>
+<!-- <script type="text/javascript" src="js/libs/wallobject.js"></script> -->
 </head>
 
 <body>
@@ -111,17 +114,87 @@
     }
 
     //创建墙壁
-    const createWall = (angle,name) => {
-      const wallGeometry = new THREE.BoxBufferGeometry(10, 200, 1400)
-      const wallMaterial = new THREE.MeshPhongMaterial({color: 0xafc0ca})
+    const createWall = (width, height, depth, angle, x, y, z, name) => {
+      const wallGeometry = new THREE.BoxBufferGeometry(width, height, depth)
+      const wallMaterial = new THREE.MeshPhongMaterial({ color: 0xafc0ca })
       const wallcube = new THREE.Mesh(wallGeometry, wallMaterial)
 
-      wallcube.position.x = -1295;
-      wallcube.position.y = 100;
-      wallcube.position.z = 0;
+      wallcube.position.x = x;
+      wallcube.position.y = y;
+      wallcube.position.z = z;
       wallcube.rotation.y += angle * Math.PI;  //-逆时针旋转,+顺时针
       wallcube.name = name;
       scene.add(wallcube);
+    }
+
+    // 创建三面墙壁
+    const createcubWall = () => {
+      Promise.all([createWall(10, 200, 1400, 0, -1295, 100, 0, "墙面"),
+      createWall(10, 200, 1400, 0, -1295, 100, 0, "墙面"),
+      createWall(10, 200, 1400, 1, 1295, 100, 0, "墙面"),
+      createWall(10, 200, 2600, 1.5, 0, 100, -700, "墙面"), createFrontWall()])
+    }
+
+    // 返回墙对象
+    const returnWallObject = (width, height, depth, angle, material, x, y, z, name) => {
+      const cubeGeometry = new THREE.BoxGeometry(width, height, depth)
+      const cube = new THREE.Mesh(cubeGeometry, material)
+      cube.position.x = x;
+      cube.position.y = y;
+      cube.position.z = z;
+      cube.rotation.y += angle * Math.PI;
+      cube.name = name;
+      return cube;
+    }
+
+    // 创建出挖去门窗的墙面,第一个参数是被挖去的墙，第二个是要挖去的物体的数组
+    //墙上挖门窗，通过两个几何体生成BSP对象
+    function createWallBsp(bsp, objects_cube) {
+      var material = new THREE.MeshPhongMaterial({
+        color: 0x9cb2d1,
+        specular: 0x9cb2d1,
+        shininess: 30,
+        transparent: true,
+        opacity: 1
+      });
+      var BSP = new ThreeBSP(bsp);
+      for (var i = 0; i < objects_cube.length; i++) {
+        var less_bsp = new ThreeBSP(objects_cube[i]);
+        BSP = BSP.subtract(less_bsp);
+      }
+      var result = BSP.toMesh(material);
+      result.material.flatshading = THREE.FlatShading;
+      result.geometry.computeFaceNormals(); //重新计算几何体侧面法向量
+      result.geometry.computeVertexNormals();
+      result.material.needsUpdate = true; //更新纹理
+      result.geometry.buffersNeedUpdate = true;
+      result.geometry.uvsNeedUpdate = true;
+      scene.add(result);
+    }
+
+
+
+    // 创建挖去门窗的墙壁
+    function createFrontWall() {
+      var matArrayB = [] //外墙
+
+      // 创建了一个数组objects_cube来存放要挖去的内容
+      var objects_cube = []
+      var frontCubWall = returnWallObject(2600, 200, 10, 0, matArrayB, 0, 100, 700, "墙面")
+      var door_cube1 = returnWallObject(200, 180, 10, 0, matArrayB, -600, 90, 700, "前门1")
+      var door_cube2 = returnWallObject(200, 180, 10, 0, matArrayB, 600, 90, 700, "前门2")
+      var window_cube1 = returnWallObject(100, 100, 10, 0, matArrayB, -900, 90, 700, "窗户1")
+      var window_cube2 = returnWallObject(100, 100, 10, 0, matArrayB, 900, 90, 700, "窗户2")
+      var window_cube3 = returnWallObject(100, 100, 10, 0, matArrayB, -200, 90, 700, "窗户3")
+      var window_cube4 = returnWallObject(100, 100, 10, 0, matArrayB, 200, 90, 700, "窗户4")
+
+      objects_cube.push(door_cube1)
+      objects_cube.push(door_cube2)
+      objects_cube.push(window_cube1)
+      objects_cube.push(window_cube2)
+      objects_cube.push(window_cube3)
+      objects_cube.push(window_cube4)
+      createWallBsp(frontCubWall, objects_cube)
     }
 
     // 初始化
@@ -132,8 +205,8 @@
       await statsInit()
       await rendererInit()
       await ControlsInit()
-      await createFloor()
-      await createWall(0,'墙面')
+      await createFloor() //创建地板
+      await createcubWall() //创建墙壁
     }
     // animate
     const renderScene = async () => {
