@@ -25,6 +25,12 @@
 <script type="text/javascript" src="js/libs/ThreeBSP.js"></script>
 <!-- 返回墙对象 -->
 <script type="text/javascript" src="js/wallobject.js"></script>
+<!-- 墙壁纹理 -->
+<script type="text/javascript" src="js/wallTexture.js"></script>
+<!-- 安装大门 -->
+<script type="text/javascript" src="js/createDoor.js"></script>
+<!-- 窗户 -->
+<script type="text/javascript" src="js/createWindow.js"></script>
 </head>
 
 <body>
@@ -39,6 +45,8 @@
     var stats = statsInit()
     //创建控件对象
     const controls = new THREE.OrbitControls(camera, renderer.domElement)
+    const matArrayB = [] //外墙   
+    const matArrayA = []  //用于纹理
 
     // 场景初始化
     function sceneInit() {
@@ -128,26 +136,6 @@
       scene.add(wallcube);
     }
 
-    // 创建三面墙壁
-    const createcubWall = () => {
-      Promise.all([createWall(10, 200, 1400, 0, -1295, 100, 0, "墙面"),
-      createWall(10, 200, 1400, 0, -1295, 100, 0, "墙面"),
-      createWall(10, 200, 1400, 1, 1295, 100, 0, "墙面"),
-      createWall(10, 200, 2600, 1.5, 0, 100, -700, "墙面"), createFrontWall()])
-    }
-
-    // // 返回墙对象
-    // const returnWallObject = (width, height, depth, angle, material, x, y, z, name) => {
-    //   const cubeGeometry = new THREE.BoxGeometry(width, height, depth)
-    //   const cube = new THREE.Mesh(cubeGeometry, material)
-    //   cube.position.x = x;
-    //   cube.position.y = y;
-    //   cube.position.z = z;
-    //   cube.rotation.y += angle * Math.PI;
-    //   cube.name = name;
-    //   return cube;
-    // }
-
     // 创建出挖去门窗的墙面,第一个参数是被挖去的墙，第二个是要挖去的物体的数组
     //墙上挖门窗，通过两个几何体生成BSP对象
     function createWallBsp(bsp, objects_cube) {
@@ -173,12 +161,8 @@
       scene.add(result);
     }
 
-
-
     // 创建挖去门窗的墙壁
     function createFrontWall() {
-      var matArrayB = [] //外墙
-
       // 创建了一个数组objects_cube来存放要挖去的内容
       var objects_cube = []
       var frontCubWall = returnWallObject(2600, 200, 10, 0, matArrayB, 0, 100, 700, "墙面")
@@ -196,6 +180,25 @@
       objects_cube.push(window_cube3)
       objects_cube.push(window_cube4)
       createWallBsp(frontCubWall, objects_cube)
+    }
+
+    // 创建三面实体墙壁+前部门窗墙壁+纹理
+    const createcubWall = () => {
+      Promise.all([createWall(10, 200, 1400, 0, -1295, 100, 0, "墙面"),
+      createWall(10, 200, 1400, 0, -1295, 100, 0, "墙面"),
+      createWall(10, 200, 1400, 1, 1295, 100, 0, "墙面"),
+      createWall(10, 200, 2600, 1.5, 0, 100, -700, "墙面"),
+      createFrontWall(),   //创建带窗户门的墙壁
+      createWallTexture(),  // 纹理
+      createLeftDoor(100, 180, 2, 0, -700, 90, 700, "左门1"),  //左门1
+      createLeftDoor(100, 180, 2, 0, 500, 90, 700, "左门2"),  //左门2
+      createRightDoor(100, 180, 2, 0, -500, 90, 700, "右门1"), //右门1
+      createRightDoor(100, 180, 2, 0, 700, 90, 700, "右门2"),  // 右门2
+      createWindow(100, 100, 2, 0, -900, 90, 700, "窗户"),
+      createWindow(100, 100, 2, 0, 900, 90, 700, "窗户"),
+      createWindow(100, 100, 2, 0, -200, 90, 700, "窗户"),
+      createWindow(100, 100, 2, 0, 200, 90, 700, "窗户")
+      ])
     }
 
     // 初始化
