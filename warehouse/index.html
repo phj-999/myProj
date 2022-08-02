@@ -23,7 +23,8 @@
 <script type="text/javascript" src="js/libs/controls/OrbitControls.js"></script>
 <!-- ThreeBsp -->
 <script type="text/javascript" src="js/libs/ThreeBSP.js"></script>
-<!-- <script type="text/javascript" src="js/libs/wallobject.js"></script> -->
+<!-- 返回墙对象 -->
+<script type="text/javascript" src="js/wallobject.js"></script>
 </head>
 
 <body>
@@ -135,17 +136,17 @@
       createWall(10, 200, 2600, 1.5, 0, 100, -700, "墙面"), createFrontWall()])
     }
 
-    // 返回墙对象
-    const returnWallObject = (width, height, depth, angle, material, x, y, z, name) => {
-      const cubeGeometry = new THREE.BoxGeometry(width, height, depth)
-      const cube = new THREE.Mesh(cubeGeometry, material)
-      cube.position.x = x;
-      cube.position.y = y;
-      cube.position.z = z;
-      cube.rotation.y += angle * Math.PI;
-      cube.name = name;
-      return cube;
-    }
+    // // 返回墙对象
+    // const returnWallObject = (width, height, depth, angle, material, x, y, z, name) => {
+    //   const cubeGeometry = new THREE.BoxGeometry(width, height, depth)
+    //   const cube = new THREE.Mesh(cubeGeometry, material)
+    //   cube.position.x = x;
+    //   cube.position.y = y;
+    //   cube.position.z = z;
+    //   cube.rotation.y += angle * Math.PI;
+    //   cube.name = name;
+    //   return cube;
+    // }
 
     // 创建出挖去门窗的墙面,第一个参数是被挖去的墙，第二个是要挖去的物体的数组
     //墙上挖门窗，通过两个几何体生成BSP对象
