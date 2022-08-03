@@ -31,9 +31,12 @@
 <script type="text/javascript" src="js/createDoor.js"></script>
 <!-- 窗户 -->
 <script type="text/javascript" src="js/createWindow.js"></script>
+<!-- 事件 -->
+<script type="text/javascript" src="js/ThreeJs_Composer.js"></script>
 </head>
 
 <body>
+  <div id="label"></div>
   <div id="Stats-output"></div>
   <div id="canvas"></div>
 
@@ -47,6 +50,7 @@
     const controls = new THREE.OrbitControls(camera, renderer.domElement)
     const matArrayB = [] //外墙   
     const matArrayA = []  //用于纹理
+    const composer =  new THREE.ThreeJs_Composer(renderer, scene, camera)
 
     // 场景初始化
     function sceneInit() {
@@ -219,6 +223,7 @@
       await controls.update()
       //通过requestAnimationFrame方法在特定时间间隔重新渲染场景
       await requestAnimationFrame(renderScene)
+      await composer.render()//事件操作
       await renderer.render(scene, camera)
     }
 
