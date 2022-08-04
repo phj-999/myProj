@@ -14,13 +14,14 @@
     width: 100vw;
     height: 100vh;
   }
+
   #label {
-      position: absolute;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.6);
-      line-height: 1;
-      border-radius: 5px;
-    }
+    position: absolute;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    line-height: 1;
+    border-radius: 5px;
+  }
 </style>
 <!-- threejs-->
 <script type="text/javascript" src="js/libs/three.js"></script>
@@ -52,6 +53,13 @@
 <script type="text/javascript" src="js/libs/Tween.js"></script>
 <!-- 添加库区与文字,存放3D仓库显示模型 -->
 <script type="text/javascript" src="js/interial.js"></script>
+<!-- 货架对象 -->
+<script type="text/javascript" src="js/shelf.js"></script>
+<!-- 货位对象 -->
+<script type="text/javascript" src="js/storageUnit.js"></script>
+<!-- 模型的静态常量配置和货架的配置 -->
+<script type="text/javascript" src="js/data.js"></script>
+
 </head>
 
 <body>
@@ -69,7 +77,7 @@
     const controls = new THREE.OrbitControls(camera, renderer.domElement)
     const matArrayB = [] //外墙   
     const matArrayA = []  //用于纹理
-    const composer =  new THREE.ThreeJs_Composer(renderer, scene, camera)
+    const composer = new THREE.ThreeJs_Composer(renderer, scene, camera)
 
     // 场景初始化
     function sceneInit() {
@@ -234,7 +242,8 @@
       await ControlsInit()
       await createFloor() //创建地板
       await createcubWall() //创建墙壁
-      await addArea(0,0,500,500,scene,"ID1$库区1号","FF0000",20,"左对齐") //添加库区
+      await addArea(0, 0, 500, 500, scene, "ID1$库区1号", "FF0000", 20, "左对齐") //添加库区
+      await addShelf(scene)
     }
     // animate
     const renderScene = async () => {
