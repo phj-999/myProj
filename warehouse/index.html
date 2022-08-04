@@ -59,6 +59,9 @@
 <script type="text/javascript" src="js/storageUnit.js"></script>
 <!-- 模型的静态常量配置和货架的配置 -->
 <script type="text/javascript" src="js/data.js"></script>
+<!-- 信息侧边栏,轻量级的icon形用户界面框架 -->
+<script type="text/javascript" src="js/libs/dat.gui.min.js"></script>
+<script type="text/javascript" src="js/gui.js"></script>
 
 </head>
 
@@ -257,7 +260,8 @@
       await createcubWall() //创建墙壁
       await addArea(0, 0, 500, 500, scene, "ID1$库区1号", "FF0000", 20, "左对齐") //添加库区
       await addShelf(scene) //货架
-      await createShelfLists()
+      await createShelfLists() //货物箱子
+      await initGui()
     }
     // animate
     const renderScene = async () => {

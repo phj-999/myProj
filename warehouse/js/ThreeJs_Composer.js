@@ -1,4 +1,4 @@
-THREE.ThreeJs_Composer = function (_renderer, _scene, _camera) {
+THREE.ThreeJs_Composer = function (_renderer, _scene, _camera, _options, _selectobject) {
     const raycaster = new THREE.Raycaster()
     const mouse = new THREE.Vector2()
     const selectedObjects = []
@@ -46,6 +46,7 @@ THREE.ThreeJs_Composer = function (_renderer, _scene, _camera) {
         
         // 计算物体和射线的焦点 保存了鼠标点击处发出射线所依次经过的物体
         const intersects = raycaster.intersectObjects( [_scene], true )
+        console.log(intersects,'intersects--鼠标点击处发出射线所依次经过的物体')
 
         // 1.鼠标点击的地方啥都没有，就直接隐藏说明性标签
         if(intersects.length == 0){
@@ -97,6 +98,9 @@ THREE.ThreeJs_Composer = function (_renderer, _scene, _camera) {
                 door_state_right1 = true;
             }
         }
+
+        var controlMsg = intersects[0].object.name.split("$")
+        console.log(controlMsg,'controlMsg')
 
     }
     return composer
