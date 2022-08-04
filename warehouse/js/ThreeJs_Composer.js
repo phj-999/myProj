@@ -21,6 +21,13 @@ THREE.ThreeJs_Composer = function (_renderer, _scene, _camera) {
     effectFXAA.renderToScreen = true
     composer.addPass( effectFXAA )
 
+   // 大门关闭打开状态
+   const door_state_left1 = true //默认是门是关闭的
+   const door_state_right1 = true //默认是门是关闭的
+   const door_state_left2 = true //默认是门是关闭的
+   const door_state_right2 = true //默认是门是关闭的
+
+
     window.addEventListener('click', onMouseClick)
 
     function onMouseClick(event) {
@@ -60,6 +67,35 @@ THREE.ThreeJs_Composer = function (_renderer, _scene, _camera) {
             selectedObjects.pop()
             selectedObjects.push( intersects[0].object )
             outlinePass.selectedObjects = selectedObjects//给选中的线条和物体加发光特效
+        }
+        // 点击门，动画效果
+        if (intersects[0].object.name == '左门1') {
+            if (door_state_left1) {
+                new TWEEN.Tween(intersects[0].object.rotation).to({
+                    y: -0.5*Math.PI
+                },5000).easing(TWEEN.Easing.Elastic.Out).onComplete(function() {}).start()
+            door_state_left1 = false
+            } else {
+                new TWEEN.Tween(intersects[0].object.rotation).to({
+                    y:0
+                },5000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
+                }).start()
+                door_state_left1 = true
+            }
+        } else if (intersects[0].object.name == "右门1") {
+            if(door_state_right1){
+                new TWEEN.Tween(intersects[0].object.rotation).to({
+                    y: 0.5*Math.PI
+                }, 5000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
+                }).start();
+                door_state_right1 = false;
+            }else{
+                new TWEEN.Tween(intersects[0].object.rotation).to({
+                    y: 0
+                }, 5000).easing(TWEEN.Easing.Elastic.Out).onComplete(function(){
+                }).start();
+                door_state_right1 = true;
+            }
         }
 
     }
