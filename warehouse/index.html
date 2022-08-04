@@ -78,6 +78,8 @@
     const matArrayB = [] //外墙   
     const matArrayA = []  //用于纹理
     const composer = new THREE.ThreeJs_Composer(renderer, scene, camera)
+    // 货架列表
+    var shelf_list = GET_SHELF_LIST()
 
     // 场景初始化
     function sceneInit() {
@@ -232,6 +234,17 @@
       ])
     }
 
+    // 货物
+    const createShelfLists = () => {
+      for (var i = 1; i <= GET_LAYER_NUM(); i++) {
+        for (var j = 1; j <= GET_COLUMN_NUM(); j++) {
+          for (var k = 1; k <= shelf_list.length; k++) {
+            addOneUnitGoodsbox(shelf_list[k - 1].shelfId, i, j, scene);
+          }
+        }
+      }
+    }
+
     // 初始化
     const Init = async () => {
       await sceneInit()
@@ -243,7 +256,8 @@
       await createFloor() //创建地板
       await createcubWall() //创建墙壁
       await addArea(0, 0, 500, 500, scene, "ID1$库区1号", "FF0000", 20, "左对齐") //添加库区
-      await addShelf(scene)
+      await addShelf(scene) //货架
+      await createShelfLists()
     }
     // animate
     const renderScene = async () => {

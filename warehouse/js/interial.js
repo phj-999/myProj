@@ -4,7 +4,7 @@
  * 存放3D仓库显示模型
  */
 
-var planeMat, RackMat, RackMat2
+var planeMat, RackMat, RackMat2, Goodsbox
 //货位信息
 var storageUnitSize = 0, storageUnitList = []
 //货架信息
@@ -19,6 +19,12 @@ const initMat = () => {
         planeMat.transparent = true;
         planeMat.opacity = 0.8;
         planeMat.needsUpdate = true;
+    })
+    // 盒子货物
+    Goodsbox = new THREE.MeshLambertMaterial()
+    new THREE.TextureLoader().load("publlic/images/box.png", function (map) {
+        CargoMat.map = map
+        CargoMat.needsUpdate = true
     })
 }
 
@@ -123,8 +129,8 @@ const addStackOfRack = (x, y, z, plane_x, plane_y, plane_z, holder_x, holder_y, 
 
 /** 根据货架配置添加货架 */
 const addShelf = (scene) => {
-    var shelf_list = new Array();
-    shelf_list.push({ StorageZoneId: 'Z1', shelfId: 'A2', shelfName: '货架A2', x: 0, y: 27, z: 0 });
+    var shelf_list = GET_SHELF_LIST()
+    // shelf_list.push({ StorageZoneId: 'Z1', shelfId: 'A2', shelfName: '货架A2', x: 0, y: 27, z: 0 });
     shelfSize = shelf_list.length;
     for (var i = 0; i < shelfSize; i++) {
         var shelf_obj = new shelf(shelf_list[i].StorageZoneId,
@@ -142,4 +148,28 @@ const addShelf = (scene) => {
     for (var i = 0; i < shelfSize; i++) {
         addStackOfRack(shelfList[i].positionX, shelfList[i].positionY, shelfList[i].positionZ, shelfList[i].planeLength, shelfList[i].planeHeight, shelfList[i].planeWidth, shelfList[i].holderLength, shelfList[i].holderHeight, shelfList[i].holderWidth, scene, shelfList[i].storageZoneId + "$" + shelfList[i].shelfId + "$" + shelfList[i].shelfName, shelfList[i].columnNum, shelfList[i].layerNum);
     }
+}
+
+/**
+ *  放置货物
+ *  */
+const addGoodsbox = (x, y, z, box_x, box_y, box_z, scene, name) => {
+    let goodsgeometry = new THREE.BoxGeometry(box_x, box_y, box_z)
+    let mesh = new THREE.Mesh(goodsgeometry, Goodsbox)
+    mesh.position.set(x, y, z)
+    mesh.name = name
+    scene.add(mesh)
+}
+
+/**
+ *  添加单个货位上的货物
+ */
+const addOneUnitGoodsbox = (shelfId, inLayerNum, inColumnNum, scene) => {
+    let storage = new storageUnit(shelfId,inLayerNum,inColumnNum).getStorageUnitById(shelfId, inLayerNum, inColumnNum)
+    let goodsshelf = new shelf().getShelfById(storage.shelfId)
+    let storageUnitid = storage.storageUnitId
+    let x = storage.positionX;
+    let y = storage.positionY + 8 + goodsshelf.planeHeight / 2;
+    let z = storage.positionZ;
+    addGoodsbox(x, y, z, 16, 16, 16, scene, "货物" + "$" + storageUnitid)
 }
