@@ -22,17 +22,17 @@ THREE.ThreeJs_Composer = function (_renderer, _scene, _camera) {
     composer.addPass( effectFXAA )
 
    // 大门关闭打开状态
-   const door_state_left1 = true //默认是门是关闭的
-   const door_state_right1 = true //默认是门是关闭的
-   const door_state_left2 = true //默认是门是关闭的
-   const door_state_right2 = true //默认是门是关闭的
+   let door_state_left1 = true //默认是门是关闭的
+   let door_state_right1 = true //默认是门是关闭的
+   let door_state_left2 = true //默认是门是关闭的
+   let door_state_right2 = true //默认是门是关闭的
 
 
     window.addEventListener('click', onMouseClick)
 
     function onMouseClick(event) {
         // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
-        var x, y
+        let x, y
         if (event.changedTouches) {
             x = event.changedTouches[0].pageX
             y = event.changedTouches[0].pageY
