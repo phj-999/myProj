@@ -62,6 +62,7 @@
 <!-- 信息侧边栏,轻量级的icon形用户界面框架 -->
 <script type="text/javascript" src="js/libs/dat.gui.min.js"></script>
 <script type="text/javascript" src="js/gui.js"></script>
+<!-- 窗口自适应 -->
 <script type="text/javascript" src="js/adaptiveResize.js"></script>
 
 </head>
@@ -266,7 +267,7 @@
       await addShelf(scene) //货架
       await createShelfLists() //货物箱子
       await initGui() //gui
-      await resize()
+ 
     }
     // animate
     const renderScene = async () => {
@@ -278,6 +279,7 @@
       await composer.render()//事件操作
       await TWEEN.update() // 动画刷新
       await renderer.render(scene, camera)
+      await resize() //自适应窗口
     }
 
     window.onload = function () {
