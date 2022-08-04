@@ -48,9 +48,10 @@
 <script type="text/javascript" src="js/libs/OutlinePass.js"></script>
 <script type="text/javascript" src="js/libs/RenderPass.js"></script>
 <script type="text/javascript" src="js/libs/ShaderPass.js"></script>
-<!-- 补间动画库 -->
+<!-- 动画库 -->
 <script type="text/javascript" src="js/libs/Tween.js"></script>
-
+<!-- 添加库区与文字,存放3D仓库显示模型 -->
+<script type="text/javascript" src="js/interial.js"></script>
 </head>
 
 <body>
@@ -233,6 +234,7 @@
       await ControlsInit()
       await createFloor() //创建地板
       await createcubWall() //创建墙壁
+      await addArea(0,0,500,500,scene,"ID1$库区1号","FF0000",20,"左对齐") //添加库区
     }
     // animate
     const renderScene = async () => {
