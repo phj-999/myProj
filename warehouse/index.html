@@ -62,6 +62,7 @@
 <!-- 信息侧边栏,轻量级的icon形用户界面框架 -->
 <script type="text/javascript" src="js/libs/dat.gui.min.js"></script>
 <script type="text/javascript" src="js/gui.js"></script>
+<script type="text/javascript" src="js/adaptiveResize.js"></script>
 
 </head>
 
@@ -247,7 +248,10 @@
         }
       }
     }
-
+    // 窗口适应
+    const resize =()=> {
+      document.addEventListener('resize', onWindowResize(camera,renderer), false) 
+    }
     // 初始化
     const Init = async () => {
       await sceneInit()
@@ -261,7 +265,8 @@
       await addArea(0, 0, 500, 500, scene, "ID1$库区1号", "FF0000", 20, "左对齐") //添加库区
       await addShelf(scene) //货架
       await createShelfLists() //货物箱子
-      await initGui()
+      await initGui() //gui
+      await resize()
     }
     // animate
     const renderScene = async () => {
@@ -274,7 +279,6 @@
       await TWEEN.update() // 动画刷新
       await renderer.render(scene, camera)
     }
-
 
     window.onload = function () {
       Init()
